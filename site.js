@@ -1,5 +1,15 @@
-/* Header: frosted background once scrolled, and the mobile "Menu" dropdown. */
+/* Header: frosted background once scrolled, and the mobile "Menu" dropdown.
+   KerenAI widget: grow/shrink its iframe when the widget reports open/closed. */
 document.addEventListener("DOMContentLoaded", () => {
+  const agent = document.querySelector(".agent-frame");
+  if (agent) {
+    const agentOrigin = new URL(agent.src).origin;
+    window.addEventListener("message", (event) => {
+      if (event.origin !== agentOrigin || event.data?.source !== "kerenai") return;
+      agent.classList.toggle("is-open", event.data.state === "open");
+    });
+  }
+
   const header = document.querySelector("header");
   if (!header) return;
 

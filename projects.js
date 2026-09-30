@@ -92,9 +92,10 @@ function renderProjects(root) {
     .map((p) => {
       const multi =
         p.gradient && p.gradient.length > 2 ? " case-frame--multi" : "";
+      const full = p.video || p.webm ? " case-frame--full" : "";
       return `
       <a class="case" href="${p.href}" data-case-id="${p.id}">
-        <div class="case-frame${multi}" style="${gradientStyle(p.gradient)}">
+        <div class="case-frame${multi}${full}" style="${gradientStyle(p.gradient)}">
           <div class="case-media">
             ${mediaHTML(p)}
           </div>
