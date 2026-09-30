@@ -1,0 +1,18 @@
+---
+description: Responsive layout rules for the portfolio (desktop-first)
+alwaysApply: true
+---
+
+# Responsive layout (desktop-first)
+
+- Build desktop-first: base styles target ~1440px, then add max-width media queries.
+- Breakpoints (max-width): 1279px (laptop), 1023px (tablet), 767px (large phone), 479px (small phone).
+- Never set fixed pixel widths on layout containers. Use %, fr, flex, or max-width.
+- Content wrapper: width 100%, max-width ~1200px, centered, with horizontal padding.
+- Use CSS grid with auto-fit/minmax for project grids so columns reflow on their own.
+- Fluid type with clamp(), e.g. headings clamp(2rem, 5vw, 4rem). Body text min 16px.
+- Images: max-width 100%, height auto; use aspect-ratio for thumbnails.
+- No absolute positioning for layout. No horizontal scroll at any width.
+- Tap targets at least 44px on touch sizes. Nav collapses to a menu at 767px and below.
+- When translating Paper designs, use the desktop artboard for base styles
+  and the tablet/mobile artboards for the max-width overrides.

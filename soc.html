@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOC Signal — Designing Effective Alerts in Cybersecurity Dashboards · Keren Wasserman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="case-page theme-soc">
+
+<header>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">KW</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#playground">Playground</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#resume">Resume</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="cs-hero wrap">
+    <a class="cs-back" href="index.html#work">← All work</a>
+    <p class="cs-label fade">SOC Signal • 2024 • Research</p>
+    <h1 class="cs-title fade d1">SOC Optimization &amp; Alert Fatigue: Designing Effective Alerts in Cybersecurity Dashboards</h1>
+    <p class="cs-lede fade d2">Cutting alert fatigue so security analysts focus on the threats that matter.</p>
+    <ul class="cs-tags fade d3">
+      <li>B2B SaaS</li>
+      <li>Cybersecurity</li>
+      <li>Usability Testing</li>
+    </ul>
+  </section>
+
+  <div class="wrap">
+    <div class="cs-cover">
+      <div class="cs-cover-media">
+        <video muted loop playsinline autoplay preload="metadata" poster="assets/soc-signal-poster.jpg">
+          <source src="assets/soc-signal.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap cs-body">
+    <aside class="cs-rail">
+      <dl class="cs-facts">
+        <div><dt>Role</dt><dd>Lead UX Researcher &amp; Designer</dd></div>
+        <div><dt>Tools</dt><dd>Figma · FigJam · Zoom · Otter AI · Claude AI</dd></div>
+        <div><dt>Timeline</dt><dd>9 months</dd></div>
+      </dl>
+      <nav class="cs-index" aria-label="On this page">
+        <p class="cs-label">On this page</p>
+        <a href="#overview" aria-current="true">Overview</a>
+        <a href="#problem">Problem &amp; goal</a>
+        <a href="#research">Research</a>
+        <a href="#jtbd">Jobs-to-be-done</a>
+        <a href="#models">Conceptual models</a>
+        <a href="#wireframes">Wireframes</a>
+        <a href="#prototype">High-fidelity prototype</a>
+        <a href="#testing">Usability testing</a>
+        <a href="#final">Final iteration</a>
+        <a href="#learnings">Learnings</a>
+      </nav>
+    </aside>
+
+    <article class="cs-content">
+      <section class="cs-section" id="overview">
+        <p class="cs-label">01</p>
+        <h2 class="cs-h2">Project overview</h2>
+        <p>This project began with a question I couldn't stop thinking about after working as a UX designer at Opsin, a cybersecurity company: what does it actually feel like to be a SOC analyst staring at a dashboard for hours, trying to catch a real threat buried inside hundreds of alerts?</p>
+        <p>Alert fatigue is one of the most pressing human factors challenges in cybersecurity. Analysts working in Security Operations Centers are responsible for monitoring, triaging, and escalating security alerts in real time — often across multiple client environments, on long shifts, with tools that weren't designed with their cognitive limits in mind. The consequences aren't abstract: a missed alert can mean a real breach.</p>
+        <p>For my graduate capstone, I applied a full User-Centered Design process to this problem — nine months of research, concept development, design, and usability testing, supported throughout by a faculty adviser. I also integrated AI throughout the process — using Otter.ai for interview transcription and Claude for research synthesis, brainstorming, and content iteration. The project let me go deeper into the cybersecurity domain and explore something I find genuinely fascinating: how small, precise design decisions — the micro interactions of an interface — can directly affect a person's ability to detect risk under pressure.</p>
+        <p>Rather than redesigning an entire platform, I focused on a specific and underexplored slice: how the design of alert displays, prioritization systems, and filtering tools affects Tier 1 SOC analyst performance and well-being. Every decision was grounded in real analyst workflows and a research process designed to surface what task analysis alone rarely reveals.</p>
+      </section>
+
+      <section class="cs-section" id="problem">
+        <p class="cs-label">02</p>
+        <h2 class="cs-h2">Problem &amp; goal</h2>
+        <div class="cs-split">
+          <div class="cs-pg">
+            <h3 class="cs-h3">Problem</h3>
+            <p>SOC analysts face overwhelming alert volumes from dashboards that generate repetitive, low-priority notifications — making it difficult to distinguish real threats from noise.</p>
+          </div>
+          <div class="cs-pg">
+            <h3 class="cs-h3">Goal</h3>
+            <p>Reduce alert fatigue and improve Tier 1 SOC analyst performance and well-being through evidence-based dashboard design.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section" id="research">
+        <p class="cs-label">03</p>
+        <h2 class="cs-h2">Research</h2>
+
+        <div class="cs-block">
+          <h3 class="cs-h3">Competitive analysis</h3>
+          <p>5 SOC platforms were analyzed across alert display, prioritization, filtering, data density, and AI features. What was learned:</p>
+          <ul class="cs-list">
+            <li>Platforms are largely optimized for Tier 2/3 — Tier 1 needs are underserved</li>
+            <li>Alert noise is a recognized problem, but design solutions are inconsistent</li>
+            <li>No platform offers a unified, Tier 1-centered alert experience</li>
+          </ul>
+          <figure class="cs-figure">
+            <div class="cs-ph cs-ph--wide"></div>
+            <figcaption>Competitive analysis table</figcaption>
+          </figure>
+        </div>
+
+        <div class="cs-block">
+          <h3 class="cs-h3">Interviews</h3>
+          <p>5 semi-structured interviews with Tier 1 SOC analysts, conducted over Zoom. Sessions explored daily workflows, pain points, tools used, and mental models around alert triage.</p>
+          <div class="cs-cards">
+            <div class="cs-card">
+              <p class="cs-label">Finding</p>
+              <h4 class="cs-h3">Alert volume is overwhelming and unlabeled</h4>
+              <p>Tier 1 analysts face ~2,000 alerts per shift with no severity labels — relying entirely on experience and pattern recognition to prioritize. Without clear labeling, determining where to start was itself a cognitive task.</p>
+            </div>
+            <div class="cs-card">
+              <p class="cs-label">Finding</p>
+              <h4 class="cs-h3">Too many tools, too much context-switching</h4>
+              <p>Participants used a minimum of 5–7 systems per investigation. One analyst identified navigating across tabs to find evidence and artifacts as the single thing she'd most want to change about her workflow.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section" id="jtbd">
+        <p class="cs-label">04</p>
+        <h2 class="cs-h2">Jobs-to-be-done</h2>
+        <p>Jobs To Be Done is a framework that shifts the focus from what users do to why they do it — capturing not just tasks and steps, but the goals, emotional pressures, social stakes, and circumstances that surround them. I chose JTBD because SOC analyst work is deeply context-dependent: the same task feels entirely different at 3am on a night shift versus mid-morning with a full team. A task-based framework would have missed that.</p>
+        <ul class="cs-rows cs-rows--named">
+          <li>
+            <span class="cs-row-key">Monitor alerts</span>
+            <div class="cs-row-body"><p>Continuously scanning and triaging incoming alerts to separate real threats from noise.</p></div>
+          </li>
+          <li>
+            <span class="cs-row-key">Analyze alerts</span>
+            <div class="cs-row-body"><p>Investigating suspicious alerts in depth to determine threat legitimacy and decide on escalation — the most time-consuming and highest-stakes job.</p></div>
+          </li>
+          <li>
+            <span class="cs-row-key">Document &amp; report</span>
+            <div class="cs-row-body"><p>Capturing findings clearly and escalating to the next tier so investigations can proceed without friction.</p></div>
+          </li>
+        </ul>
+        <figure class="cs-figure">
+          <div class="cs-ph"></div>
+          <figcaption>JTBD canvases for each job: job steps, related jobs, desired outcomes, emotional and social jobs, key circumstances</figcaption>
+        </figure>
+      </section>
+
+      <section class="cs-section" id="models">
+        <p class="cs-label">05</p>
+        <h2 class="cs-h2">Conceptual models</h2>
+        <p>Before any sketching or prototyping began, a conceptual model was developed to define what the system needs to support — grounded in how Tier 1 analysts actually think about and perform their work. As Johnson and Henderson (2013) describe, a conceptual model defines abstractly what users can do with a system and what concepts they need to be aware of, in terms of tasks rather than screen graphics. The model was built in three layers, each directly informed by the JTBD analysis and interview findings.</p>
+
+        <div class="cs-block">
+          <h3 class="cs-h3">Object × Action</h3>
+          <p>Mapping the core objects analysts interact with against their four primary actions. Alert emerged as the most critical object — involved in all four actions — directly reinforcing the focus on the alert triage experience.</p>
+          <figure class="cs-figure">
+            <div class="cs-ph cs-ph--wide"></div>
+            <figcaption>Object × Action table</figcaption>
+          </figure>
+        </div>
+
+        <div class="cs-block">
+          <h3 class="cs-h3">Attributes &amp; measures</h3>
+          <p>Defining what information each object carries and how performance is tracked. Drawn directly from interviews — analysts consistently needed severity, status, time, and alert type at a glance. This step directly informed decisions around data density and alert display.</p>
+          <figure class="cs-figure">
+            <div class="cs-ph cs-ph--wide"></div>
+            <figcaption>Attributes and measures table</figcaption>
+          </figure>
+        </div>
+
+        <div class="cs-block">
+          <h3 class="cs-h3">Prioritization</h3>
+          <p>Ranking tasks by frequency across a shift to determine what needs to be immediately visible versus what can require additional navigation. Prioritization was driven entirely by research — never assumed.</p>
+          <figure class="cs-figure">
+            <div class="cs-ph cs-ph--wide"></div>
+            <figcaption>Prioritization table</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="wireframes">
+        <p class="cs-label">06</p>
+        <h2 class="cs-h2">Wireframes</h2>
+        <p>Every wireframe decision mapped directly to a JTBD job step or pain point. Core structural decisions included:</p>
+        <ul class="cs-list">
+          <li>Severity-first alert hierarchy</li>
+          <li>Compact default view with expandable detail</li>
+          <li>Filtering toolbar accessible during active triage</li>
+          <li>Alert detail panel — full context without navigating away</li>
+        </ul>
+        <figure class="cs-figure">
+          <div class="cs-ph"></div>
+          <figcaption>Wireframes</figcaption>
+        </figure>
+      </section>
+
+      <section class="cs-section" id="prototype">
+        <p class="cs-label">07</p>
+        <h2 class="cs-h2">High-fidelity prototype</h2>
+
+        <div class="cs-block">
+          <p class="cs-label">Screen 1 of 4</p>
+          <h3 class="cs-h3">Dashboard</h3>
+          <p>An orientation screen visited at the start of a shift to assess the overall health of the environment before diving into triage.</p>
+          <div class="cs-ph cs-ph--dark"></div>
+          <ul class="cs-list">
+            <li>4 KPI cards surface the metrics that matter most at shift start</li>
+            <li>Unassigned alerts panel surfaces the most recent alerts to minimize steps between orientation and investigation</li>
+            <li>Dark mode chosen deliberately to reduce eye strain during long shifts; cyan used consistently for interactive elements</li>
+          </ul>
+        </div>
+
+        <div class="cs-block">
+          <p class="cs-label">Screen 2 of 4</p>
+          <h3 class="cs-h3">Alert queue</h3>
+          <p>Where analysts triage and prioritize incoming alerts — the highest-frequency screen across the shift.</p>
+          <div class="cs-ph cs-ph--dark"></div>
+          <ul class="cs-list">
+            <li>Severity badges use a semantic color system (red → critical, orange → high, yellow → medium, cyan → low) for scannable triage without reading individual entries</li>
+            <li>Rich filtering toolbar with color-coded counts makes the alert breakdown immediately scannable</li>
+          </ul>
+        </div>
+
+        <div class="cs-block">
+          <p class="cs-label">Screen 3 of 4</p>
+          <h3 class="cs-h3">Alert detail view</h3>
+          <p>Where analysts investigate an alert and reach their escalation or dismissal decision. Designed around one principle: every element should help the analyst reach that decision faster and with greater confidence.</p>
+          <div class="cs-ph cs-ph--dark"></div>
+          <ul class="cs-list">
+            <li>Layout mirrors how analysts think — context first, evidence below</li>
+            <li>Enrichment data in sidebar — no tool switching needed</li>
+            <li>Persistent decision bar — escalate or dismiss always one click away</li>
+          </ul>
+        </div>
+
+        <div class="cs-block">
+          <p class="cs-label">Screen 4 of 4</p>
+          <h3 class="cs-h3">Escalation form</h3>
+          <p>Designed to reduce the cognitive and emotional burden of documentation — the task analysts most associate with anxiety and time pressure.</p>
+          <div class="cs-ph cs-ph--dark"></div>
+          <ul class="cs-list">
+            <li>Structured dropdowns and pre-populated tags instead of free text</li>
+            <li>Context from the alert detail view carried forward automatically</li>
+            <li>AI pre-selects the 3 highest-confidence evidence items as a starting point</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cs-section" id="testing">
+        <p class="cs-label">08</p>
+        <h2 class="cs-h2">Usability testing</h2>
+        <p>5 Tier 1 SOC analysts completed 4 scenario-based tasks over Zoom, followed by a System Usability Scale (SUS) questionnaire.</p>
+        <div class="cs-stats">
+          <div class="cs-stat"><strong>83.75</strong><span>SUS score (good)</span></div>
+          <div class="cs-stat"><strong>60%</strong><span>Avg success rate, no failures</span></div>
+          <div class="cs-stat"><strong>0.5</strong><span>Avg assists per task</span></div>
+          <div class="cs-stat"><strong>4.4/5</strong><span>Avg confidence</span></div>
+        </div>
+        <div class="cs-split">
+          <div>
+            <h3 class="cs-h3">What worked</h3>
+            <ul class="cs-list">
+              <li>Dashboard orientation was immediate — all participants identified where to start without assistance</li>
+              <li>Alert detail panel gave the right context without requiring extra navigation</li>
+              <li>Guided documentation form reduced anxiety — described as quick and aligned with real workflow</li>
+              <li>Similar alerts panel surfaced context that current tools don't provide</li>
+              <li>AI suggestions felt non-intrusive — analysts appreciated staying in control of the final decision</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="cs-h3">What didn't work</h3>
+            <ul class="cs-list">
+              <li>Filtering toolbar went unnoticed by all participants — 0% full success on Task 2</li>
+              <li>Alert status column not visible enough — nearly caused a wrong alert selection</li>
+              <li>Ambiguous alert description language caused hesitation during investigation</li>
+              <li>Event timeline direction was unclear — one participant read it in the wrong order</li>
+              <li>AI evidence panel label was confusing — purpose unclear before explanation</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section" id="final">
+        <p class="cs-label">09</p>
+        <h2 class="cs-h2">Final iteration</h2>
+
+        <div class="cs-block">
+          <p class="cs-label">Change 1 of 4</p>
+          <h3 class="cs-h3">Sort order &amp; column organization</h3>
+          <p>Alerts were sorted by time rather than urgency. The status column sat far right — analysts nearly selected alerts already under review because they couldn't see their status at a glance.</p>
+          <div class="cs-split cs-split--tight">
+            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>Before</figcaption></figure>
+            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>After</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="cs-block">
+          <p class="cs-label">Change 2 of 4</p>
+          <h3 class="cs-h3">Filtering toolbar visibility</h3>
+          <p>No participant noticed or used the filtering toolbar or sort dropdown during testing — despite filtering being a core intended feature. Neither had enough visual weight to draw attention without instruction.</p>
+          <div class="cs-split cs-split--tight">
+            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>Before</figcaption></figure>
+            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>After</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="cs-block">
+          <p class="cs-label">Change 3 of 4</p>
+          <h3 class="cs-h3">Timeline direction</h3>
+          <p>A few participants read the event timeline in the wrong direction, leading to an incorrect escalation decision before self-correcting. The timeline had no directional cue indicating chronological order.</p>
+          <div class="cs-split cs-split--tight">
+            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>Before</figcaption></figure>
+            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>After</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="cs-block">
+          <p class="cs-label">Change 4 of 4</p>
+          <h3 class="cs-h3">AI panel clarity</h3>
+          <p>A few participants were unsure what the AI-assisted evidence pre-selection feature represented and didn't know how to interact with it. The panel lacked any labeling or explanation of its suggestion-based nature.</p>
+          <div class="cs-split cs-split--tight">
+            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>Before</figcaption></figure>
+            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>After</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section" id="learnings">
+        <p class="cs-label">10</p>
+        <h2 class="cs-h2">Learnings</h2>
+        <ol class="cs-rows">
+          <li>
+            <span class="cs-row-key">01</span>
+            <div class="cs-row-body">
+              <h3 class="cs-h3">Design for the sixth hour of a shift, not the first</h3>
+              <p>Every decision was tested against: does this hold up under fatigue and time pressure? The SOC dashboard isn't just a data display — it's a cognitive tool used in high-stakes, high-volume conditions. That lens changed how I approached every single design choice.</p>
+            </div>
+          </li>
+          <li>
+            <span class="cs-row-key">02</span>
+            <div class="cs-row-body">
+              <h3 class="cs-h3">JTBD surfaces what task analysis misses</h3>
+              <p>The emotional and social dimensions of analyst work — credibility, pressure, trust — shaped design decisions as much as the functional requirements. Choosing JTBD over a purely task-based framework meant the design was built around the whole person, not just the workflow.</p>
+            </div>
+          </li>
+          <li>
+            <span class="cs-row-key">03</span>
+            <div class="cs-row-body">
+              <h3 class="cs-h3">Discoverability is as important as capability</h3>
+              <p>A feature that isn't found isn't a feature. The filtering toolbar failure in testing made this concrete — every participant missed it entirely. It was a clear reminder that designing a tool and designing for its discovery are two separate problems.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+    </article>
+  </div>
+
+  <section class="cs-more">
+    <div class="wrap">
+      <p class="eyebrow">More case studies</p>
+      <div class="case-grid" id="case-grid" data-exclude="soc" data-limit="2"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <h4>Keren Wasserman</h4>
+      <p>Product designer focused on turning complexity into clarity, one research-backed decision at a time.</p>
+      <p class="copy">© 2026 Keren Wasserman</p>
+    </div>
+    <div class="foot-col">
+      <h5>Links</h5>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#playground">Playground</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#resume">Resume</a>
+    </div>
+    <div class="foot-col">
+      <h5>Contact</h5>
+      <div class="foot-icons">
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.24 8.02h4.5V24H.24zM8.34 8.02h4.31v2.18h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.5v-6.34c0-1.51-.03-3.46-2.11-3.46-2.11 0-2.43 1.65-2.43 3.35V24h-4.5z"/></svg>
+        </a>
+        <a href="mailto:hello@example.com" aria-label="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6l9 7 9-7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
+<script src="projects.js" defer></script>
+<script src="case.js" defer></script>
+</body>
+</html>

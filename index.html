@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keren Wasserman — Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="#top" class="logo">KW</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#playground">Playground</a>
+      <a href="#about">About</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="greet fade">Hi, I'm Keren!</p>
+      <h1 class="fade d1">I design clarity into complex systems</h1>
+      <p class="lede fade d2">Research-driven product design for enterprise SaaS — recently shaped the GenAI security platform at <img class="inline-logo" src="assets/opsin-wordmark.png" width="40" height="40" alt="Opsin"> that raised $7M.</p>
+      <div class="cta-row fade d3">
+        <a class="btn btn-blue" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-mauve" href="#resume">Resume ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED WORK — 2-column case study cards -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="case-grid" id="case-grid"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="wrap foot-grid">
+    <div class="foot-brand" id="about">
+      <h4>Keren Wasserman</h4>
+      <p>Product designer focused on turning complexity into clarity, one research-backed decision at a time.</p>
+      <p class="copy">© 2026 Keren Wasserman</p>
+    </div>
+    <div class="foot-col">
+      <h5>Links</h5>
+      <a href="#work">Work</a>
+      <a href="#playground">Playground</a>
+      <a href="#about">About</a>
+      <a href="#resume">Resume</a>
+    </div>
+    <div class="foot-col">
+      <h5>Contact</h5>
+      <div class="foot-icons">
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.24 8.02h4.5V24H.24zM8.34 8.02h4.31v2.18h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.5v-6.34c0-1.51-.03-3.46-2.11-3.46-2.11 0-2.43 1.65-2.43 3.35V24h-4.5z"/></svg>
+        </a>
+        <a href="mailto:hello@example.com" aria-label="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6l9 7 9-7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
+<script src="projects.js" defer></script>
+</body>
+</html>
