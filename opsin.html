@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="tailwind.css">
 </head>
 <body class="case-page theme-opsin">
 
@@ -18,8 +19,8 @@
     <nav id="site-nav" aria-label="Primary">
       <a href="index.html#work">Work</a>
       <a href="index.html#playground">Playground</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#resume">Resume</a>
+      <a href="about.html">About</a>
+      <a href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -29,7 +30,7 @@
 
   <section class="cs-hero wrap">
     <a class="cs-back" href="index.html#work">← All work</a>
-    <p class="cs-label fade">Opsin • 2025 • Shipped</p>
+    <p class="cs-label fade">Opsin • 2024 • Shipped</p>
     <h1 class="cs-title fade d1">GenAI Security &amp; Data Protection Platform</h1>
     <p class="cs-lede fade d2">Shaped the GenAI security platform that raised $7M in seed funding.</p>
     <ul class="cs-tags fade d3">
@@ -43,7 +44,7 @@
     <div class="cs-cover cs-cover--video">
       <div class="cs-cover-media">
         <video muted loop playsinline autoplay preload="metadata">
-          <source src="assets/opsin.mp4" type="video/mp4">
+          <source src="assets/videos/opsin.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -53,6 +54,21 @@
     <aside class="cs-rail">
       <dl class="cs-facts">
         <div><dt>Role</dt><dd>Lead UX Designer</dd></div>
+        <div class="cs-fact--wide"><dt>Team</dt><dd>
+          <ul class="team-list">
+            <li class="team-member" data-lift>
+              <span class="team-avatar team-avatar--me" aria-hidden="true">KW</span>
+              <span class="team-text"><span class="team-name">Keren (me)</span><span class="team-role">Lead UX Designer</span></span>
+            </li>
+            <li class="team-member" data-lift>
+              <span class="team-avatars" aria-hidden="true">
+                <span class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg></span>
+                <span class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg></span>
+              </span>
+              <span class="team-text"><span class="team-name">2 Co-founders</span><span class="team-role">Software Engineers</span></span>
+            </li>
+          </ul>
+        </dd></div>
         <div><dt>Tools</dt><dd>
           <ul class="tool-list">
             <li><span class="tool" tabindex="0" role="img" aria-label="Figma"><span class="tool-tile"><img src="assets/tools/figma.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Figma</span></span></li>
@@ -65,6 +81,7 @@
         <p class="cs-label">On this page</p>
         <a href="#overview" aria-current="true">Overview</a>
         <a href="#problem">Problem &amp; goal</a>
+        <a href="#use-case">Use case</a>
         <a href="#jtbd">Jobs-to-be-done</a>
         <a href="#wireframes">Wireframes</a>
         <a href="#hifi">High-fidelity design</a>
@@ -98,45 +115,102 @@
         </div>
       </section>
 
-      <section class="cs-section" id="jtbd">
+      <section class="cs-section" id="use-case">
         <p class="cs-label">03</p>
-        <h2 class="cs-h2">Jobs-to-be-done</h2>
-        <p>After receiving Opsin's brief and detailed use cases, I chose to map the problem space using a Jobs-to-be-Done framework before jumping into design. Rather than documenting what the system does, JTBD helped me focus on what the security analyst is actually trying to accomplish — and the circumstances, pressures, and emotional stakes that shape how they work. This grounded decisions like alert prioritization and audit traceability in real analyst needs, not just technical requirements.</p>
+        <h2 class="cs-h2">Use case: query &amp; authorization</h2>
+        <p>Opsin's founders first walked me through their use cases verbally, in conversation rather than documentation. Before designing anything, I turned that explanation into a visual flow so all three of us could point at the same picture.</p>
+        <p>The first use case follows a user who asks for another customer's tax information. Before anything is returned, the request has to pass two checkpoints: does the user have valid credentials, and do they have permission to access this specific data? Only when both are true is the data returned; failing either one blocks the request.</p>
+        <p>Laying it out made every decision point explicit, gave the founders something concrete to react to, and surfaced the moment that matters most for the product: a denied request is exactly what a security analyst later has to investigate.</p>
         <figure class="cs-figure">
-          <div class="cs-ph"></div>
-          <figcaption>Jobs-to-be-done map</figcaption>
+          <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/opsin/use-case-1-flow.png" target="_blank" rel="noopener" data-lift>
+            <img src="assets/opsin/use-case-1-flow.png" alt="Flow diagram: a user signs in; if credentials are invalid, access is denied. On the home screen they query another customer's tax info; if they lack access permissions the request is blocked, otherwise the tax info is returned." width="3200" height="1640" loading="lazy">
+          </a>
+          <figcaption>Use case 1: query and authorization, visualized from the founders' walkthrough. Click to open full size.</figcaption>
+        </figure>
+      </section>
+
+      <section class="cs-section" id="jtbd">
+        <p class="cs-label">04</p>
+        <h2 class="cs-h2">Jobs-to-be-done</h2>
+        <p>With the use cases mapped, I chose to frame the problem space using a Jobs-to-be-Done framework before jumping into design. Rather than documenting what the system does, JTBD helped me focus on what the security analyst is actually trying to accomplish — and the circumstances, pressures, and emotional stakes that shape how they work. This grounded decisions like alert prioritization and audit traceability in real analyst needs, not just technical requirements.</p>
+        <figure class="cs-figure">
+          <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/opsin/Jobs-to-be-done.png" target="_blank" rel="noopener" data-lift>
+            <img src="assets/opsin/Jobs-to-be-done.png" alt="Jobs-to-be-done map for a security analyst whose target job is responding to an unauthorized access alert: aspirations, related jobs, seven job steps, emotional and social jobs, needs and circumstances." width="5168" height="4054" loading="lazy">
+          </a>
+          <figcaption>Jobs-to-be-done map for the security analyst. Click to open full size.</figcaption>
         </figure>
       </section>
 
       <section class="cs-section" id="wireframes">
-        <p class="cs-label">04</p>
+        <p class="cs-label">05</p>
         <h2 class="cs-h2">Wireframes</h2>
         <p>To get stakeholder sign-off before moving into high-fidelity, I created low-fidelity wireframes in Axure RP, chosen for its ability to simulate complex, dynamic interactions quickly. I focused on three core flows: the Dashboard (security overview), AI Model Policies (LLM access and compliance rules), and Audit Log (tracking unauthorized access). These wireframes were intentionally directional, just enough to validate the core user journeys and align on product direction before investing in visual design.</p>
         <figure class="cs-figure">
-          <div class="cs-ph"></div>
+          <div class="cs-ph cs-media" data-lift>
+            <video muted loop playsinline preload="none" poster="assets/opsin/posters/wireframes.jpg" aria-label="Slideshow of the Axure wireframes">
+              <source src="assets/opsin/wireframes.mp4" type="video/mp4">
+            </video>
+            <button class="cs-media-toggle opacity-80 transition-opacity duration-200 hover:opacity-100" type="button" aria-label="Pause slideshow">
+              <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+            </button>
+          </div>
           <figcaption>Axure wireframes: Dashboard, AI Model Policies, Audit Log</figcaption>
         </figure>
       </section>
 
       <section class="cs-section" id="hifi">
-        <p class="cs-label">05</p>
+        <p class="cs-label">06</p>
         <h2 class="cs-h2">High-fidelity design</h2>
         <p>Moving into high-fidelity in Figma, the core design challenge was simplicity under pressure. Since users are performing high-stakes security tasks, every screen needed to minimize cognitive load and surface only what mattered. I designed six screens across two main flows: creating a ticket for a flagged alert, and managing AI monitor policies across platforms.</p>
         <p>A key interaction pattern throughout was the use of overlays for quick actions like ticket creation and alert analysis, keeping users in context without losing their place. Working within the provided brand guidelines, the visual direction stayed clean and minimal, letting the data and actions speak for themselves.</p>
         <figure class="cs-figure">
-          <div class="cs-ph cs-ph--brand"></div>
-          <figcaption>Create ticket and AI monitor policy flows</figcaption>
+          <div class="cs-ph cs-media" data-lift>
+            <video muted loop playsinline preload="none" poster="assets/opsin/posters/hifi.jpg" aria-label="Slideshow of the high-fidelity Figma screens">
+              <source src="assets/opsin/hifi.mp4" type="video/mp4">
+            </video>
+            <button class="cs-media-toggle opacity-80 transition-opacity duration-200 hover:opacity-100" type="button" aria-label="Pause slideshow">
+              <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+            </button>
+          </div>
+          <figcaption>High-fidelity screens: Create ticket and AI monitor policy flows</figcaption>
         </figure>
       </section>
 
       <section class="cs-section" id="impact">
-        <p class="cs-label">06</p>
+        <p class="cs-label">07</p>
         <h2 class="cs-h2">Business impact</h2>
-        <p class="cs-quote">As the sole UX designer during Opsin's early startup phase, I helped transform a complex GenAI security concept into an investor-ready prototype that directly contributed to the company's first seed raise.</p>
+        <div class="cs-callout">
+          <p class="cs-callout-num">$7M</p>
+          <div class="cs-callout-body">
+            <h3 class="cs-h3">Secured $7M in seed funding</h3>
+            <p>The prototype was used directly in investor pitches, helping the team communicate the product vision and secure their initial round.</p>
+          </div>
+        </div>
+        <p>As the sole UX designer during Opsin's early startup phase, I helped transform a complex GenAI security concept into an investor-ready prototype that directly contributed to the company's first seed raise.</p>
+        <h3 class="cs-h3 cs-subhead">Key outcomes</h3>
+        <ul class="cs-cards cs-cards--outcomes">
+          <li class="cs-card group" data-lift>
+            <span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></svg></span>
+            <h4 class="cs-h3">Established the design foundation for a 0→1 product</h4>
+            <p>Defined Opsin's first end-to-end experience: the information architecture, core flows and screens that gave the founders a shared reference to build from.</p>
+          </li>
+          <li class="cs-card group" data-lift>
+            <span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h4 class="cs-h3">Made complex security data accessible</h4>
+            <p>Simplified dense cybersecurity workflows into a clean, minimal interface, making the product approachable for both technical and non-technical enterprise users.</p>
+          </li>
+          <li class="cs-card group" data-lift>
+            <span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <h4 class="cs-h3">Delivered under intense timeline pressure</h4>
+            <p>Took the product from concept to investor-ready prototype in 4 months as the sole designer, balancing speed with design quality.</p>
+          </li>
+        </ul>
       </section>
 
       <section class="cs-section" id="learnings">
-        <p class="cs-label">07</p>
+        <p class="cs-label">08</p>
         <h2 class="cs-h2">Learnings</h2>
         <ol class="cs-rows">
           <li>
@@ -185,8 +259,8 @@
       <h5>Links</h5>
       <a href="index.html#work">Work</a>
       <a href="index.html#playground">Playground</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#resume">Resume</a>
+      <a href="about.html">About</a>
+      <a href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume</a>
     </div>
     <div class="foot-col">
       <h5>Contact</h5>
@@ -202,6 +276,8 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="site.js" defer></script>
 <script src="projects.js" defer></script>
 <script src="case.js" defer></script>

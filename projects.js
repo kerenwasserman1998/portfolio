@@ -5,11 +5,12 @@ const projects = [
     href: "opsin.html",
     summary: "Shaped the GenAI security platform that raised $7M in seed funding.",
     company: "Opsin",
-    year: "2025",
+    year: "2024",
     gradient: ["#ffb4a2", "#ffe0c7"],
-    video: "assets/opsin.mp4",
+    video: "assets/videos/opsin.mp4",
     webm: null,
-    poster: null,
+    poster: "assets/videos/posters/opsin.jpg",
+    posterTime: 0,
     image: null,
   },
   {
@@ -17,11 +18,12 @@ const projects = [
     href: "acme.html",
     summary: "Helping fraud analysts catch real threats with less noise in credit-risk monitoring.",
     company: "ACME",
-    year: "2024",
+    year: "2025",
     gradient: ["#c6e9e6", "#dce7fb"],
-    video: "assets/acme.mp4",
+    video: "assets/videos/acme.mp4",
     webm: null,
-    poster: null,
+    poster: "assets/videos/posters/acme.jpg",
+    posterTime: 0,
     image: null,
   },
   {
@@ -29,11 +31,12 @@ const projects = [
     href: "soc.html",
     summary: "Cutting alert fatigue so security analysts focus on the threats that matter.",
     company: "SOC Signal",
-    year: "2024",
+    year: "2026",
     gradient: ["#ffd6c9", "#e8d5f2"],
-    video: "assets/soc-signal.mp4",
+    video: "assets/videos/soc.mp4",
     webm: null,
-    poster: null,
+    poster: "assets/videos/posters/soc.jpg",
+    posterTime: 0,
     image: null,
   },
   {
@@ -41,11 +44,12 @@ const projects = [
     href: "joymee.html",
     summary: "Widening access to mental health education and support.",
     company: "JoyMee",
-    year: "2023",
+    year: "2024",
     gradient: ["#f3e6c7", "#efe4ec", "#dce7fb"],
-    video: null,
+    video: "assets/videos/joymee.mp4",
     webm: null,
-    poster: null,
+    poster: "assets/videos/posters/joymee.jpg",
+    posterTime: 1.2,
     image: null,
   },
 ];
@@ -64,6 +68,7 @@ function gradientStyle(colors) {
 function mediaHTML(project) {
   if (project.video || project.webm) {
     const poster = project.poster ? ` poster="${project.poster}"` : "";
+    const start = project.posterTime ? ` data-start="${project.posterTime}"` : "";
     const sources = [];
     if (project.webm) {
       sources.push(`<source src="${project.webm}" type="video/webm">`);
@@ -71,7 +76,7 @@ function mediaHTML(project) {
     if (project.video) {
       sources.push(`<source src="${project.video}" type="video/mp4">`);
     }
-    return `<video class="case-video" muted loop playsinline preload="metadata"${poster}>${sources.join("")}</video>`;
+    return `<video class="case-video" muted loop playsinline preload="metadata"${poster}${start}>${sources.join("")}</video>`;
   }
 
   if (project.image || project.poster) {
@@ -102,57 +107,127 @@ function renderProjects(root) {
         </div>
         <div class="case-caption">
           <p class="case-summary">${p.summary}</p>
-          <p class="case-meta">${p.company} • ${p.year}</p>
+          <p class="case-meta">${p.company} • ${p.year}<span class="case-arrow" aria-hidden="true">→</span></p>
         </div>
       </a>`;
     })
     .join("");
 }
 
-function setupCaseVideos(root) {
+/* Mouse devices: a card's video plays only while the card is hovered or keyboard-focused.
+   Touch devices: only the card nearest the middle of the screen plays.
+   A device counts as mouse-driven if it reports so, or as soon as a real mouse pointer
+   appears, since some embedded browsers misreport (hover:hover). */
+function setupCaseMedia(root) {
+  const cards = Array.from(root.querySelectorAll(".case"));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const videos = root.querySelectorAll(".case-video");
+  let mouseMode = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const videoOf = (card) => card.querySelector(".case-video");
 
-  if (reduceMotion) {
-    videos.forEach((video) => {
-      video.removeAttribute("autoplay");
-      video.pause();
-      try {
-        video.currentTime = 0;
-      } catch (_) {
-        /* ignore */
+  /* The resting frame is the poster's frame (data-start): playback begins there,
+     and stopping rewinds to it, so the still and the video always line up. */
+  const startOf = (video) => Number(video.dataset.start) || 0;
+  const rewind = (video) => {
+    const start = startOf(video);
+    if (Math.abs(video.currentTime - start) > 0.05) video.currentTime = start;
+  };
+  const play = (video) => {
+    if (!video || reduceMotion || !video.paused) return;
+    if (video.readyState >= 1) rewind(video);
+    else video.addEventListener("loadedmetadata", () => rewind(video), { once: true });
+    video.play().catch(() => {});
+  };
+  const pause = (video) => {
+    if (!video || (video.paused && video.readyState < 1)) return;
+    video.pause();
+    if (video.readyState >= 1) rewind(video);
+  };
+
+  let ticking = false;
+  const playCentred = () => {
+    ticking = false;
+    if (mouseMode) return;
+    const mid = window.innerHeight / 2;
+    let best = null;
+    let bestDist = Infinity;
+    cards.forEach((card) => {
+      const box = card.querySelector(".case-frame").getBoundingClientRect();
+      const visible = Math.min(box.bottom, window.innerHeight) - Math.max(box.top, 0);
+      if (visible < box.height * 0.6) return;
+      const dist = Math.abs(box.top + box.height / 2 - mid);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = card;
       }
     });
-    return;
-  }
+    cards.forEach((card) => (card === best ? play(videoOf(card)) : pause(videoOf(card))));
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(playCentred);
+  };
 
-  if (!("IntersectionObserver" in window)) {
-    videos.forEach((video) => {
-      video.play().catch(() => {});
+  const enterMouseMode = () => {
+    mouseMode = true;
+    window.removeEventListener("scroll", onScroll);
+    window.removeEventListener("resize", onScroll);
+    cards.forEach((card) => {
+      if (!card.classList.contains("is-hovered")) pause(videoOf(card));
     });
-    return;
+  };
+
+  cards.forEach((card) => {
+    const video = videoOf(card);
+    card.addEventListener("pointerenter", (event) => {
+      if (event.pointerType !== "mouse") return;
+      if (!mouseMode) enterMouseMode();
+      card.classList.add("is-hovered");
+      play(video);
+    });
+    card.addEventListener("pointerleave", () => {
+      card.classList.remove("is-hovered");
+      if (mouseMode) pause(video);
+    });
+    card.addEventListener("focus", () => {
+      if (card.matches(":focus-visible")) play(video);
+    });
+    card.addEventListener("blur", () => {
+      if (mouseMode && !card.classList.contains("is-hovered")) pause(video);
+    });
+  });
+
+  /* Buffer videos shortly before they scroll into view so hover starts without a wait. */
+  if ("IntersectionObserver" in window) {
+    const warm = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.preload = "auto";
+          warm.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "200px 0px" }
+    );
+    cards.forEach((card) => videoOf(card) && warm.observe(videoOf(card)));
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target;
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      });
-    },
-    { threshold: 0.35 }
-  );
-
-  videos.forEach((video) => observer.observe(video));
+  if (!mouseMode && !reduceMotion) {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    const detectMouse = (event) => {
+      if (event.pointerType !== "mouse") return;
+      document.removeEventListener("pointermove", detectMouse);
+      if (!mouseMode) enterMouseMode();
+    };
+    document.addEventListener("pointermove", detectMouse, { passive: true });
+    playCentred();
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("case-grid");
   if (!root) return;
   renderProjects(root);
-  setupCaseVideos(root);
+  setupCaseMedia(root);
 });

@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="tailwind.css">
 </head>
 <body class="case-page theme-soc">
 
@@ -18,8 +19,8 @@
     <nav id="site-nav" aria-label="Primary">
       <a href="index.html#work">Work</a>
       <a href="index.html#playground">Playground</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#resume">Resume</a>
+      <a href="about.html">About</a>
+      <a href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -29,7 +30,7 @@
 
   <section class="cs-hero wrap">
     <a class="cs-back" href="index.html#work">← All work</a>
-    <p class="cs-label fade">SOC Signal • 2024 • Research</p>
+    <p class="cs-label fade">SOC Signal • 2026 • Research</p>
     <h1 class="cs-title fade d1">SOC Optimization &amp; Alert Fatigue: Designing Effective Alerts in Cybersecurity Dashboards</h1>
     <p class="cs-lede fade d2">Cutting alert fatigue so security analysts focus on the threats that matter.</p>
     <ul class="cs-tags fade d3">
@@ -43,7 +44,7 @@
     <div class="cs-cover cs-cover--video">
       <div class="cs-cover-media">
         <video muted loop playsinline autoplay preload="metadata">
-          <source src="assets/soc-signal.mp4" type="video/mp4">
+          <source src="assets/videos/soc.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -56,7 +57,6 @@
         <div><dt>Tools</dt><dd>
           <ul class="tool-list">
             <li><span class="tool" tabindex="0" role="img" aria-label="Figma"><span class="tool-tile"><img src="assets/tools/figma.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Figma</span></span></li>
-            <li><span class="tool" tabindex="0" role="img" aria-label="FigJam"><span class="tool-tile"><img src="assets/tools/figjam.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">FigJam</span></span></li>
             <li><span class="tool" tabindex="0" role="img" aria-label="Zoom"><span class="tool-tile"><img src="assets/tools/zoom.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Zoom</span></span></li>
             <li><span class="tool" tabindex="0" role="img" aria-label="Otter.ai"><span class="tool-tile"><img src="assets/tools/otter.png" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Otter.ai</span></span></li>
             <li><span class="tool" tabindex="0" role="img" aria-label="Claude"><span class="tool-tile"><img src="assets/tools/claude.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Claude</span></span></li>
@@ -394,8 +394,8 @@
       <h5>Links</h5>
       <a href="index.html#work">Work</a>
       <a href="index.html#playground">Playground</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#resume">Resume</a>
+      <a href="about.html">About</a>
+      <a href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume</a>
     </div>
     <div class="foot-col">
       <h5>Contact</h5>
@@ -411,6 +411,8 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="site.js" defer></script>
 <script src="projects.js" defer></script>
 <script src="case.js" defer></script>

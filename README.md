@@ -1,18 +1,42 @@
 # Keren Wasserman — Portfolio
 
-Framework-free portfolio site. Vanilla HTML + CSS, no build step.
+Portfolio site. Vanilla HTML + CSS + JS, with Tailwind utilities and GSAP.
 
 ## Run it
 Open `index.html` in a browser (double-click), or in Cursor use a live-server
 extension for hot reload.
 
+## Tailwind (utilities only)
+`styles.css` holds the base design. Tailwind adds utility classes on top, with no
+Preflight reset, so existing pages are unaffected. After adding or changing
+Tailwind classes in any `.html`/`.js` file, rebuild `tailwind.css`:
+
+```
+npm install          # first time only
+npm run watch:css    # rebuilds on save while editing
+npm run build:css    # one-off minified build (run before committing)
+```
+
+- Input: `src/tailwind.css` · output: `tailwind.css` (committed, linked after `styles.css`)
+- Breakpoints match the site, desktop-first: `max-xl:` ≤1279 · `max-lg:` ≤1023 ·
+  `max-md:` ≤767 · `max-sm:` ≤479
+- Site tokens are available as utilities: `text-ink`, `text-body`, `text-muted`,
+  `bg-chip`, `bg-page`, `border-line`, `bg-blue-tag`, `font-sans`, …
+- `rounded-sm` / `rounded-md` / `rounded-lg` use the site's own radius tokens
+
+## GSAP
+GSAP 3.15 + ScrollTrigger load from jsDelivr on every page (before `site.js`);
+the plugin is registered in `site.js`.
+
 ## Files
 - `index.html` — page structure (nav, hero, work grid, playground, footer)
+- `about.html` — about page (bio, experience/education, photo strip)
 - `opsin.html`, `acme.html`, `soc.html`, `joymee.html` — case study pages
-- `styles.css` — all styling. **Design tokens live at the top in `:root`.**
+- `styles.css` — base styling. **Design tokens live at the top in `:root`.**
+- `src/tailwind.css` → `tailwind.css` — Tailwind utilities (built, see above)
 - `site.js` — shared header behavior (frosted bar on scroll, mobile menu)
 - `projects.js` — work cards (homepage grid + "More case studies" rows)
-- `case.js` — case study pages: active chapter in the side index
+- `case.js` — case study pages: active chapter in the side index, tool icon tooltips, GSAP hover lift on `[data-lift]` elements, and `.cs-media` slideshow videos (play while on screen, with a pause button)
 
 ## Design tokens (edit once, applies everywhere) — top of `styles.css`
 - **Type:** `--fs-hero`, `--fs-h2`, `--fs-title`, `--fs-lede`, `--fs-body`,

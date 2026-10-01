@@ -1,6 +1,8 @@
 /* Header: frosted nav pill once scrolled, and the mobile hamburger dropdown.
    KerenAI widget: grow/shrink its iframe when the widget reports open/closed. */
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
   const agent = document.querySelector(".agent-frame");
   if (agent) {
     const agentOrigin = new URL(agent.src).origin;

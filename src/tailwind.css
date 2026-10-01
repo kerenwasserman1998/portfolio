@@ -1,0 +1,36 @@
+/* Tailwind utilities only — no Preflight reset, so styles.css stays in charge of the base look.
+   Build: npm run build:css  ·  While editing: npm run watch:css  →  writes ../tailwind.css */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" source(none);
+
+@source "../*.html";
+@source "../*.js";
+
+/* Same breakpoints as styles.css, read desktop-first with max-* variants:
+   max-xl: laptop (≤1279) · max-lg: tablet (≤1023) · max-md: large phone (≤767) · max-sm: small phone (≤479) */
+@theme {
+  --breakpoint-sm: 30rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+}
+
+/* Site tokens from styles.css, e.g. text-ink, bg-chip, border-line, font-sans. */
+@theme inline {
+  --font-sans: var(--font);
+  --color-page: var(--bg);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-chip: var(--chip);
+  --color-blue: var(--blue);
+  --color-blue-tag: var(--blue-tag);
+  --color-mauve: var(--mauve);
+  --color-mauve-tag: var(--mauve-tag);
+  --color-sage: var(--sage);
+  --color-sage-tag: var(--sage-tag);
+  --color-mint: var(--mint);
+  --color-mint-tag: var(--mint-tag);
+  --color-cream: var(--cream);
+}

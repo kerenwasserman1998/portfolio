@@ -1,0 +1,18 @@
+{
+  "name": "keren-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio site. Vanilla HTML + CSS + JS, with Tailwind utilities built by the Tailwind CLI.",
+  "scripts": {
+    "build:css": "tailwindcss -i src/tailwind.css -o tailwind.css --minify",
+    "watch:css": "tailwindcss -i src/tailwind.css -o tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kerenwasserman1998/portfolio.git"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
