@@ -14,7 +14,7 @@
 <header>
   <div class="nav-inner">
     <a href="index.html" class="logo">KW</a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span class="nav-toggle-bars" aria-hidden="true"></span></button>
     <nav id="site-nav" aria-label="Primary">
       <a href="index.html#work">Work</a>
       <a href="index.html#playground">Playground</a>
@@ -40,9 +40,9 @@
   </section>
 
   <div class="wrap">
-    <div class="cs-cover">
+    <div class="cs-cover cs-cover--video">
       <div class="cs-cover-media">
-        <video muted loop playsinline autoplay preload="metadata" poster="assets/soc-signal-poster.jpg">
+        <video muted loop playsinline autoplay preload="metadata">
           <source src="assets/soc-signal.mp4" type="video/mp4">
         </video>
       </div>
@@ -53,7 +53,15 @@
     <aside class="cs-rail">
       <dl class="cs-facts">
         <div><dt>Role</dt><dd>Lead UX Researcher &amp; Designer</dd></div>
-        <div><dt>Tools</dt><dd>Figma · FigJam · Zoom · Otter AI · Claude AI</dd></div>
+        <div><dt>Tools</dt><dd>
+          <ul class="tool-list">
+            <li><span class="tool" tabindex="0" role="img" aria-label="Figma"><span class="tool-tile"><img src="assets/tools/figma.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Figma</span></span></li>
+            <li><span class="tool" tabindex="0" role="img" aria-label="FigJam"><span class="tool-tile"><img src="assets/tools/figjam.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">FigJam</span></span></li>
+            <li><span class="tool" tabindex="0" role="img" aria-label="Zoom"><span class="tool-tile"><img src="assets/tools/zoom.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Zoom</span></span></li>
+            <li><span class="tool" tabindex="0" role="img" aria-label="Otter.ai"><span class="tool-tile"><img src="assets/tools/otter.png" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Otter.ai</span></span></li>
+            <li><span class="tool" tabindex="0" role="img" aria-label="Claude"><span class="tool-tile"><img src="assets/tools/claude.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Claude</span></span></li>
+          </ul>
+        </dd></div>
         <div><dt>Timeline</dt><dd>9 months</dd></div>
       </dl>
       <nav class="cs-index" aria-label="On this page">

@@ -14,7 +14,7 @@
 <header>
   <div class="nav-inner">
     <a href="index.html" class="logo">KW</a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span class="nav-toggle-bars" aria-hidden="true"></span></button>
     <nav id="site-nav" aria-label="Primary">
       <a href="index.html#work">Work</a>
       <a href="index.html#playground">Playground</a>
@@ -49,7 +49,14 @@
     <aside class="cs-rail">
       <dl class="cs-facts">
         <div><dt>Role</dt><dd>Lead UX Researcher &amp; Designer</dd></div>
-        <div><dt>Tools</dt><dd>Figma · Miro · Zoom · Google Forms</dd></div>
+        <div><dt>Tools</dt><dd>
+          <ul class="tool-list">
+            <li><span class="tool" tabindex="0" role="img" aria-label="Figma"><span class="tool-tile"><img src="assets/tools/figma.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Figma</span></span></li>
+            <li><span class="tool" tabindex="0" role="img" aria-label="Miro"><span class="tool-tile"><img src="assets/tools/miro.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Miro</span></span></li>
+            <li><span class="tool" tabindex="0" role="img" aria-label="Zoom"><span class="tool-tile"><img src="assets/tools/zoom.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Zoom</span></span></li>
+            <li><span class="tool" tabindex="0" role="img" aria-label="Google Forms"><span class="tool-tile"><img src="assets/tools/google-forms.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Google Forms</span></span></li>
+          </ul>
+        </dd></div>
         <div><dt>Timeline</dt><dd>7 months</dd></div>
       </dl>
       <nav class="cs-index" aria-label="On this page">

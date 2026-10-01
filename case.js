@@ -1,4 +1,4 @@
-/* Case study pages: highlight the rail chapter for the section in view. */
+/* Case study pages: tool-name tooltips, and highlight the rail chapter for the section in view. */
 document.addEventListener("DOMContentLoaded", () => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.querySelectorAll(".cs-cover video").forEach((video) => {
@@ -6,6 +6,27 @@ document.addEventListener("DOMContentLoaded", () => {
       video.pause();
     });
   }
+
+  /* Mouse hover via pointer events (embedded browsers can misreport (hover:hover));
+     touch toggles on tap, since a tap doesn't focus a non-link on iOS. */
+  const tools = Array.from(document.querySelectorAll(".tool"));
+  const untip = (except) => tools.forEach((tool) => tool !== except && tool.classList.remove("is-tipped"));
+  tools.forEach((tool) => {
+    tool.addEventListener("pointerenter", (event) => {
+      if (event.pointerType === "mouse") tool.classList.add("is-tipped");
+    });
+    tool.addEventListener("pointerleave", (event) => {
+      if (event.pointerType === "mouse") tool.classList.remove("is-tipped");
+    });
+    tool.addEventListener("pointerup", (event) => {
+      if (event.pointerType === "mouse") return;
+      untip(tool);
+      tool.classList.toggle("is-tipped");
+    });
+  });
+  document.addEventListener("pointerdown", (event) => {
+    if (!event.target.closest(".tool")) untip();
+  });
 
   const links = Array.from(document.querySelectorAll(".cs-index a"));
   if (!links.length) return;
