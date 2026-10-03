@@ -32,7 +32,7 @@
     <a class="cs-back" href="index.html#work">← All work</a>
     <p class="cs-label fade">ACME • 2025 • Industry sponsored</p>
     <h1 class="cs-title fade d1">Credit Card Fraud Detection &amp; Risk Platform</h1>
-    <p class="cs-lede fade d2">Helping fraud analysts catch real threats with less noise in credit-risk monitoring.</p>
+    <p class="cs-lede fade d2">A FICO-sponsored project helping fraud analysts catch real threats with less noise in credit-risk monitoring.</p>
     <ul class="cs-tags fade d3">
       <li>B2B SaaS</li>
       <li>Fintech</li>
@@ -54,6 +54,18 @@
     <aside class="cs-rail">
       <dl class="cs-facts">
         <div><dt>Role</dt><dd>UX Designer, Manager Experience</dd></div>
+        <div class="cs-fact--wide"><dt>Team</dt><dd>
+          <ul class="team-list">
+            <li class="team-member" data-lift>
+              <span class="team-avatar team-avatar--me" aria-hidden="true">KW</span>
+              <span class="team-text"><span class="team-name">Keren (me)</span><span class="team-role">Manager Experience</span></span>
+            </li>
+            <li class="team-member" data-lift>
+              <span class="team-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+              <span class="team-text"><span class="team-name">UX Designer</span><span class="team-role">Agent Experience</span></span>
+            </li>
+          </ul>
+        </dd></div>
         <div><dt>Tools</dt><dd>
           <ul class="tool-list">
             <li><span class="tool" tabindex="0" role="img" aria-label="Figma"><span class="tool-tile"><img src="assets/tools/figma.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Figma</span></span></li>
@@ -70,6 +82,7 @@
         <a href="#models">Conceptual models</a>
         <a href="#iterations">Iterations</a>
         <a href="#new-screens">New screens</a>
+        <a href="#learnings">Learnings</a>
       </nav>
     </aside>
 
@@ -103,8 +116,10 @@
         <p>This project used a Jobs To Be Done (JTBD) framework because the problem space is highly operational and task-driven, with clearly defined roles and success metrics. Fraud managers’ effectiveness depends on completing time-sensitive tasks such as monitoring performance, reallocating resources, and responding to system signals, rather than on individual traits or preferences.</p>
         <p>JTBD shifted the focus from who the users are to what they need to accomplish in specific situations. This made it easier to translate requirements into clear use cases and tasks, directly informing the dashboard’s information architecture, workflows, and action points.</p>
         <figure class="cs-figure">
-          <div class="cs-ph"></div>
-          <figcaption>JTBD for Balance Queues (Manager)</figcaption>
+          <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/acme/jtbd.png" target="_blank" rel="noopener" data-lift>
+            <img src="assets/acme/jtbd.png" alt="Jobs-to-be-done map for a fraud manager balancing queues: job performer, target job, job steps, emotional and social jobs, needs and circumstances." width="5168" height="3114" loading="lazy">
+          </a>
+          <figcaption>JTBD for Balance Queues (Manager). Click to open full size.</figcaption>
         </figure>
       </section>
 
@@ -114,31 +129,42 @@
         <p>Conceptual models were used to define how the system works before moving into screen design. They helped break down a complex product into clear objects, actions, data, and tasks, creating a shared structure for the system.</p>
         <p>Using conceptual models reduced unnecessary complexity and made interactions more consistent and predictable. This foundation allowed the design to scale cleanly as more data, features, and workflows were added.</p>
 
-        <div class="cs-block">
-          <h3 class="cs-h3">Object × Action</h3>
-          <p>An Object × Action table defined which actions managers can perform on core system objects (investigators, queues, cases, and reports), ensuring clear permissions and actionable UI controls.</p>
-          <figure class="cs-figure">
-            <div class="cs-ph cs-ph--wide"></div>
-            <figcaption>Object × Action table</figcaption>
-          </figure>
-        </div>
-
-        <div class="cs-block">
-          <h3 class="cs-h3">Attributes + Measure &amp; Unit</h3>
-          <p>For each object in the Object × Action table, transactional IxD attributes were defined using an Attributes table and a Measure + Unit table. This helped determine what information should be presented on each page and which measures needed to be visualized using charts, graphs, or tables. Defining these attributes also supported understanding relationships between measures and informed how data was structured across views.</p>
-          <figure class="cs-figure">
-            <div class="cs-ph cs-ph--wide"></div>
-            <figcaption>Attributes + Measure &amp; Unit table for Investigator</figcaption>
-          </figure>
-        </div>
-
-        <div class="cs-block">
-          <h3 class="cs-h3">Prioritization matrix</h3>
-          <p>A prioritization table was created using the Object × Action table and the Attributes table, including measures and units. Tasks were grouped by how often they happen as frequent, medium, or rare, which helped decide what should be most visible and what could be placed deeper in the interface.</p>
-          <figure class="cs-figure">
-            <div class="cs-ph cs-ph--wide"></div>
-            <figcaption>Prioritization table</figcaption>
-          </figure>
+        <div class="tabs tabs--underline" data-tabs>
+          <div class="tabs-list" role="tablist" aria-label="Conceptual models">
+            <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="model-tab-oa" aria-controls="model-panel-oa" aria-selected="true">Object × Action</button>
+            <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="model-tab-attr" aria-controls="model-panel-attr" aria-selected="false" tabindex="-1">Attributes</button>
+            <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="model-tab-prio" aria-controls="model-panel-prio" aria-selected="false" tabindex="-1">Prioritization</button>
+            <span class="tabs-indicator" aria-hidden="true"></span>
+          </div>
+          <div class="tabs-panels">
+            <div class="tabs-panel" role="tabpanel" id="model-panel-oa" aria-labelledby="model-tab-oa" tabindex="0">
+              <p>An Object × Action table defined which actions managers can perform on core system objects (investigators, queues, models, and cases), ensuring clear permissions and actionable UI controls.</p>
+              <figure class="cs-figure">
+                <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/acme/object-action.png" target="_blank" rel="noopener" data-lift>
+                  <img src="assets/acme/object-action.png" alt="Object × Action table: investigators can be transferred, tracked, shared and messaged; queues and cases can be transferred, tracked and shared; models can be tracked and shared." width="2464" height="1272" loading="lazy">
+                </a>
+                <figcaption>Object × Action table</figcaption>
+              </figure>
+            </div>
+            <div class="tabs-panel" role="tabpanel" id="model-panel-attr" aria-labelledby="model-tab-attr" tabindex="0" hidden>
+              <p>For each object in the Object × Action table, transactional IxD attributes were defined using an Attributes table and a Measure + Unit table. This helped determine what information should be presented on each page and which measures needed to be visualized using charts, graphs, or tables. Defining these attributes also supported understanding relationships between measures and informed how data was structured across views.</p>
+              <figure class="cs-figure">
+                <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/acme/attributes.png" target="_blank" rel="noopener" data-lift>
+                  <img src="assets/acme/attributes.png" alt="Investigator attributes (name, assigned queue, hours logged, cases skipped, active cases, prior closed cases) beside a table of measures and their units, such as cases worked per hour and percentage of incorrect dispositions." width="2592" height="1864" loading="lazy">
+                </a>
+                <figcaption>Attributes + Measure &amp; Unit table for Investigator</figcaption>
+              </figure>
+            </div>
+            <div class="tabs-panel" role="tabpanel" id="model-panel-prio" aria-labelledby="model-tab-prio" tabindex="0" hidden>
+              <p>A prioritization table was created using the Object × Action table and the Attributes table, including measures and units. Tasks were grouped by how often they happen as frequent, medium, or rare, which helped decide what should be most visible and what could be placed deeper in the interface.</p>
+              <figure class="cs-figure">
+                <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/acme/prioritization.png" target="_blank" rel="noopener" data-lift>
+                  <img src="assets/acme/prioritization.png" alt="Prioritization matrix. Frequent: view dashboards, track queue progress, monitor investigator performance, balance queues, monitor model performance, message investigator. Medium: create and share reports, run what-if scenarios, track case. Rare: escalate issues." width="1968" height="1624" loading="lazy">
+                </a>
+                <figcaption>Prioritization table</figcaption>
+              </figure>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -146,24 +172,53 @@
         <p class="cs-label">05</p>
         <h2 class="cs-h2">High-fidelity prototypes — iterations</h2>
 
-        <div class="cs-block">
-          <h3 class="cs-h3">Transfer agent</h3>
-          <div class="cs-split cs-split--tight">
-            <div>
-              <div class="cs-ph"></div>
-              <p class="cs-label">Initial</p>
-              <ul class="cs-list">
-                <li>No visibility into how transferring an agent would affect queue load</li>
-                <li>Redundant agent selection, requiring multiple clicks across screens and overlays</li>
-              </ul>
+        <div class="cs-block tabs tabs--segment" data-tabs>
+          <div class="cs-block-head">
+            <h3 class="cs-h3">Transfer agent</h3>
+            <div class="tabs-list" role="tablist" aria-label="Transfer agent prototype">
+              <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="transfer-tab-before" aria-controls="transfer-panel-before" aria-selected="true">Before</button>
+              <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="transfer-tab-after" aria-controls="transfer-panel-after" aria-selected="false" tabindex="-1">After</button>
+              <span class="tabs-indicator" aria-hidden="true"></span>
             </div>
-            <div>
-              <div class="cs-ph cs-ph--brand"></div>
-              <p class="cs-label cs-label--ink">Refined</p>
-              <ul class="cs-list">
-                <li>Displays current queue status and post-transfer forecasts upfront</li>
-                <li>Allows agent re-selection within the same interaction, reducing friction</li>
-              </ul>
+          </div>
+          <div class="tabs-panels">
+            <div class="tabs-panel" role="tabpanel" id="transfer-panel-before" aria-labelledby="transfer-tab-before" tabindex="0">
+              <div class="cs-ph cs-media" data-lift>
+                <video muted loop playsinline preload="none" poster="assets/acme/posters/transfer-before.jpg" aria-label="Initial transfer-agent prototype, starting from the overview dashboard">
+                  <source src="assets/acme/transfer-before.mp4" type="video/mp4">
+                </video>
+                <button class="cs-media-toggle opacity-80 transition-opacity duration-200 hover:opacity-100" type="button" aria-label="Pause video">
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+                </button>
+              </div>
+              <div class="ba-notes">
+                <p class="cs-label">Initial prototype</p>
+                <p>The initial design feedback surfaced two key issues in the transfer-agent flow:</p>
+                <ul class="cs-list">
+                  <li>No visibility into how transferring an agent would affect queue load</li>
+                  <li>Redundant agent selection, requiring multiple clicks across screens and overlays</li>
+                </ul>
+              </div>
+            </div>
+            <div class="tabs-panel" role="tabpanel" id="transfer-panel-after" aria-labelledby="transfer-tab-after" tabindex="0" hidden>
+              <div class="cs-ph cs-media" data-lift>
+                <video muted loop playsinline preload="none" poster="assets/acme/posters/transfer-after.jpg" aria-label="Refined transfer-agent prototype, starting from the queue detail page">
+                  <source src="assets/acme/transfer-after.mp4" type="video/mp4">
+                </video>
+                <button class="cs-media-toggle opacity-80 transition-opacity duration-200 hover:opacity-100" type="button" aria-label="Pause video">
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+                </button>
+              </div>
+              <div class="ba-notes">
+                <p class="cs-label cs-label--ink">Refined prototype</p>
+                <p>In the refined design, these were resolved by:</p>
+                <ul class="cs-list cs-list--check">
+                  <li>Displaying current queue status and post-transfer forecasts upfront</li>
+                  <li>Allowing agent re-selection within the same interaction, reducing friction</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -174,26 +229,58 @@
           <ul class="cs-list">
             <li>Standardized screen dimensions across the flow</li>
             <li>Established a consistent title hierarchy and labeling system</li>
-            <li>Expanded the transfer interaction to provide clearer, more flexible options</li>
+            <li>Expanded the transfer interaction to provide clearer, more flexible options (shown above)</li>
             <li>Introduced gamification elements to increase engagement and system transparency</li>
           </ul>
-          <div class="cs-split cs-split--tight">
-            <figure class="cs-figure">
-              <div class="cs-ph"></div>
-              <figcaption>Dashboard — before</figcaption>
-            </figure>
-            <figure class="cs-figure">
-              <div class="cs-ph"></div>
-              <figcaption>Dashboard — after</figcaption>
-            </figure>
-            <figure class="cs-figure">
-              <div class="cs-ph"></div>
-              <figcaption>Agent detail — before</figcaption>
-            </figure>
-            <figure class="cs-figure">
-              <div class="cs-ph"></div>
-              <figcaption>Agent detail — after</figcaption>
-            </figure>
+
+          <div class="tabs tabs--pill" data-tabs>
+            <div class="tabs-list" role="tablist" aria-label="Screen iterations">
+              <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-page" type="button" role="tab" id="iter-tab-dash" aria-controls="iter-panel-dash" aria-selected="true">Dashboard</button>
+              <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-page" type="button" role="tab" id="iter-tab-agent" aria-controls="iter-panel-agent" aria-selected="false" tabindex="-1">Agent detail</button>
+              <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-page" type="button" role="tab" id="iter-tab-queue" aria-controls="iter-panel-queue" aria-selected="false" tabindex="-1">Queue detail</button>
+              <span class="tabs-indicator" aria-hidden="true"></span>
+            </div>
+            <div class="tabs-panels">
+              <div class="tabs-panel" role="tabpanel" id="iter-panel-dash" aria-labelledby="iter-tab-dash" tabindex="0">
+                <div class="ba-hold" data-hold>
+                  <div class="ba-frame select-none touch-pan-y" data-lift>
+                    <img class="ba-after" src="assets/acme/iterations/dashboard-after.png" alt="Dashboard after iteration: six KPI cards, a department leaderboard, a tabbed agent performance chart with forecast, and a status card per fraud model." width="2163" height="1539" loading="lazy" draggable="false">
+                    <img class="ba-before" src="assets/acme/iterations/dashboard-before.png" alt="Dashboard before iteration: four KPI cards, cases per queue, an agent performance table and a single model FPR chart." width="1440" height="828" loading="lazy" draggable="false">
+                  </div>
+                  <div class="ba-bar">
+                    <p class="ba-hint"><span class="ba-badge" aria-hidden="true">After</span>Press and hold the screen to see the before.</p>
+                    <button class="ba-switch group" type="button" aria-pressed="false"><span class="ba-track bg-line transition-colors duration-200 group-aria-pressed:bg-ink" aria-hidden="true"><span class="ba-knob"></span></span>Show before</button>
+                  </div>
+                  <p class="ba-caption">Expanded the KPI row from four to six metrics (adding agent performance, training completion, retention and ROI), added a department leaderboard, turned agent performance into a tabbed chart with a forecast, and gave each fraud model its own status card.</p>
+                </div>
+              </div>
+              <div class="tabs-panel" role="tabpanel" id="iter-panel-agent" aria-labelledby="iter-tab-agent" tabindex="0" hidden>
+                <div class="ba-hold" data-hold>
+                  <div class="ba-frame select-none touch-pan-y" data-lift>
+                    <img class="ba-after" src="assets/acme/iterations/agent-detail-after.png" alt="Agent detail after iteration: profile card with Stats, Game and Training tabs, a tabbed performance chart comparing the agent with team, department, company average and goal, and a shorter case list." width="1440" height="1024" loading="lazy" draggable="false">
+                    <img class="ba-before" src="assets/acme/iterations/agent-detail-before.png" alt="Agent detail before iteration: profile stats, a single cases-closed-per-hour chart and a long case list." width="1440" height="1209" loading="lazy" draggable="false">
+                  </div>
+                  <div class="ba-bar">
+                    <p class="ba-hint"><span class="ba-badge" aria-hidden="true">After</span>Press and hold the screen to see the before.</p>
+                    <button class="ba-switch group" type="button" aria-pressed="false"><span class="ba-track bg-line transition-colors duration-200 group-aria-pressed:bg-ink" aria-hidden="true"><span class="ba-knob"></span></span>Show before</button>
+                  </div>
+                  <p class="ba-caption">Added Stats, Game and Training tabs to the agent profile, replaced the single cases-per-hour chart with a tabbed performance chart that compares the agent with their team, department, company average and goal, and shortened the case list to keep the page scannable.</p>
+                </div>
+              </div>
+              <div class="tabs-panel" role="tabpanel" id="iter-panel-queue" aria-labelledby="iter-tab-queue" tabindex="0" hidden>
+                <div class="ba-hold" data-hold>
+                  <div class="ba-frame select-none touch-pan-y" data-lift>
+                    <img class="ba-after" src="assets/acme/iterations/queue-detail-after.png" alt="Queue detail after iteration: queue performance beside a tabbed Leaderboard and Flagged Cases panel with points, accuracy, teamwork and productivity, plus Cases and Agents tabs on the list." width="1443" height="1024" loading="lazy" draggable="false">
+                    <img class="ba-before" src="assets/acme/iterations/queue-detail-before.png" alt="Queue detail before iteration: queue performance, a flagged cases table and a long case list." width="1440" height="1224" loading="lazy" draggable="false">
+                  </div>
+                  <div class="ba-bar">
+                    <p class="ba-hint"><span class="ba-badge" aria-hidden="true">After</span>Press and hold the screen to see the before.</p>
+                    <button class="ba-switch group" type="button" aria-pressed="false"><span class="ba-track bg-line transition-colors duration-200 group-aria-pressed:bg-ink" aria-hidden="true"><span class="ba-knob"></span></span>Show before</button>
+                  </div>
+                  <p class="ba-caption">Paired flagged cases with a points-based leaderboard in one tabbed panel, and added Cases and Agents tabs to the list so managers can switch views without leaving the queue.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -202,16 +289,53 @@
         <p class="cs-label">06</p>
         <h2 class="cs-h2">New screens</h2>
         <p>As part of the gamification requirement, I designed two new screens to boost agent performance, accuracy, and teamwork. The Game screen introduces progress tracking and achievement elements to increase engagement during work. The Training screen allows managers to assign courses and track agent progress, connecting skill development directly to performance outcomes.</p>
-        <div class="cs-split cs-split--tight">
-          <figure class="cs-figure">
-            <div class="cs-ph cs-ph--brand"></div>
-            <figcaption>Game</figcaption>
-          </figure>
-          <figure class="cs-figure">
-            <div class="cs-ph cs-ph--brand"></div>
-            <figcaption>Training</figcaption>
-          </figure>
-        </div>
+        <figure class="cs-figure">
+          <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/acme/screens/game.png" target="_blank" rel="noopener" data-lift>
+            <img src="assets/acme/screens/game.png" alt="Game screen: a department leaderboard ranked across accuracy, productivity, teamwork, training and retention, with performance and ROI charts and a quarterly budget bar." width="2160" height="1536" loading="lazy">
+          </a>
+          <figcaption><strong>Game.</strong> Department leaderboards across five performance categories, with performance, ROI and budget tracking.</figcaption>
+        </figure>
+        <figure class="cs-figure">
+          <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/acme/screens/training.png" target="_blank" rel="noopener" data-lift>
+            <img src="assets/acme/screens/training.png" alt="Training screen: training modules with an Assign Training action, a training ROI chart, before and after training performance, and a training leaderboard." width="1443" height="1026" loading="lazy">
+          </a>
+          <figcaption><strong>Training.</strong> Managers assign modules, then track completion, ROI and how performance changes after training.</figcaption>
+        </figure>
+      </section>
+
+      <section class="cs-section" id="learnings">
+        <p class="cs-label">07</p>
+        <h2 class="cs-h2">Learnings</h2>
+        <ol class="cs-rows">
+          <li>
+            <span class="cs-row-key">01</span>
+            <div class="cs-row-body">
+              <h3 class="cs-h3">Data visualization</h3>
+              <p>Deepened my ability to convey complex operational data through charts, graphs, and dashboards by selecting the right visualization for each use case and user question.</p>
+            </div>
+          </li>
+          <li>
+            <span class="cs-row-key">02</span>
+            <div class="cs-row-body">
+              <h3 class="cs-h3">Micro-interactions</h3>
+              <p>Refined interaction patterns such as filtering, sorting, and drill-down to details, enabling users to explore data progressively without overwhelming the interface.</p>
+            </div>
+          </li>
+          <li>
+            <span class="cs-row-key">03</span>
+            <div class="cs-row-body">
+              <h3 class="cs-h3">Gamification</h3>
+              <p>Learned how to apply gamification thoughtfully to increase engagement, motivation, and system transparency without distracting from core tasks.</p>
+            </div>
+          </li>
+          <li>
+            <span class="cs-row-key">04</span>
+            <div class="cs-row-body">
+              <h3 class="cs-h3">Jobs To Be Done</h3>
+              <p>Strengthened my use of the JTBD framework to ground design decisions in user intent and outcomes, ensuring solutions addressed real operational needs rather than surface-level features.</p>
+            </div>
+          </li>
+        </ol>
       </section>
     </article>
   </div>

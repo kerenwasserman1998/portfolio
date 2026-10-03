@@ -46,7 +46,7 @@
     <div class="cs-cover cs-cover--video">
       <div class="cs-cover-media">
         <video muted loop playsinline autoplay preload="metadata">
-          <source src="assets/videos/joymee.mp4" type="video/mp4">
+          <source src="assets/joymee/cover.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -56,6 +56,22 @@
     <aside class="cs-rail">
       <dl class="cs-facts">
         <div><dt>Role</dt><dd>Lead UX Researcher &amp; Designer</dd></div>
+        <div class="cs-fact--wide"><dt>Team</dt><dd>
+          <ul class="team-list">
+            <li class="team-member" data-lift>
+              <span class="team-avatar team-avatar--me" aria-hidden="true">KW</span>
+              <span class="team-text"><span class="team-name">Keren (me)</span><span class="team-role">Lead UX Researcher &amp; Designer</span></span>
+            </li>
+          </ul>
+          <p class="team-with">Worked with</p>
+          <ul class="team-pills">
+            <li>Graphic Designer</li>
+            <li>UX Manager</li>
+            <li>Founder</li>
+            <li>Marketing</li>
+            <li>Head of Engineering</li>
+          </ul>
+        </dd></div>
         <div><dt>Tools</dt><dd>
           <ul class="tool-list">
             <li><span class="tool" tabindex="0" role="img" aria-label="Figma"><span class="tool-tile"><img src="assets/tools/figma.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Figma</span></span></li>
@@ -107,28 +123,49 @@
         <div class="cs-block">
           <h3 class="cs-h3">Interviews</h3>
           <p>I conducted 10 Zoom interviews with participants aged 18 to 55 from diverse backgrounds across the U.S., including individuals who are single, married, divorced, and part of the LGBTQ+ community. The interviews explored their thoughts on sexual education and online sexual therapy. I also performed usability testing with these participants to assess their experiences with the JoyMee platform.</p>
-          <div class="cs-cards">
-            <div class="cs-card">
-              <p class="cs-label">Finding 1</p>
+          <ol class="findings" data-reveal>
+            <li class="finding" data-lift>
+              <span class="finding-num"><span class="sr-only">Finding </span>01</span>
               <p>Participants viewed sexuality treatment as addressing an existing problem, with 60% linking it to trauma.</p>
-            </div>
-            <div class="cs-card">
-              <p class="cs-label">Finding 2</p>
+            </li>
+            <li class="finding" data-lift>
+              <span class="finding-num"><span class="sr-only">Finding </span>02</span>
               <p>Women preferred to choose their therapist, while men were either indifferent or preferred therapists who suited them.</p>
-            </div>
-            <div class="cs-card">
-              <p class="cs-label">Finding 3</p>
+            </li>
+            <li class="finding" data-lift>
+              <span class="finding-num"><span class="sr-only">Finding </span>03</span>
               <p>The majority of participants were taught in childhood that sex and sexuality were taboo and negative.</p>
-            </div>
-          </div>
+            </li>
+          </ol>
         </div>
 
         <div class="cs-block">
           <h3 class="cs-h3">Personas</h3>
           <p>Based on the insights gathered from the interviews, I developed 2 personas that represent the target audience for JoyMee. These personas reflect the diverse backgrounds, experiences, and perspectives of participants, highlighting their unique needs and preferences related to sexual education and online therapy.</p>
-          <div class="cs-split cs-split--tight">
-            <figure class="cs-figure"><div class="cs-ph"></div><figcaption>Persona 1</figcaption></figure>
-            <figure class="cs-figure"><div class="cs-ph"></div><figcaption>Persona 2</figcaption></figure>
+          <div class="tabs tabs--underline" data-tabs>
+            <div class="tabs-list" role="tablist" aria-label="Personas">
+              <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="persona-tab-brad" aria-controls="persona-panel-brad" aria-selected="true">Brad, 27</button>
+              <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="persona-tab-ashley" aria-controls="persona-panel-ashley" aria-selected="false" tabindex="-1">Ashley, 39</button>
+              <span class="tabs-indicator" aria-hidden="true"></span>
+            </div>
+            <div class="tabs-panels">
+              <div class="tabs-panel" role="tabpanel" id="persona-panel-brad" aria-labelledby="persona-tab-brad" tabindex="0">
+                <figure class="cs-figure">
+                  <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/joymee/personas/persona-1.png" target="_blank" rel="noopener" data-lift>
+                    <img src="assets/joymee/personas/persona-1.png" alt="Persona: Brad, 27, single salesperson in Denver. Wants personal growth, sexual-health knowledge and a therapist he connects with; prefers in-person therapy, struggles with attention and reading, and needs structure to stay motivated." width="1866" height="1068" loading="lazy">
+                  </a>
+                  <figcaption>Persona 1: Brad, a single salesperson who prefers in-person therapy and needs structure to stay engaged.</figcaption>
+                </figure>
+              </div>
+              <div class="tabs-panel" role="tabpanel" id="persona-panel-ashley" aria-labelledby="persona-tab-ashley" tabindex="0" hidden>
+                <figure class="cs-figure">
+                  <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/joymee/personas/persona-2.jpg" target="_blank" rel="noopener" data-lift>
+                    <img src="assets/joymee/personas/persona-2.jpg" alt="Persona: Ashley, 39, divorced nurse anesthetist in San Jose. Wants better communication and intimacy and a therapist who shares her values; past couples therapy felt ineffective and she grew up with negative views of sexuality." width="2000" height="1114" loading="lazy">
+                  </a>
+                  <figcaption>Persona 2: Ashley, a divorced nurse anesthetist looking for a therapist who aligns with her values.</figcaption>
+                </figure>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -157,8 +194,10 @@
             </div>
           </div>
           <figure class="cs-figure">
-            <div class="cs-ph cs-ph--wide"></div>
-            <figcaption>Competitive analysis table</figcaption>
+            <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/joymee/source/competitive-analysis-full.jpg" target="_blank" rel="noopener" data-lift>
+              <img src="assets/joymee/competitive-analysis.jpg" alt="Competitive analysis table of Talkspace, BetterHelp, ReGain, Modern Intimacy and Beducated, comparing competitor type, location, business size, price, courses versus therapy, and insurance. Modern Intimacy is the only direct competitor and the only one offering both courses and therapy." width="3200" height="2030" loading="lazy">
+            </a>
+            <figcaption>Competitive analysis table. Click to open full size.</figcaption>
           </figure>
         </div>
       </section>
@@ -167,10 +206,36 @@
         <p class="cs-label">04</p>
         <h2 class="cs-h2">Wireframes</h2>
         <p>The wireframes focused on two core user flows: finding a therapist and booking a session, and discovering a course and completing a purchase. These flows were prioritized based on research findings, as they represented the platform's primary value to users. Before moving into high-fidelity, the wireframes were reviewed with the engineering lead, UX manager, founder, and marketing team to validate the structure, surface technical constraints early, and align on product direction.</p>
-        <figure class="cs-figure">
-          <div class="cs-ph"></div>
-          <figcaption>Wireframes: find a therapist and book a session; discover a course and purchase</figcaption>
-        </figure>
+        <div class="carousel" data-carousel data-interval="8000" role="region" aria-roledescription="carousel" aria-label="Wireframes">
+          <div class="carousel-stage touch-pan-y select-none">
+            <ul class="carousel-track">
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="1 of 4" data-caption="Home: entry point into courses and personalized content">
+                <img src="assets/joymee/wireframes/home.png" alt="Wireframe of the home screen with a welcome message and content filters by audience." width="386" height="836" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="2 of 4" data-caption="Therapist matching: filters and match percentages">
+                <img src="assets/joymee/wireframes/therapists.png" alt="Wireframe of the therapist list with filters and therapist cards showing match percentage, availability and Book Now." width="386" height="836" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="3 of 4" data-caption="Therapist profile: credentials, specializations and session options">
+                <img src="assets/joymee/wireframes/therapist-profile.png" alt="Wireframe of a therapist profile with intro video, credentials, specializations, bio and session options." width="386" height="836" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="4 of 4" data-caption="Course page: preview, price and purchase">
+                <img src="assets/joymee/wireframes/course.png" alt="Wireframe of a course page with a preview video, instructor, price and Buy It Now and Add to Cart buttons." width="386" height="836" loading="lazy" draggable="false">
+              </li>
+            </ul>
+          </div>
+          <div class="carousel-bar">
+            <p class="carousel-caption" aria-live="off"></p>
+            <div class="carousel-controls">
+              <button class="carousel-btn carousel-prev transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+              <div class="carousel-dots"></div>
+              <button class="carousel-btn carousel-next transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+              <button class="carousel-btn carousel-pause transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Pause slideshow">
+                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="cs-section" id="hifi">
@@ -178,10 +243,44 @@
         <h2 class="cs-h2">High-fidelity design</h2>
         <p>Moving into high-fidelity, the design priorities were shaped by the sensitivity of the subject matter. Trust was the foundation — therapist profiles were designed to prominently display credentials and licenses, giving users the confidence to take the step of booking a session. Color and visual tone were chosen deliberately to feel warm and approachable, softening the stigma and embarrassment often associated with sexual health topics.</p>
         <p>I collaborated closely with a UI designer who contributed custom illustrations and led the color implementation across the app, translating the structural and interaction decisions from my wireframes into a cohesive, polished visual language.</p>
-        <figure class="cs-figure">
-          <div class="cs-ph cs-ph--brand"></div>
-          <figcaption>High-fidelity screens</figcaption>
-        </figure>
+        <div class="carousel" data-carousel data-interval="8000" role="region" aria-roledescription="carousel" aria-label="High-fidelity screens">
+          <div class="carousel-stage touch-pan-y select-none">
+            <ul class="carousel-track">
+              <li class="carousel-slide carousel-slide--video" aria-roledescription="slide" aria-label="1 of 6" data-caption="Walkthrough: browsing courses, therapists and articles">
+                <video muted playsinline preload="none" poster="assets/joymee/hifi/walkthrough-poster.jpg" aria-label="Walkthrough of the high-fidelity JoyMee app">
+                  <source src="assets/joymee/hifi/walkthrough.mp4" type="video/mp4">
+                </video>
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="2 of 6" data-caption="Topics: approachable entry points with custom illustrations">
+                <img src="assets/joymee/hifi/topics.png" alt="Topics screen with illustrated question cards such as how breathing could transform your sex life." width="402" height="852" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="3 of 6" data-caption="Articles: filter and sort expert content">
+                <img src="assets/joymee/hifi/articles.png" alt="Articles screen with filter and sort controls and an article card credited to a licensed therapist." width="406" height="856" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="4 of 6" data-caption="Therapist profile: credentials up front to build trust">
+                <img src="assets/joymee/hifi/therapist.png" alt="Therapist profile with a large portrait, intro video and credentials." width="408" height="856" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="5 of 6" data-caption="Course page: preview video and course details">
+                <img src="assets/joymee/hifi/course.png" alt="Course page for Understanding Our Bodies with a preview video and description." width="406" height="856" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="6 of 6" data-caption="Booking confirmation: session package with the therapist's credentials">
+                <img src="assets/joymee/hifi/booking.png" alt="Booking confirmation reading Congratulations on starting your journey, with a 10-session package and the therapist's credentials." width="402" height="852" loading="lazy" draggable="false">
+              </li>
+            </ul>
+          </div>
+          <div class="carousel-bar">
+            <p class="carousel-caption" aria-live="off"></p>
+            <div class="carousel-controls">
+              <button class="carousel-btn carousel-prev transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+              <div class="carousel-dots"></div>
+              <button class="carousel-btn carousel-next transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+              <button class="carousel-btn carousel-pause transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Pause slideshow">
+                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="cs-section" id="learnings">

@@ -110,14 +110,16 @@
 
         <div class="cs-block">
           <h3 class="cs-h3">Competitive analysis</h3>
-          <p>5 SOC platforms were analyzed across alert display, prioritization, filtering, data density, and AI features. What was learned:</p>
+          <p>6 SOC platforms were analyzed across alert display, prioritization, filtering, data density, and AI features. What was learned:</p>
           <ul class="cs-list">
             <li>Platforms are largely optimized for Tier 2/3 — Tier 1 needs are underserved</li>
             <li>Alert noise is a recognized problem, but design solutions are inconsistent</li>
             <li>No platform offers a unified, Tier 1-centered alert experience</li>
           </ul>
           <figure class="cs-figure">
-            <div class="cs-ph cs-ph--wide"></div>
+            <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/soc/competitive-analysis.png" target="_blank" rel="noopener" data-lift>
+              <img src="assets/soc/competitive-analysis.png" alt="Competitive analysis of Splunk Enterprise Security, IBM QRadar, Microsoft Sentinel, Google Chronicle, CrowdStrike Falcon and Palo Alto Cortex across alert prioritization, data density, search and filtering, and Tier 1 guidance. Splunk and QRadar are manual, very dense and low on Tier 1 guidance; CrowdStrike and Cortex use automated grouping and rate high." width="2408" height="1364" loading="lazy">
+            </a>
             <figcaption>Competitive analysis table</figcaption>
           </figure>
         </div>
@@ -144,23 +146,12 @@
         <p class="cs-label">04</p>
         <h2 class="cs-h2">Jobs-to-be-done</h2>
         <p>Jobs To Be Done is a framework that shifts the focus from what users do to why they do it — capturing not just tasks and steps, but the goals, emotional pressures, social stakes, and circumstances that surround them. I chose JTBD because SOC analyst work is deeply context-dependent: the same task feels entirely different at 3am on a night shift versus mid-morning with a full team. A task-based framework would have missed that.</p>
-        <ul class="cs-rows cs-rows--named">
-          <li>
-            <span class="cs-row-key">Monitor alerts</span>
-            <div class="cs-row-body"><p>Continuously scanning and triaging incoming alerts to separate real threats from noise.</p></div>
-          </li>
-          <li>
-            <span class="cs-row-key">Analyze alerts</span>
-            <div class="cs-row-body"><p>Investigating suspicious alerts in depth to determine threat legitimacy and decide on escalation — the most time-consuming and highest-stakes job.</p></div>
-          </li>
-          <li>
-            <span class="cs-row-key">Document &amp; report</span>
-            <div class="cs-row-body"><p>Capturing findings clearly and escalating to the next tier so investigations can proceed without friction.</p></div>
-          </li>
-        </ul>
+        <p>I mapped three jobs: monitoring alerts, analyzing alerts, and documenting and reporting. Below is the canvas for the primary one, analyzing alerts — the most time-consuming and highest-stakes of the three.</p>
         <figure class="cs-figure">
-          <div class="cs-ph"></div>
-          <figcaption>JTBD canvases for each job: job steps, related jobs, desired outcomes, emotional and social jobs, key circumstances</figcaption>
+          <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/soc/source/jtbd/analyze%20alerts.png" target="_blank" rel="noopener" data-lift>
+            <img src="assets/soc/jtbd-analyze.webp" alt="JTBD canvas for a Tier 1 SOC analyst analyzing alerts, aspiring to Tier 2. Job steps: identify a suspicious alert, open its details, check description, severity and logs, look for unusual activity, then escalate or dismiss. Also lists related jobs, emotional and social jobs such as feeling confident under pressure and being trusted by Tier 2, desired outcomes, and circumstances like high alert volume and time pressure." width="2400" height="1576" loading="lazy">
+          </a>
+          <figcaption>JTBD canvas for Analyze alerts: job steps, related jobs, emotional and social jobs, needs and circumstances</figcaption>
         </figure>
       </section>
 
@@ -169,31 +160,42 @@
         <h2 class="cs-h2">Conceptual models</h2>
         <p>Before any sketching or prototyping began, a conceptual model was developed to define what the system needs to support — grounded in how Tier 1 analysts actually think about and perform their work. As Johnson and Henderson (2013) describe, a conceptual model defines abstractly what users can do with a system and what concepts they need to be aware of, in terms of tasks rather than screen graphics. The model was built in three layers, each directly informed by the JTBD analysis and interview findings.</p>
 
-        <div class="cs-block">
-          <h3 class="cs-h3">Object × Action</h3>
-          <p>Mapping the core objects analysts interact with against their four primary actions. Alert emerged as the most critical object — involved in all four actions — directly reinforcing the focus on the alert triage experience.</p>
-          <figure class="cs-figure">
-            <div class="cs-ph cs-ph--wide"></div>
-            <figcaption>Object × Action table</figcaption>
-          </figure>
-        </div>
-
-        <div class="cs-block">
-          <h3 class="cs-h3">Attributes &amp; measures</h3>
-          <p>Defining what information each object carries and how performance is tracked. Drawn directly from interviews — analysts consistently needed severity, status, time, and alert type at a glance. This step directly informed decisions around data density and alert display.</p>
-          <figure class="cs-figure">
-            <div class="cs-ph cs-ph--wide"></div>
-            <figcaption>Attributes and measures table</figcaption>
-          </figure>
-        </div>
-
-        <div class="cs-block">
-          <h3 class="cs-h3">Prioritization</h3>
-          <p>Ranking tasks by frequency across a shift to determine what needs to be immediately visible versus what can require additional navigation. Prioritization was driven entirely by research — never assumed.</p>
-          <figure class="cs-figure">
-            <div class="cs-ph cs-ph--wide"></div>
-            <figcaption>Prioritization table</figcaption>
-          </figure>
+        <div class="tabs tabs--underline" data-tabs>
+          <div class="tabs-list" role="tablist" aria-label="Conceptual models">
+            <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="model-tab-oa" aria-controls="model-panel-oa" aria-selected="true">Object × Action</button>
+            <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="model-tab-attr" aria-controls="model-panel-attr" aria-selected="false" tabindex="-1">Attributes &amp; measures</button>
+            <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="model-tab-prio" aria-controls="model-panel-prio" aria-selected="false" tabindex="-1">Prioritization</button>
+            <span class="tabs-indicator" aria-hidden="true"></span>
+          </div>
+          <div class="tabs-panels">
+            <div class="tabs-panel" role="tabpanel" id="model-panel-oa" aria-labelledby="model-tab-oa" tabindex="0">
+              <p>Mapping the core objects analysts interact with against their four primary actions. Alert emerged as the most critical object — involved in all four actions — directly reinforcing the focus on the alert triage experience.</p>
+              <figure class="cs-figure">
+                <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/soc/models/object-action.png" target="_blank" rel="noopener" data-lift>
+                  <img src="assets/soc/models/object-action.png" alt="Object × Action table. Alert can be monitored, investigated, escalated and closed; host can be investigated; people can be monitored, investigated and escalated; documentation can be escalated and closed." width="2048" height="768" loading="lazy">
+                </a>
+                <figcaption>Object × Action table</figcaption>
+              </figure>
+            </div>
+            <div class="tabs-panel" role="tabpanel" id="model-panel-attr" aria-labelledby="model-tab-attr" tabindex="0" hidden>
+              <p>Defining what information each object carries and how performance is tracked. Drawn directly from interviews — analysts consistently needed severity, status, time, and alert type at a glance. This step directly informed decisions around data density and alert display.</p>
+              <figure class="cs-figure">
+                <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/soc/models/attributes.png" target="_blank" rel="noopener" data-lift>
+                  <img src="assets/soc/models/attributes.png" alt="Attributes and measures table. Alert: ID, severity, status, created time, type, history and final decision, measured by volume, severity breakdown, response time and escalation rate. Host, analyst and documentation each list their key attributes and measures." width="2304" height="960" loading="lazy">
+                </a>
+                <figcaption>Attributes and measures table</figcaption>
+              </figure>
+            </div>
+            <div class="tabs-panel" role="tabpanel" id="model-panel-prio" aria-labelledby="model-tab-prio" tabindex="0" hidden>
+              <p>Ranking tasks by frequency across a shift to determine what needs to be immediately visible versus what can require additional navigation. Prioritization was driven entirely by research — never assumed.</p>
+              <figure class="cs-figure">
+                <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/soc/models/prioritization.png" target="_blank" rel="noopener" data-lift>
+                  <img src="assets/soc/models/prioritization.png" alt="Prioritization table. Frequent, about 75% of a shift: monitor, prioritize and investigate alerts, filter and search, escalate or close, document findings. Medium, about 20%: review alert history, track status, attach evidence, communicate with Tier 2. Rare, about 5%: flag alerts for tuning." width="1696" height="1024" loading="lazy">
+                </a>
+                <figcaption>Prioritization table</figcaption>
+              </figure>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -207,61 +209,69 @@
           <li>Filtering toolbar accessible during active triage</li>
           <li>Alert detail panel — full context without navigating away</li>
         </ul>
-        <figure class="cs-figure">
-          <div class="cs-ph"></div>
-          <figcaption>Wireframes</figcaption>
-        </figure>
+        <div class="carousel carousel--fade" data-carousel data-interval="8000" role="region" aria-roledescription="carousel" aria-label="Wireframes">
+          <div class="carousel-stage touch-pan-y select-none">
+            <ul class="carousel-track">
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="1 of 3" data-caption="Dashboard: KPI cards, threat activity timeline and recent security alerts">
+                <img src="assets/soc/wireframes/dashboard.webp" alt="Dashboard wireframe with four KPI cards, a threat activity timeline, security status bars and a recent security alerts table." width="2400" height="1338" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="2 of 3" data-caption="Alert detail: overview, impacted entity and timeline, with risk, threat intel and related alerts alongside">
+                <img src="assets/soc/wireframes/alert-detail.webp" alt="Alert detail wireframe with alert overview, impacted entity and event timeline, and a sidebar for risk and history, threat intelligence and related alerts. Status, Escalate, Close and Mark as Benign actions sit top right." width="2400" height="1338" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="3 of 3" data-caption="Escalation: a three-step documentation form over the alert detail">
+                <img src="assets/soc/wireframes/escalate.webp" alt="Escalation wireframe: a Document Investigation Decision modal with decision selection, investigation summary and supporting evidence sections over the alert detail page." width="2400" height="1338" loading="lazy" draggable="false">
+              </li>
+            </ul>
+          </div>
+          <div class="carousel-bar">
+            <p class="carousel-caption" aria-live="off"></p>
+            <div class="carousel-controls">
+              <button class="carousel-btn carousel-prev transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+              <div class="carousel-dots"></div>
+              <button class="carousel-btn carousel-next transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+              <button class="carousel-btn carousel-pause transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Pause slideshow">
+                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="cs-section" id="prototype">
         <p class="cs-label">07</p>
         <h2 class="cs-h2">High-fidelity prototype</h2>
 
-        <div class="cs-block">
-          <p class="cs-label">Screen 1 of 4</p>
-          <h3 class="cs-h3">Dashboard</h3>
-          <p>An orientation screen visited at the start of a shift to assess the overall health of the environment before diving into triage.</p>
-          <div class="cs-ph cs-ph--dark"></div>
-          <ul class="cs-list">
-            <li>4 KPI cards surface the metrics that matter most at shift start</li>
-            <li>Unassigned alerts panel surfaces the most recent alerts to minimize steps between orientation and investigation</li>
-            <li>Dark mode chosen deliberately to reduce eye strain during long shifts; cyan used consistently for interactive elements</li>
-          </ul>
-        </div>
-
-        <div class="cs-block">
-          <p class="cs-label">Screen 2 of 4</p>
-          <h3 class="cs-h3">Alert queue</h3>
-          <p>Where analysts triage and prioritize incoming alerts — the highest-frequency screen across the shift.</p>
-          <div class="cs-ph cs-ph--dark"></div>
-          <ul class="cs-list">
-            <li>Severity badges use a semantic color system (red → critical, orange → high, yellow → medium, cyan → low) for scannable triage without reading individual entries</li>
-            <li>Rich filtering toolbar with color-coded counts makes the alert breakdown immediately scannable</li>
-          </ul>
-        </div>
-
-        <div class="cs-block">
-          <p class="cs-label">Screen 3 of 4</p>
-          <h3 class="cs-h3">Alert detail view</h3>
-          <p>Where analysts investigate an alert and reach their escalation or dismissal decision. Designed around one principle: every element should help the analyst reach that decision faster and with greater confidence.</p>
-          <div class="cs-ph cs-ph--dark"></div>
-          <ul class="cs-list">
-            <li>Layout mirrors how analysts think — context first, evidence below</li>
-            <li>Enrichment data in sidebar — no tool switching needed</li>
-            <li>Persistent decision bar — escalate or dismiss always one click away</li>
-          </ul>
-        </div>
-
-        <div class="cs-block">
-          <p class="cs-label">Screen 4 of 4</p>
-          <h3 class="cs-h3">Escalation form</h3>
-          <p>Designed to reduce the cognitive and emotional burden of documentation — the task analysts most associate with anxiety and time pressure.</p>
-          <div class="cs-ph cs-ph--dark"></div>
-          <ul class="cs-list">
-            <li>Structured dropdowns and pre-populated tags instead of free text</li>
-            <li>Context from the alert detail view carried forward automatically</li>
-            <li>AI pre-selects the 3 highest-confidence evidence items as a starting point</li>
-          </ul>
+        <p>Four core screens, tested with analysts before the final iteration. Dark mode was chosen deliberately to reduce eye strain during long shifts, with cyan reserved for interactive elements and a semantic color system for severity.</p>
+        <div class="carousel carousel--fade" data-carousel data-interval="8000" role="region" aria-roledescription="carousel" aria-label="High-fidelity screens">
+          <div class="carousel-stage touch-pan-y select-none">
+            <ul class="carousel-track">
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="1 of 4" data-caption="Dashboard: KPI cards and unassigned alerts orient analysts at the start of a shift">
+                <img src="assets/soc/hifi/dashboard.webp" alt="Dark-mode dashboard with KPI cards for total alerts, critical and high alerts, mean time to detect and false positive rate, an unassigned alerts table, alerts by status, alerts over time and alerts by severity." width="2400" height="1310" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="2 of 4" data-caption="Alert queue: severity badges and color-coded filter counts make triage scannable">
+                <img src="assets/soc/hifi/alerts.webp" alt="Alert queue with filter chips for severity, status and source above a table of alerts with colored severity badges, source, analyst, status, ticket ID and time." width="2400" height="1310" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="3 of 4" data-caption="Alert detail: context first, evidence below, enrichment in the sidebar and a persistent decision bar">
+                <img src="assets/soc/hifi/alert-detail.webp" alt="Alert detail for a critical DNS tunneling alert: summary, user, host and source IP, an event timeline and similar alerts, an enrichment sidebar with VirusTotal, IP details and an AI analysis, and a decision bar with False Positive, Flag for Tuning and Escalate." width="2400" height="1310" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="4 of 4" data-caption="Escalation form: structured fields, carried-over context and AI pre-selected evidence">
+                <img src="assets/soc/hifi/escalate.webp" alt="Document Escalation modal with severity assessment and reason dropdowns, key evidence chips with the top three AI-selected findings pre-checked, and additional notes." width="2400" height="1310" loading="lazy" draggable="false">
+              </li>
+            </ul>
+          </div>
+          <div class="carousel-bar">
+            <p class="carousel-caption" aria-live="off"></p>
+            <div class="carousel-controls">
+              <button class="carousel-btn carousel-prev transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+              <div class="carousel-dots"></div>
+              <button class="carousel-btn carousel-next transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+              <button class="carousel-btn carousel-pause transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Pause slideshow">
+                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -269,15 +279,50 @@
         <p class="cs-label">08</p>
         <h2 class="cs-h2">Usability testing</h2>
         <p>5 Tier 1 SOC analysts completed 4 scenario-based tasks over Zoom, followed by a System Usability Scale (SUS) questionnaire.</p>
-        <div class="cs-stats">
-          <div class="cs-stat"><strong>83.75</strong><span>SUS score (good)</span></div>
+        <div class="sus" data-sus data-score="83.75">
+          <div class="sus-head">
+            <h3 class="sus-title">SUS score</h3>
+            <span class="tip">
+              <button class="tip-btn sus-info transition-colors duration-200 hover:text-ink" type="button" aria-label="What is the SUS score?" aria-describedby="sus-tip-info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.5h.01"/></svg>
+              </button>
+              <span class="tip-bubble" role="tooltip" id="sus-tip-info">The System Usability Scale is a 10-question survey scored from 0 to 100. Participants filled it in after completing the tasks.</span>
+            </span>
+          </div>
+          <div class="sus-body">
+            <div class="sus-score">
+              <p class="sus-value"><span class="sus-num">83.75</span><span class="sus-max">/100</span></p>
+              <span class="sus-badge">Good</span>
+            </div>
+            <div class="sus-scale">
+              <div class="sus-track" role="img" aria-label="83.75 out of 100: above the 68 average and past the 80.3 threshold for good">
+                <span class="sus-fill"></span>
+                <span class="sus-tick sus-at-avg" aria-hidden="true"></span>
+                <span class="sus-tick sus-at-good" aria-hidden="true"></span>
+              </div>
+              <div class="sus-marks">
+                <span class="sus-mark sus-at-0" aria-hidden="true">0</span>
+                <span class="tip sus-mark sus-at-avg">
+                  <button class="tip-btn sus-mark-btn transition-colors duration-200 hover:text-ink" type="button" aria-describedby="sus-tip-avg">68<span class="sus-mark-text"> · above avg</span></button>
+                  <span class="tip-bubble tip-bubble--end" role="tooltip" id="sus-tip-avg">68 is the average SUS score across hundreds of products. Anything above it is above average.</span>
+                </span>
+                <span class="tip sus-mark sus-at-good">
+                  <button class="tip-btn sus-mark-btn transition-colors duration-200 hover:text-ink" type="button" aria-describedby="sus-tip-good">80.3<span class="sus-mark-text"> · good</span></button>
+                  <span class="tip-bubble tip-bubble--end" role="tooltip" id="sus-tip-good">80.3 marks roughly the top 10% of scores, the point where users are likely to recommend a product.</span>
+                </span>
+                <span class="sus-mark sus-at-100" aria-hidden="true">100</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-stats cs-stats--3">
           <div class="cs-stat"><strong>60%</strong><span>Avg success rate, no failures</span></div>
           <div class="cs-stat"><strong>0.5</strong><span>Avg assists per task</span></div>
           <div class="cs-stat"><strong>4.4/5</strong><span>Avg confidence</span></div>
         </div>
         <div class="cs-split">
           <div>
-            <h3 class="cs-h3">What worked</h3>
+            <h3 class="cs-h3 cs-verdict"><span class="cs-verdict-icon cs-verdict-icon--yes" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>What worked</h3>
             <ul class="cs-list">
               <li>Dashboard orientation was immediate — all participants identified where to start without assistance</li>
               <li>Alert detail panel gave the right context without requiring extra navigation</li>
@@ -287,7 +332,7 @@
             </ul>
           </div>
           <div>
-            <h3 class="cs-h3">What didn't work</h3>
+            <h3 class="cs-h3 cs-verdict"><span class="cs-verdict-icon cs-verdict-icon--no" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg></span>What didn't work</h3>
             <ul class="cs-list">
               <li>Filtering toolbar went unnoticed by all participants — 0% full success on Task 2</li>
               <li>Alert status column not visible enough — nearly caused a wrong alert selection</li>
@@ -303,43 +348,44 @@
         <p class="cs-label">09</p>
         <h2 class="cs-h2">Final iteration</h2>
 
-        <div class="cs-block">
-          <p class="cs-label">Change 1 of 4</p>
-          <h3 class="cs-h3">Sort order &amp; column organization</h3>
-          <p>Alerts were sorted by time rather than urgency. The status column sat far right — analysts nearly selected alerts already under review because they couldn't see their status at a glance.</p>
-          <div class="cs-split cs-split--tight">
-            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>Before</figcaption></figure>
-            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>After</figcaption></figure>
-          </div>
-        </div>
+        <p>Testing pointed to one screen: the alert queue. Both changes below were made there, and every other screen held up as designed.</p>
 
-        <div class="cs-block">
-          <p class="cs-label">Change 2 of 4</p>
-          <h3 class="cs-h3">Filtering toolbar visibility</h3>
-          <p>No participant noticed or used the filtering toolbar or sort dropdown during testing — despite filtering being a core intended feature. Neither had enough visual weight to draw attention without instruction.</p>
-          <div class="cs-split cs-split--tight">
-            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>Before</figcaption></figure>
-            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>After</figcaption></figure>
+        <div class="ba-hold ba-annotated" data-hold data-start="before">
+          <div class="ba-media">
+            <div class="ba-frame select-none touch-pan-y" data-lift>
+              <div class="ba-after">
+                <img src="assets/soc/iteration/alerts-after.webp" alt="Alert queue after the iteration: a Filter by label leads the toolbar, the status column sits right after severity, a colored bar runs down the left of each row, and alerts are sorted critical first." width="2400" height="1310" loading="lazy" draggable="false">
+                <span class="ba-mark ba-mark--good soc-mark-cols-after" data-mark="1" aria-hidden="true"><span class="ba-mark-num">1</span></span>
+                <span class="ba-mark ba-mark--good soc-mark-bar-after" data-mark="2" aria-hidden="true"><span class="ba-mark-num ba-mark-num--mid">2</span></span>
+              </div>
+              <div class="ba-before">
+                <img src="assets/soc/iteration/alerts-before.webp" alt="Alert queue before the iteration: alerts sorted by time, the status column far right, and an unlabeled filter toolbar." width="2400" height="1310" loading="lazy" draggable="false">
+                <span class="ba-mark ba-mark--bad soc-mark-sev-before" data-mark="1" aria-hidden="true"><span class="ba-mark-num">1</span></span>
+                <span class="ba-mark ba-mark--bad soc-mark-status-before" data-mark="1" aria-hidden="true"></span>
+                <span class="ba-mark ba-mark--bad soc-mark-bar-before" data-mark="2" aria-hidden="true"><span class="ba-mark-num ba-mark-num--mid">2</span></span>
+              </div>
+            </div>
+            <div class="ba-bar">
+              <p class="ba-hint"><span class="ba-badge" aria-hidden="true">Before</span>Press and hold the screen to compare.</p>
+              <button class="ba-switch group" type="button" aria-pressed="true"><span class="ba-track bg-line transition-colors duration-200 group-aria-pressed:bg-ink" aria-hidden="true"><span class="ba-knob"></span></span>Show before</button>
+            </div>
           </div>
-        </div>
 
-        <div class="cs-block">
-          <p class="cs-label">Change 3 of 4</p>
-          <h3 class="cs-h3">Timeline direction</h3>
-          <p>A few participants read the event timeline in the wrong direction, leading to an incorrect escalation decision before self-correcting. The timeline had no directional cue indicating chronological order.</p>
-          <div class="cs-split cs-split--tight">
-            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>Before</figcaption></figure>
-            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>After</figcaption></figure>
-          </div>
-        </div>
-
-        <div class="cs-block">
-          <p class="cs-label">Change 4 of 4</p>
-          <h3 class="cs-h3">AI panel clarity</h3>
-          <p>A few participants were unsure what the AI-assisted evidence pre-selection feature represented and didn't know how to interact with it. The panel lacked any labeling or explanation of its suggestion-based nature.</p>
-          <div class="cs-split cs-split--tight">
-            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>Before</figcaption></figure>
-            <figure class="cs-figure"><div class="cs-ph cs-ph--dark"></div><figcaption>After</figcaption></figure>
+          <div class="ba-explain" aria-live="polite">
+            <div class="ba-explain-set" data-when="before">
+              <p class="ba-explain-title ba-explain-title--bad">What testing showed</p>
+              <ol class="ba-points">
+                <li data-mark="1"><span class="ba-point-num" aria-hidden="true">1</span><div><h3 class="ba-point-title">Sort order &amp; status</h3><p>Alerts were sorted by time rather than urgency, and the status column sat far right. Analysts nearly picked alerts already under review because they couldn't see status at a glance.</p></div></li>
+                <li data-mark="2"><span class="ba-point-num" aria-hidden="true">2</span><div><h3 class="ba-point-title">Filtering toolbar</h3><p>No participant noticed or used the filtering toolbar or sort dropdown. Neither had enough visual weight to draw attention without instruction.</p></div></li>
+              </ol>
+            </div>
+            <div class="ba-explain-set" data-when="after" hidden>
+              <p class="ba-explain-title ba-explain-title--good">What changed</p>
+              <ol class="ba-points">
+                <li data-mark="1"><span class="ba-point-num" aria-hidden="true">1</span><div><h3 class="ba-point-title">Sort order &amp; status</h3><p>Default sort is now critical, then unassigned, then oldest first. Status moved right after severity, and a colored bar on each row gives severity at a glance.</p></div></li>
+                <li data-mark="2"><span class="ba-point-num" aria-hidden="true">2</span><div><h3 class="ba-point-title">Filtering toolbar</h3><p>The toolbar and sort dropdown got stronger visual weight, and a "Filter by:" label at the far left makes their purpose clear.</p></div></li>
+              </ol>
+            </div>
           </div>
         </div>
       </section>
