@@ -24,18 +24,26 @@ npm run build:css    # one-off minified build (run before committing)
   `bg-chip`, `bg-page`, `border-line`, `bg-blue-tag`, `font-sans`, …
 - `rounded-sm` / `rounded-md` / `rounded-lg` use the site's own radius tokens
 
+## Hover
+Tailwind's `hover:` variant is set to plain `:hover` in `src/tailwind.css` (the default media-query check
+misfires in some embedded browsers). Hovers that change a color set in `styles.css` live in `styles.css`,
+because unlayered rules there win over Tailwind utilities.
+
 ## GSAP
 GSAP 3.15 + ScrollTrigger load from jsDelivr on every page (before `site.js`);
 the plugin is registered in `site.js`.
 
 ## Files
-- `index.html` — page structure (nav, hero, work grid, playground, footer)
+- `index.html` — page structure (nav, hero, work grid, footer)
 - `about.html` — about page (bio, experience/education, photo strip)
 - `opsin.html`, `acme.html`, `soc.html`, `joymee.html` — case study pages
 - `styles.css` — base styling. **Design tokens live at the top in `:root`.**
 - `src/tailwind.css` → `tailwind.css` — Tailwind utilities (built, see above)
 - `site.js` — shared header behavior (frosted bar on scroll, mobile menu)
 - `projects.js` — work cards (homepage grid + "More case studies" rows)
+- `playground.html` — Playground page: staggered grid of experiments; on desktop a card opens a pop-up (video pinned on top, text scrolls), deep-linkable as `playground.html#<id>`
+- `experiment.html` — phone version of an experiment (`experiment.html?id=<id>`), same content as the pop-up
+- `playground.js` — experiment data (title, subtitle, links, text) and the grid / pop-up / phone page. Set `thumb`, `video` and `poster` on an entry to replace its placeholder; `shape` is `"wide"` or `"tall"`
 - `case.js` — case study pages: active chapter in the side index, tool icon tooltips, GSAP hover lift on `[data-lift]` elements, `.cs-media` slideshow videos (play while on screen, with a pause button), `[data-tabs]` tab sets (`tabs--underline`, `tabs--segment`, `tabs--pill`), `[data-hold]` before/after frames (press and hold, or the switch, to reveal the other state; `data-start="before"` opens on the before, `[data-when]` note sets swap with the state, and hovering or tapping a `data-mark` note spotlights its matching box on the screen), `[data-reveal]` groups whose children stagger in on first scroll (GSAP ScrollTrigger), `[data-carousel]` phone carousels (center screen with faded neighbors, or `.carousel--fade` for a full-width crossfade; image slides advance every `data-interval` ms, a video slide advances when it ends; arrows, dots, swipe, keyboard and a pause button), `.tip` tooltips (hover, keyboard focus or tap; Escape or tapping outside closes), and the `[data-sus]` score meter (bar fills and the number counts up to `data-score` on first scroll)
 
 ## Design tokens (edit once, applies everywhere) — top of `styles.css`
