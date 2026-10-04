@@ -54,6 +54,10 @@ const projects = [
   },
 ];
 
+/* Arrow badge in the card's corner, shown while the card is hovered (.is-hovered, set below
+   from real mouse events) or keyboard-focused. Same badge as the playground cards. */
+const badgeHTML = `<span class="absolute top-4 right-4 flex size-11 items-center justify-center rounded-full bg-page text-ink shadow-md opacity-0 translate-y-1.5 scale-90 transition duration-300 ease-out group-[.is-hovered]/case:opacity-100 group-[.is-hovered]/case:translate-y-0 group-[.is-hovered]/case:scale-100 group-focus-visible/case:opacity-100 group-focus-visible/case:translate-y-0 group-focus-visible/case:scale-100 motion-reduce:transition-none" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12.5l7-7M7 5.5h5.5V11"/></svg></span>`;
+
 function gradientStyle(colors) {
   if (!colors || !colors.length) return "";
   if (colors.length === 1) {
@@ -99,11 +103,12 @@ function renderProjects(root) {
         p.gradient && p.gradient.length > 2 ? " case-frame--multi" : "";
       const full = p.video || p.webm ? " case-frame--full" : "";
       return `
-      <a class="case" href="${p.href}" data-case-id="${p.id}">
-        <div class="case-frame${multi}${full}" style="${gradientStyle(p.gradient)}">
+      <a class="case group/case" href="${p.href}" data-case-id="${p.id}">
+        <div class="relative case-frame${multi}${full}" style="${gradientStyle(p.gradient)}">
           <div class="case-media">
             ${mediaHTML(p)}
           </div>
+          ${badgeHTML}
         </div>
         <div class="case-caption">
           <p class="case-summary">${p.summary}</p>

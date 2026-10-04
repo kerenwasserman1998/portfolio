@@ -6,6 +6,10 @@
 @source "../*.html";
 @source "../*.js";
 
+/* hover: works on plain :hover. Tailwind's default also requires the (hover:hover) media
+   query, which some embedded browsers (like in-app previews) report as false even with a mouse. */
+@custom-variant hover (&:hover);
+
 /* Same breakpoints as styles.css, read desktop-first with max-* variants:
    max-xl: laptop (≤1279) · max-lg: tablet (≤1023) · max-md: large phone (≤767) · max-sm: small phone (≤479) */
 @theme {

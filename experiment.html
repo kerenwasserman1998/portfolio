@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keren Wasserman — Product Designer</title>
+<title>Playground · Keren Wasserman</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 <link rel="stylesheet" href="tailwind.css?v=2">
 </head>
 <body>
 
 <header>
   <div class="nav-inner">
-    <a href="#top" class="logo">KW</a>
+    <a href="index.html" class="logo">KW</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span class="nav-toggle-bars" aria-hidden="true"></span></button>
     <nav id="site-nav" aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="playground.html">Playground</a>
+      <a href="index.html#work">Work</a>
+      <a href="playground.html" aria-current="page">Playground</a>
       <a href="about.html">About</a>
       <a href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume</a>
       <a href="#contact">Contact</a>
@@ -28,39 +28,24 @@
 
 <main id="top">
 
-  <!-- HERO -->
-  <section class="hero wrap">
-    <div class="hero-copy">
-      <p class="greet fade">Hi, I'm Keren!</p>
-      <h1 class="fade d1">A <span class="hl">product designer</span> who designs clarity into complex systems</h1>
-      <p class="lede fade d2">Research-driven product design — I helped <img class="inline-logo" src="assets/opsin-wordmark.png" width="40" height="40" alt="Opsin"> raise $7M by designing its GenAI security platform.</p>
-      <div class="cta-row fade d3">
-        <a class="btn btn-blue" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="btn btn-mauve" href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume ↗</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SELECTED WORK — 2-column case study cards -->
-  <section class="block" id="work">
-    <div class="wrap">
-      <div class="case-grid" id="case-grid"></div>
-    </div>
-  </section>
+  <article class="pg-page wrap" id="pg-page">
+    <a class="cs-back group/back" href="playground.html"><svg class="transition-transform duration-200 ease-out group-hover/back:-translate-x-1 motion-reduce:transition-none" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg> Back</a>
+    <div class="pg-page-media pg-media"></div>
+    <div class="pg-page-body"></div>
+  </article>
 
 </main>
 
-<!-- FOOTER -->
 <footer id="contact">
   <div class="wrap foot-grid">
-    <div class="foot-brand" id="about">
+    <div class="foot-brand">
       <h4>Keren Wasserman</h4>
       <p>Product designer focused on turning complexity into clarity, one research-backed decision at a time.</p>
       <p class="copy">© 2026 Keren Wasserman</p>
     </div>
     <div class="foot-col">
       <h5>Links</h5>
-      <a href="#work">Work</a>
+      <a href="index.html#work">Work</a>
       <a href="playground.html">Playground</a>
       <a href="about.html">About</a>
       <a href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume</a>
@@ -79,12 +64,9 @@
   </div>
 </footer>
 
-<!-- KERENAI CHAT WIDGET -->
-<iframe class="agent-frame" src="https://portfolio-agent-eta.vercel.app/widget.html" title="KerenAI — ask anything about Keren" loading="lazy"></iframe>
-
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="site.js" defer></script>
-<script src="projects.js?v=2" defer></script>
+<script src="playground.js?v=2" defer></script>
 </body>
 </html>
