@@ -5,6 +5,7 @@ const projects = [
     href: "opsin.html",
     summary: "Shaped the GenAI security platform that raised $7M in seed funding.",
     company: "Opsin",
+    status: { label: "Shipped", tone: "shipped" },
     year: "2024",
     gradient: ["#d3f5ea", "#a6e5f4"],
     video: "assets/videos/opsin.mp4",
@@ -17,7 +18,8 @@ const projects = [
     id: "acme",
     href: "acme.html",
     summary: "Helping fraud analysts catch real threats with less noise in credit-risk monitoring.",
-    company: "ACME",
+    company: "FICO",
+    status: { label: "Industry sponsored", tone: "sponsored" },
     year: "2025",
     gradient: ["#ebe9fd", "#cbc4ed"],
     video: "assets/videos/acme.mp4",
@@ -31,6 +33,7 @@ const projects = [
     href: "soc.html",
     summary: "Cutting alert fatigue so security analysts focus on the threats that matter.",
     company: "SOC Signal",
+    status: { label: "Research project", tone: "research" },
     year: "2026",
     gradient: ["#fe9a9e", "#f9d0c4"],
     video: "assets/videos/soc.mp4",
@@ -44,6 +47,7 @@ const projects = [
     href: "joymee.html",
     summary: "Widening access to mental health education and support.",
     company: "JoyMee",
+    status: { label: "Shipped", tone: "shipped" },
     year: "2024",
     gradient: ["#fdf1f8", "#f3e5f6", "#e8d8f4"],
     video: "assets/joymee/cover.mp4",
@@ -109,6 +113,7 @@ function renderProjects(root) {
             ${mediaHTML(p)}
           </div>
           ${badgeHTML}
+          ${p.status ? `<span class="case-pill case-pill--${p.status.tone}"><span class="case-pill-dot" aria-hidden="true"></span>${p.status.label}</span>` : ""}
         </div>
         <div class="case-caption">
           <p class="case-summary">${p.summary}</p>

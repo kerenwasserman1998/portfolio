@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20">
+<link rel="stylesheet" href="styles.css?v=23">
 <link rel="stylesheet" href="tailwind.css?v=2">
 </head>
 <body>
@@ -33,7 +33,15 @@
     <div class="hero-copy">
       <p class="greet fade">Hi, I'm Keren!</p>
       <h1 class="fade d1">A <span class="hl">product designer</span> who designs clarity into complex systems</h1>
-      <p class="lede fade d2">Research-driven product design — I helped <img class="inline-logo" src="assets/opsin-wordmark.png" width="40" height="40" alt="Opsin"> raise $7M by designing its GenAI security platform.</p>
+      <p class="lede fade d2">Research-driven product design — I helped <span class="logo-pop">
+        <button class="logo-pop-trigger" type="button" aria-expanded="false" aria-controls="opsin-pop" aria-label="About Opsin"><img class="inline-logo" src="assets/opsin-wordmark.png" width="40" height="40" alt="Opsin"></button>
+        <span class="logo-pop-card" id="opsin-pop" role="group" aria-label="Opsin">
+          <span class="logo-pop-head"><img src="assets/about/logo-opsin.png" width="28" height="28" alt=""><strong>Opsin Security</strong></span>
+          <span class="logo-pop-text">GenAI security platform · raised a $7M seed round</span>
+          <a class="logo-pop-link" href="opsin.html">Read the case study <span aria-hidden="true">→</span></a>
+          <a class="logo-pop-link" href="https://www.opsinsecurity.com/" target="_blank" rel="noopener">opsinsecurity.com <span aria-hidden="true">↗</span></a>
+        </span>
+      </span> raise $7M by designing its GenAI security platform.</p>
       <div class="cta-row fade d3">
         <a class="btn btn-blue" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn <span class="btn-arrow" aria-hidden="true">↗</span></a>
         <a class="btn btn-mauve" href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume <span class="btn-arrow" aria-hidden="true">↗</span></a>
@@ -84,7 +92,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
-<script src="site.js?v=20" defer></script>
-<script src="projects.js?v=17" defer></script>
+<script src="site.js?v=21" defer></script>
+<script src="projects.js?v=21" defer></script>
 </body>
 </html>
