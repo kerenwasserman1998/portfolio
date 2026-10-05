@@ -12,6 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* Scroll reveal for simple pages: [data-rise] children rise in one after another,
+     [data-rise-self] rises as one block, the first time each scrolls into view. */
+  if (window.gsap && window.ScrollTrigger && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll("[data-rise], [data-rise-self]").forEach((el) => {
+      const targets = el.hasAttribute("data-rise") ? el.children : el;
+      gsap.from(targets, {
+        autoAlpha: 0, y: 26, duration: 0.7, ease: "power3.out", stagger: 0.12,
+        clearProps: "opacity,visibility,transform",
+        scrollTrigger: { trigger: el, start: "top 85%", once: true },
+      });
+    });
+  }
+
   const header = document.querySelector("header");
   if (!header) return;
 
