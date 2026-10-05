@@ -195,27 +195,25 @@ document.addEventListener("DOMContentLoaded", () => {
     preload.observe(root);
   });
 
-  /* Before/after: the switch pins the before; pressing and holding the frame shows the other
-     state until release. data-start="before" opens pinned. Touch waits briefly and cancels on
-     movement so scrolling past doesn't flash it. [data-when] note sets follow the state, and
-     hovering or tapping a note spotlights the outlines with the same data-mark. */
+  /* Before/after: clicking (or tapping, or Enter/Space on) the frame flips between the after
+     and the before. data-start="before" opens on the before. [data-when] note sets follow the
+     state, and hovering or tapping a note spotlights the outlines with the same data-mark. */
   document.querySelectorAll("[data-hold]").forEach((root) => {
     const frame = root.querySelector(".ba-frame");
     const before = root.querySelector(".ba-before");
     const badge = root.querySelector(".ba-badge");
-    const toggle = root.querySelector(".ba-switch");
     const noteSets = Array.from(root.querySelectorAll("[data-when]"));
-    let held = false;
-    let pinned = root.dataset.start === "before";
-    let timer = null;
-    let origin = null;
+    let showBefore = root.dataset.start === "before";
 
     const render = (instant) => {
-      const showBefore = held !== pinned;
       const state = showBefore ? "before" : "after";
       root.dataset.showing = state;
       if (badge) badge.textContent = showBefore ? "Before" : "After";
-      if (animate && !instant) gsap.to(before, { autoAlpha: showBefore ? 1 : 0, duration: 0.25, ease: "power2.out", overwrite: true });
+      const hint = root.querySelector(".ba-hint-text");
+      if (hint) hint.textContent = `Click the screen to see the ${showBefore ? "after" : "before"}.`;
+      frame.setAttribute("aria-pressed", String(showBefore));
+      frame.setAttribute("aria-label", showBefore ? "Show the after" : "Show the before");
+      if (animate && !instant) gsap.to(before, { autoAlpha: showBefore ? 1 : 0, duration: 0.3, ease: "power2.out", overwrite: true });
       else if (window.gsap) gsap.set(before, { autoAlpha: showBefore ? 1 : 0 });
       else before.style.opacity = showBefore ? "1" : "0";
       noteSets.forEach((set) => {
@@ -240,40 +238,18 @@ document.addEventListener("DOMContentLoaded", () => {
         spotlight(root.dataset.focusMark !== note.dataset.mark);
       });
     });
-    const release = () => {
-      clearTimeout(timer);
-      origin = null;
-      if (held) {
-        held = false;
-        render();
-      }
-    };
 
-    frame.addEventListener("pointerdown", (event) => {
-      if (event.button !== 0) return;
-      origin = { x: event.clientX, y: event.clientY };
-      timer = setTimeout(() => {
-        held = true;
-        render();
-      }, event.pointerType === "mouse" ? 0 : 120);
-    });
-    frame.addEventListener("pointermove", (event) => {
-      if (!origin || held) return;
-      if (Math.hypot(event.clientX - origin.x, event.clientY - origin.y) > 8) {
-        clearTimeout(timer);
-        origin = null;
-      }
-    });
-    ["pointerup", "pointerleave", "pointercancel"].forEach((type) => frame.addEventListener(type, release));
-    frame.addEventListener("contextmenu", (event) => event.preventDefault());
-
-    toggle?.addEventListener("click", () => {
-      pinned = !pinned;
-      toggle.setAttribute("aria-pressed", String(pinned));
+    const flip = () => {
+      showBefore = !showBefore;
       delete root.dataset.focusMark;
       render();
+    };
+    frame.addEventListener("click", flip);
+    frame.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      flip();
     });
-    if (toggle) toggle.setAttribute("aria-pressed", String(pinned));
     render(true);
   });
 
@@ -336,6 +312,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  /* Section reveal ([data-reveal-sections]): each section's blocks rise in one after another
+     as it scrolls into view. Blocks with their own entrance (problem → goal, callouts) are left out. */
+  document.querySelectorAll("[data-reveal-sections] > .cs-section").forEach((section) => {
+    if (!animate || !window.ScrollTrigger) return;
+    const blocks = Array.from(section.children).filter((el) => !el.matches("[data-shift], [data-callout], [data-reveal]"));
+    gsap.from(blocks, {
+      autoAlpha: 0, y: 28, duration: 0.7, ease: "power3.out", stagger: 0.1,
+      clearProps: "opacity,visibility,transform",
+      scrollTrigger: { trigger: section, start: "top 82%", once: true },
+    });
+  });
 
   /* Live callout: the headline number counts up from zero, then the copy beside it slides in. */
   document.querySelectorAll("[data-callout]").forEach((callout) => {

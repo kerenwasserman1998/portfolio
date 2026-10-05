@@ -19,7 +19,7 @@ const projects = [
     summary: "Helping fraud analysts catch real threats with less noise in credit-risk monitoring.",
     company: "ACME",
     year: "2025",
-    gradient: ["#c6e9e6", "#dce7fb"],
+    gradient: ["#ebe9fd", "#cbc4ed"],
     video: "assets/videos/acme.mp4",
     webm: null,
     poster: "assets/videos/posters/acme.jpg",

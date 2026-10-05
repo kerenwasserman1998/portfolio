@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="tailwind.css?v=2">
+<link rel="stylesheet" href="styles.css?v=11">
+<link rel="stylesheet" href="tailwind.css?v=11">
 </head>
 <body class="case-page theme-acme">
 
@@ -86,7 +86,7 @@
       </nav>
     </aside>
 
-    <article class="cs-content">
+    <article class="cs-content" data-reveal-sections>
       <section class="cs-section" id="overview">
         <p class="cs-label">01</p>
         <h2 class="cs-h2">Project overview</h2>
@@ -98,15 +98,18 @@
       <section class="cs-section" id="problem">
         <p class="cs-label">02</p>
         <h2 class="cs-h2">Problem &amp; goal</h2>
-        <div class="cs-split">
-          <div class="cs-pg">
-            <h3 class="cs-h3">Problem</h3>
+        <div class="shift" data-shift>
+          <article class="shift-card shift-card--problem" data-lift>
+            <span class="shift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4"/><path d="M12 17h.01"/></svg></span>
+            <h3 class="cs-label">Problem</h3>
             <p>Fraud managers lack real-time visibility into performance and fraud trends, leading to reactive decisions, inefficiencies, and employee burnout.</p>
-          </div>
-          <div class="cs-pg">
-            <h3 class="cs-h3">Goal</h3>
+          </article>
+          <svg class="shift-arrow" viewBox="0 0 64 24" fill="none" aria-hidden="true"><path class="shift-arrow-line" d="M2 12h56"/><path class="shift-arrow-head" d="m50 5 8 7-8 7"/></svg>
+          <article class="shift-card shift-card--goal" data-lift>
+            <span class="shift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3 class="cs-label">Goal</h3>
             <p>A centralized manager dashboard that combines real-time analytics, actionable controls, and gamification to improve decision-making, productivity, and employee experience.</p>
-          </div>
+          </article>
         </div>
       </section>
 
@@ -172,18 +175,18 @@
         <p class="cs-label">05</p>
         <h2 class="cs-h2">High-fidelity prototypes — iterations</h2>
 
-        <div class="cs-block tabs tabs--segment" data-tabs>
+        <div class="cs-block tabs tabs--segment tabs--ba" data-tabs>
           <div class="cs-block-head">
             <h3 class="cs-h3">Transfer agent</h3>
             <div class="tabs-list" role="tablist" aria-label="Transfer agent prototype">
-              <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="transfer-tab-before" aria-controls="transfer-panel-before" aria-selected="true">Before</button>
-              <button class="tabs-tab transition-colors duration-200 hover:text-ink aria-selected:text-ink" type="button" role="tab" id="transfer-tab-after" aria-controls="transfer-panel-after" aria-selected="false" tabindex="-1">After</button>
+              <button class="tabs-tab tabs-tab--before transition-colors duration-200" type="button" role="tab" id="transfer-tab-before" aria-controls="transfer-panel-before" aria-selected="true">Before</button>
+              <button class="tabs-tab tabs-tab--after transition-colors duration-200" type="button" role="tab" id="transfer-tab-after" aria-controls="transfer-panel-after" aria-selected="false" tabindex="-1">After</button>
               <span class="tabs-indicator" aria-hidden="true"></span>
             </div>
           </div>
           <div class="tabs-panels">
             <div class="tabs-panel" role="tabpanel" id="transfer-panel-before" aria-labelledby="transfer-tab-before" tabindex="0">
-              <div class="cs-ph cs-media" data-lift>
+              <div class="cs-ph cs-media cs-media--framed cs-media--before" data-lift>
                 <video muted loop playsinline preload="none" poster="assets/acme/posters/transfer-before.jpg" aria-label="Initial transfer-agent prototype, starting from the overview dashboard">
                   <source src="assets/acme/transfer-before.mp4" type="video/mp4">
                 </video>
@@ -193,16 +196,16 @@
                 </button>
               </div>
               <div class="ba-notes">
-                <p class="cs-label">Initial prototype</p>
+                <p class="cs-label ba-label--bad">Initial prototype</p>
                 <p>The initial design feedback surfaced two key issues in the transfer-agent flow:</p>
-                <ul class="cs-list">
+                <ul class="cs-list cs-list--bad">
                   <li>No visibility into how transferring an agent would affect queue load</li>
                   <li>Redundant agent selection, requiring multiple clicks across screens and overlays</li>
                 </ul>
               </div>
             </div>
             <div class="tabs-panel" role="tabpanel" id="transfer-panel-after" aria-labelledby="transfer-tab-after" tabindex="0" hidden>
-              <div class="cs-ph cs-media" data-lift>
+              <div class="cs-ph cs-media cs-media--framed cs-media--after" data-lift>
                 <video muted loop playsinline preload="none" poster="assets/acme/posters/transfer-after.jpg" aria-label="Refined transfer-agent prototype, starting from the queue detail page">
                   <source src="assets/acme/transfer-after.mp4" type="video/mp4">
                 </video>
@@ -212,9 +215,9 @@
                 </button>
               </div>
               <div class="ba-notes">
-                <p class="cs-label cs-label--ink">Refined prototype</p>
+                <p class="cs-label ba-label--good">Refined prototype</p>
                 <p>In the refined design, these were resolved by:</p>
-                <ul class="cs-list cs-list--check">
+                <ul class="cs-list cs-list--check cs-list--good">
                   <li>Displaying current queue status and post-transfer forecasts upfront</li>
                   <li>Allowing agent re-selection within the same interaction, reducing friction</li>
                 </ul>
@@ -243,39 +246,36 @@
             <div class="tabs-panels">
               <div class="tabs-panel" role="tabpanel" id="iter-panel-dash" aria-labelledby="iter-tab-dash" tabindex="0">
                 <div class="ba-hold" data-hold>
-                  <div class="ba-frame select-none touch-pan-y" data-lift>
+                  <div class="ba-frame select-none" role="button" tabindex="0" aria-label="Show the before" data-lift>
                     <img class="ba-after" src="assets/acme/iterations/dashboard-after.png" alt="Dashboard after iteration: six KPI cards, a department leaderboard, a tabbed agent performance chart with forecast, and a status card per fraud model." width="2163" height="1539" loading="lazy" draggable="false">
                     <img class="ba-before" src="assets/acme/iterations/dashboard-before.png" alt="Dashboard before iteration: four KPI cards, cases per queue, an agent performance table and a single model FPR chart." width="1440" height="828" loading="lazy" draggable="false">
                   </div>
                   <div class="ba-bar">
-                    <p class="ba-hint"><span class="ba-badge" aria-hidden="true">After</span>Press and hold the screen to see the before.</p>
-                    <button class="ba-switch group" type="button" aria-pressed="false"><span class="ba-track bg-line transition-colors duration-200 group-aria-pressed:bg-ink" aria-hidden="true"><span class="ba-knob"></span></span>Show before</button>
+                    <p class="ba-hint"><span class="ba-badge" aria-hidden="true">After</span><span class="ba-hint-text">Click the screen to see the before.</span></p>
                   </div>
                   <p class="ba-caption">Expanded the KPI row from four to six metrics (adding agent performance, training completion, retention and ROI), added a department leaderboard, turned agent performance into a tabbed chart with a forecast, and gave each fraud model its own status card.</p>
                 </div>
               </div>
               <div class="tabs-panel" role="tabpanel" id="iter-panel-agent" aria-labelledby="iter-tab-agent" tabindex="0" hidden>
                 <div class="ba-hold" data-hold>
-                  <div class="ba-frame select-none touch-pan-y" data-lift>
+                  <div class="ba-frame select-none" role="button" tabindex="0" aria-label="Show the before" data-lift>
                     <img class="ba-after" src="assets/acme/iterations/agent-detail-after.png" alt="Agent detail after iteration: profile card with Stats, Game and Training tabs, a tabbed performance chart comparing the agent with team, department, company average and goal, and a shorter case list." width="1440" height="1024" loading="lazy" draggable="false">
                     <img class="ba-before" src="assets/acme/iterations/agent-detail-before.png" alt="Agent detail before iteration: profile stats, a single cases-closed-per-hour chart and a long case list." width="1440" height="1209" loading="lazy" draggable="false">
                   </div>
                   <div class="ba-bar">
-                    <p class="ba-hint"><span class="ba-badge" aria-hidden="true">After</span>Press and hold the screen to see the before.</p>
-                    <button class="ba-switch group" type="button" aria-pressed="false"><span class="ba-track bg-line transition-colors duration-200 group-aria-pressed:bg-ink" aria-hidden="true"><span class="ba-knob"></span></span>Show before</button>
+                    <p class="ba-hint"><span class="ba-badge" aria-hidden="true">After</span><span class="ba-hint-text">Click the screen to see the before.</span></p>
                   </div>
                   <p class="ba-caption">Added Stats, Game and Training tabs to the agent profile, replaced the single cases-per-hour chart with a tabbed performance chart that compares the agent with their team, department, company average and goal, and shortened the case list to keep the page scannable.</p>
                 </div>
               </div>
               <div class="tabs-panel" role="tabpanel" id="iter-panel-queue" aria-labelledby="iter-tab-queue" tabindex="0" hidden>
                 <div class="ba-hold" data-hold>
-                  <div class="ba-frame select-none touch-pan-y" data-lift>
+                  <div class="ba-frame select-none" role="button" tabindex="0" aria-label="Show the before" data-lift>
                     <img class="ba-after" src="assets/acme/iterations/queue-detail-after.png" alt="Queue detail after iteration: queue performance beside a tabbed Leaderboard and Flagged Cases panel with points, accuracy, teamwork and productivity, plus Cases and Agents tabs on the list." width="1443" height="1024" loading="lazy" draggable="false">
                     <img class="ba-before" src="assets/acme/iterations/queue-detail-before.png" alt="Queue detail before iteration: queue performance, a flagged cases table and a long case list." width="1440" height="1224" loading="lazy" draggable="false">
                   </div>
                   <div class="ba-bar">
-                    <p class="ba-hint"><span class="ba-badge" aria-hidden="true">After</span>Press and hold the screen to see the before.</p>
-                    <button class="ba-switch group" type="button" aria-pressed="false"><span class="ba-track bg-line transition-colors duration-200 group-aria-pressed:bg-ink" aria-hidden="true"><span class="ba-knob"></span></span>Show before</button>
+                    <p class="ba-hint"><span class="ba-badge" aria-hidden="true">After</span><span class="ba-hint-text">Click the screen to see the before.</span></p>
                   </div>
                   <p class="ba-caption">Paired flagged cases with a points-based leaderboard in one tabbed panel, and added Cases and Agents tabs to the list so managers can switch views without leaving the queue.</p>
                 </div>
@@ -380,7 +380,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="site.js" defer></script>
-<script src="projects.js?v=2" defer></script>
-<script src="case.js" defer></script>
+<script src="projects.js?v=11" defer></script>
+<script src="case.js?v=11" defer></script>
 </body>
 </html>

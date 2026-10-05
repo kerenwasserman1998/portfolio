@@ -178,7 +178,7 @@
     --fs-tooltip:13px;
 
     --g-opsin-1:#d3f5ea;  --g-opsin-2:#a6e5f4;   /* mint → sky, sampled from the Opsin cover video */
-    --g-acme-1:#c6e9e6;   --g-acme-2:#dce7fb;
+    --g-acme-1:#ebe9fd;   --g-acme-2:#cbc4ed;   /* lavender, sampled from the ACME cover video */
     --g-soc-1:#ffd6c9;    --g-soc-2:#e8d5f2;
     --g-joymee-1:#f3e6c7; --g-joymee-2:#efe4ec; --g-joymee-3:#dce7fb;
     --g-joymee-ink:#a3307c;
@@ -578,7 +578,7 @@
     border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-45deg);
   }
 
-  /* before/after: press and hold (or the switch) reveals the before layer */
+  /* before/after: clicking the frame flips the before layer in and out */
   .ba-hold{display:flex;flex-direction:column;gap:12px}
   .ba-frame{position:relative;border-radius:var(--radius-figure);background:var(--chip);overflow:hidden;cursor:pointer;-webkit-touch-callout:none}
   .ba-after{display:block;width:100%;height:auto}
@@ -590,18 +590,6 @@
   }
   .ba-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px 16px}
   .ba-hint{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;font-size:var(--fs-small);line-height:1.45;color:var(--muted)}
-  .ba-switch{
-    display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0;border:0;background:none;
-    font:inherit;font-size:var(--fs-nav);font-weight:var(--fw-medium);color:var(--ink);cursor:pointer;
-  }
-  .ba-switch:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:var(--radius-sm)}
-  .ba-track{position:relative;display:inline-block;flex:0 0 var(--switch-w);height:var(--switch-h);border-radius:var(--radius-pill)}
-  .ba-knob{
-    position:absolute;top:calc((var(--switch-h) - var(--switch-knob)) / 2);left:calc((var(--switch-h) - var(--switch-knob)) / 2);
-    width:var(--switch-knob);height:var(--switch-knob);border-radius:50%;background:var(--bg);box-shadow:var(--tab-thumb-shadow);
-    transition:transform .2s var(--ease-out);
-  }
-  .ba-switch[aria-pressed="true"] .ba-knob{transform:translateX(calc(var(--switch-w) - var(--switch-h)))}
   .ba-caption{font-size:var(--fs-nav);line-height:1.6;color:var(--body)}
 
   /* headline metric */
@@ -1251,6 +1239,37 @@
   .cs-callout--live:hover{background-position:100% 50%}
   .cs-callout--live:hover .cs-callout-num{transform:scale(1.06)}
 
+  /* ---------- BEFORE / AFTER EMPHASIS (acme.html transfer agent) ----------
+     Red marks the before, green the after: the selected tab, the frame outline and the notes. */
+  /* additional screens (static before/after): badge and frame outline follow the state */
+  .ba-hold[data-showing="before"] .ba-badge{background:var(--verdict-bad)}
+  .ba-hold[data-showing="after"] .ba-badge{background:var(--verdict-good)}
+  .ba-hold:not(.ba-annotated) .ba-frame::after{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    border:2px solid transparent;border-radius:inherit;transition:border-color .25s ease;
+  }
+  .ba-hold:not(.ba-annotated)[data-showing="before"] .ba-frame::after{border-color:var(--verdict-bad)}
+  .ba-hold:not(.ba-annotated)[data-showing="after"] .ba-frame::after{border-color:var(--verdict-good)}
+  .ba-frame:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+  .tabs--ba .tabs-tab--before[aria-selected="true"]{color:var(--verdict-bad)}
+  .tabs--ba .tabs-tab--after[aria-selected="true"]{color:var(--verdict-good)}
+  .tabs--ba .tabs-tab:not([aria-selected="true"]):hover{color:var(--ink)}
+  .tabs--ba:has(.tabs-tab--before[aria-selected="true"]) .tabs-indicator{background:var(--flow-no-tint)}
+  .tabs--ba:has(.tabs-tab--after[aria-selected="true"]) .tabs-indicator{background:var(--flow-yes-tint)}
+  .cs-media--framed{
+    aspect-ratio:7/5;display:flex;align-items:center;justify-content:center;
+    padding:clamp(14px,3vw,32px);
+    background:linear-gradient(145deg,var(--case-g1),var(--case-g2),var(--case-g3));
+    outline:2px solid transparent;outline-offset:-2px;
+  }
+  .cs-ph.cs-media--framed video{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;border-radius:var(--radius-media);box-shadow:var(--lift-shadow-hover)}
+  .cs-media--before{outline-color:var(--verdict-bad)}
+  .cs-media--after{outline-color:var(--verdict-good)}
+  .ba-label--bad{color:var(--verdict-bad)}
+  .ba-label--good{color:var(--verdict-good)}
+  .cs-list--bad li::before{background:var(--verdict-bad)}
+  .cs-list--good li::before{border-color:var(--verdict-good)}
+
   /* ---------- SLIDESHOW OVERLAYS ([data-overlay-at] on the carousel) ---------- */
   .carousel--fade .carousel-slide{position:relative}
   .carousel-overlay{
@@ -1275,7 +1294,7 @@
     .fade{animation:none;opacity:1;transform:none}
     .case.is-hovered :is(.case-video,.case-image),.case:focus-visible :is(.case-video,.case-image){transform:none}
     .case-arrow,.case.is-hovered .case-arrow{transform:none}
-    .ba-knob,.carousel-dot-bar,.ba-mark,.tip-bubble{transition:none}
+    .carousel-dot-bar,.ba-mark,.tip-bubble{transition:none}
     .btn:hover{transform:none}
     .nav-glide{transition:opacity .18s ease}
     .hl{animation:none;background-size:100% 100%}
