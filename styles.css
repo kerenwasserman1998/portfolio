@@ -177,7 +177,7 @@
     --tooltip-ink:#ffffff;
     --fs-tooltip:13px;
 
-    --g-opsin-1:#ffb4a2;  --g-opsin-2:#ffe0c7;
+    --g-opsin-1:#d3f5ea;  --g-opsin-2:#a6e5f4;   /* mint → sky, sampled from the Opsin cover video */
     --g-acme-1:#c6e9e6;   --g-acme-2:#dce7fb;
     --g-soc-1:#ffd6c9;    --g-soc-2:#e8d5f2;
     --g-joymee-1:#f3e6c7; --g-joymee-2:#efe4ec; --g-joymee-3:#dce7fb;
@@ -1093,6 +1093,177 @@
   @media (prefers-reduced-motion:reduce){
     .pg-modal[open],.pg-modal[open]::backdrop{animation:none}
     .pg-thumb-media{transition:none}
+  }
+
+  /* ---------- PROBLEM → GOAL (opsin.html) ---------- */
+  .shift{display:grid;grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr);gap:16px;align-items:stretch}
+  .shift-card{
+    display:flex;flex-direction:column;gap:12px;
+    padding:clamp(24px,3vw,32px);border-radius:var(--radius-figure);
+  }
+  .shift-card p{font-size:var(--fs-cs-lede);line-height:1.5;letter-spacing:-.01em;color:var(--ink)}
+  .shift-card--problem{background:var(--bg);border:1px solid var(--line)}
+  .shift-card--goal{background:linear-gradient(145deg,var(--case-g1),var(--case-g2),var(--case-g3))}
+  .shift-card--goal .cs-label{color:var(--ink)}
+  .shift-icon{
+    display:flex;align-items:center;justify-content:center;width:40px;height:40px;margin-bottom:4px;
+    border-radius:var(--radius-sm);
+  }
+  .shift-icon svg{width:20px;height:20px}
+  .shift-card--problem .shift-icon{background:var(--flow-no-tint);color:var(--verdict-bad)}
+  .shift-card--goal .shift-icon{background:var(--bg);color:var(--ink)}
+  .shift-arrow{align-self:center;width:64px;height:24px;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ---------- USE-CASE FLOW (opsin.html) ----------
+     Nodes sit in a CSS grid; case.js draws the connectors into .flow-lines from their positions.
+     Below ~760px of width the flow stacks top to bottom (container query). */
+  :root{
+    --flow-decision:#2f6fe8;
+    --flow-yes:#1f9d55;
+    --flow-no:var(--verdict-bad);
+    --flow-yes-tint:#e3f5ea;
+    --flow-no-tint:#fdeaea;
+    --flow-diamond:108px;
+    --fs-flow-title:14px;
+    --fs-flow-sub:13px;
+    --fs-flow-small:12px;
+  }
+  .flow{
+    position:relative;container-type:inline-size;
+    padding:clamp(20px,3vw,32px);border-radius:var(--radius-figure);
+    background:var(--chip);
+  }
+  .flow-legend{
+    display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px 18px;list-style:none;
+    font-size:var(--fs-flow-small);line-height:1.3;color:var(--body);
+  }
+  .flow-legend li{display:flex;align-items:center;gap:6px}
+  .flow-key{width:10px;height:10px;border-radius:3px;border:1.5px solid}
+  .flow-key--decision{border-color:var(--flow-decision);transform:rotate(45deg);border-radius:2px;background:var(--bg)}
+  .flow-key--yes{border-color:#b7e4c7;background:var(--flow-yes-tint)}
+  .flow-key--no{border-color:#f5c2c2;background:var(--flow-no-tint)}
+
+  .flow-grid{
+    --flow-dir:row;
+    position:relative;z-index:1;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 32px var(--flow-diamond) 76px minmax(0,1.2fr) 32px var(--flow-diamond) 76px minmax(0,1fr);
+    grid-template-areas:
+      "login . check1 . home . check2 . granted"
+      ". denied denied denied . . . . .";
+    align-items:center;row-gap:84px;
+    padding-top:72px;
+  }
+  .flow-node[data-node="login"]{grid-area:login}
+  .flow-node[data-node="check1"]{grid-area:check1}
+  .flow-node[data-node="home"]{grid-area:home}
+  .flow-node[data-node="check2"]{grid-area:check2}
+  .flow-node[data-node="granted"]{grid-area:granted}
+  .flow-node[data-node="denied"]{grid-area:denied}
+
+  .flow-card{
+    position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;
+    padding:20px 14px 14px;border-radius:14px;
+    background:var(--bg);border:1px solid var(--line);
+    box-shadow:0 1px 2px rgba(23,24,26,.06);
+  }
+  .flow-card--yes{border-color:#cdebd8;box-shadow:5px 5px 0 -1px var(--bg),5px 5px 0 0 #cdebd8,10px 10px 0 -1px var(--bg),10px 10px 0 0 #e1f3e8}
+  .flow-card--no{border-color:#f6d0d0}
+  .flow-badge{
+    position:absolute;top:-10px;left:12px;
+    padding:3px 7px;border-radius:6px;
+    font-size:10px;line-height:1.2;font-weight:var(--fw-bold);letter-spacing:.1em;text-transform:uppercase;
+    background:var(--ink);color:var(--bg);
+  }
+  .flow-card--yes .flow-badge{background:var(--flow-yes)}
+  .flow-card--no .flow-badge{background:var(--flow-no)}
+  .flow-icon{
+    flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+    width:32px;height:32px;border-radius:var(--radius-sm);
+    background:var(--blue-tag);color:var(--flow-decision);
+  }
+  .flow-icon svg{width:17px;height:17px}
+  .flow-card--yes .flow-icon{background:var(--flow-yes-tint);color:var(--flow-yes)}
+  .flow-card--no .flow-icon{background:var(--flow-no-tint);color:var(--flow-no)}
+  .flow-text{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .flow-text strong{font-size:var(--fs-flow-title);line-height:1.3;font-weight:var(--fw-semibold);color:var(--ink)}
+  .flow-text span{font-size:var(--fs-flow-sub);line-height:1.4;color:var(--body)}
+
+  .flow-decision{position:relative;display:flex;flex-direction:column;align-items:center}
+  .flow-question{
+    position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);
+    width:max-content;max-width:200px;text-align:center;
+    font-size:var(--fs-flow-small);line-height:1.4;color:var(--body);
+  }
+  .flow-diamond{
+    position:relative;display:flex;align-items:center;justify-content:center;
+    width:var(--flow-diamond);height:var(--flow-diamond);
+    text-align:center;
+  }
+  .flow-diamond::before{
+    content:"";position:absolute;inset:calc(var(--flow-diamond) * .1464);
+    border:1.5px solid var(--flow-decision);border-radius:10px;background:var(--bg);
+    transform:rotate(45deg);
+    box-shadow:0 6px 16px -8px rgba(47,111,232,.35);
+  }
+  .flow-diamond span{position:relative;max-width:78px;font-size:var(--fs-flow-sub);line-height:1.3;font-weight:var(--fw-semibold);color:var(--ink)}
+
+  /* hover tracing (case.js toggles the classes from mouse events) */
+  .flow-node{transition:opacity .25s ease}
+  .flow-card,.flow-diamond::before{transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out)}
+  .flow-node.is-hovered .flow-card,.flow-card.is-hovered{transform:translateY(-3px);box-shadow:0 14px 28px -14px rgba(23,24,26,.28)}
+  .flow-node.is-hovered .flow-diamond::before{transform:rotate(45deg) scale(1.06);box-shadow:0 10px 22px -8px rgba(47,111,232,.45)}
+  .flow.is-tracing .flow-node:not(.is-lit){opacity:.4}
+  .flow-lines path,.flow-chip{transition:opacity .25s ease}
+  .flow.is-tracing .flow-lines path:not(.is-lit),.flow.is-tracing .flow-chip:not(.is-lit){opacity:.2}
+  .flow.is-tracing .flow-lines path.is-lit{stroke-width:2.4}
+
+  .flow-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  .flow-lines path{fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .flow-line--go{stroke:var(--flow-decision)}
+  .flow-line--yes{stroke:var(--flow-yes)}
+  .flow-line--no{stroke:var(--flow-no);stroke-dasharray:.5 6}
+  .flow-head--no{stroke-dasharray:none}
+  .flow-chip{
+    position:absolute;z-index:2;transform:translate(-50%,-50%);
+    padding:2px 10px;border-radius:var(--radius-pill);
+    font-size:var(--fs-flow-small);line-height:1.5;font-weight:var(--fw-semibold);
+  }
+  .flow-chip--yes{background:var(--flow-yes-tint);color:var(--flow-yes);border:1px solid #b7e4c7}
+  .flow-chip--no{background:var(--flow-no-tint);color:var(--flow-no);border:1px solid #f5c2c2}
+
+  @container (max-width:759px){
+    .flow-grid{
+      --flow-dir:column;
+      grid-template-columns:minmax(0,1fr) 56px;
+      grid-template-areas:"login ." "check1 ." "home ." "check2 ." "granted ." "denied .";
+      justify-items:center;row-gap:68px;padding-top:28px;
+    }
+    .flow-card{flex-direction:row;width:min(100%,300px);padding:18px 14px 14px}
+    .flow-question{position:static;transform:none;margin-bottom:6px;max-width:240px}
+  }
+
+  /* ---------- LIVE CALLOUT (opsin.html business impact) ----------
+     case.js counts the number up and fades the copy in on first scroll;
+     on hover the gradient drifts and the number grows a touch. */
+  .cs-callout--live{background-size:200% 200%;background-position:0% 50%;transition:background-position .9s var(--ease-out)}
+  .cs-callout--live .cs-callout-num{display:inline-block;transform-origin:left center;transition:transform .45s var(--ease-out);font-variant-numeric:tabular-nums}
+  .cs-callout--live:hover{background-position:100% 50%}
+  .cs-callout--live:hover .cs-callout-num{transform:scale(1.06)}
+
+  /* ---------- SLIDESHOW OVERLAYS ([data-overlay-at] on the carousel) ---------- */
+  .carousel--fade .carousel-slide{position:relative}
+  .carousel-overlay{
+    position:absolute;inset:0;z-index:1;
+    display:flex;align-items:stretch;justify-content:flex-end;overflow:hidden;
+    border-radius:var(--radius-media);background:rgba(23,24,26,.15);
+    opacity:0;visibility:hidden;
+  }
+  .carousel--fade .carousel-overlay img{width:auto;height:100%;max-width:100%;object-fit:contain;object-position:right top;border-radius:0;box-shadow:none}
+
+  @media (max-width:767px){
+    .shift{grid-template-columns:minmax(0,1fr);gap:8px}
+    .shift-arrow{justify-self:center;transform:rotate(90deg);width:48px}
   }
 
   /* ---------- MOTION / A11Y ---------- */
