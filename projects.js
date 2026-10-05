@@ -32,7 +32,7 @@ const projects = [
     summary: "Cutting alert fatigue so security analysts focus on the threats that matter.",
     company: "SOC Signal",
     year: "2026",
-    gradient: ["#ffd6c9", "#e8d5f2"],
+    gradient: ["#fe9a9e", "#f9d0c4"],
     video: "assets/videos/soc.mp4",
     webm: null,
     poster: "assets/videos/posters/soc.jpg",

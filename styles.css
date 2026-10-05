@@ -179,7 +179,7 @@
 
     --g-opsin-1:#d3f5ea;  --g-opsin-2:#a6e5f4;   /* mint → sky, sampled from the Opsin cover video */
     --g-acme-1:#ebe9fd;   --g-acme-2:#cbc4ed;   /* lavender, sampled from the ACME cover video */
-    --g-soc-1:#ffd6c9;    --g-soc-2:#e8d5f2;
+    --g-soc-1:#fe9a9e;    --g-soc-2:#f9d0c4;   /* coral → peach, sampled from the SOC cover video */
     --g-joymee-1:#f3e6c7; --g-joymee-2:#efe4ec; --g-joymee-3:#dce7fb;
     --g-joymee-ink:#a3307c;
   }
@@ -794,7 +794,7 @@
     font:inherit;font-size:var(--fs-small);color:var(--body);cursor:help;
     text-decoration:underline dotted;text-underline-offset:4px;
   }
-  .cs-stats--3{grid-template-columns:repeat(3,minmax(0,1fr));border-top:0}
+  .cs-stats.cs-stats--3{grid-template-columns:repeat(3,minmax(0,1fr));border-top:0}
 
   /* tooltips: hover (mouse), keyboard focus or tap */
   .tip{position:relative;display:inline-flex}
@@ -1269,6 +1269,29 @@
   .ba-label--good{color:var(--verdict-good)}
   .cs-list--bad li::before{background:var(--verdict-bad)}
   .cs-list--good li::before{border-color:var(--verdict-good)}
+
+  /* ---------- SOC: findings, stat cards, worked / didn't-work cards ---------- */
+  .cs-cards--findings{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+  .cs-card--finding .cs-label{margin-top:2px}
+  .cs-stats--cards{list-style:none;gap:16px;padding:0;border:0}
+  .cs-stats--cards .cs-stat{gap:8px;padding:24px;border-radius:var(--radius-figure);background:var(--chip)}
+  .cs-stats--cards .cs-card-icon{margin-bottom:6px}
+  .cs-stats--cards strong{font-variant-numeric:tabular-nums}
+  .cs-verdicts{gap:16px}
+  .cs-verdict-card{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.6vw,28px);border-radius:var(--radius-figure);border:1px solid}
+  .cs-verdict-card--yes{background:var(--flow-yes-tint);border-color:#cdebd8}
+  .cs-verdict-card--no{background:var(--flow-no-tint);border-color:#f6d0d0}
+  .cs-verdict-card .cs-list li{color:var(--ink)}
+  .cs-list--x li::before{
+    content:"";top:.62em;left:0;width:10px;height:2px;border-radius:1px;background:var(--verdict-bad);transform:rotate(45deg);
+  }
+  .cs-list--x li::after{
+    content:"";position:absolute;top:.62em;left:0;width:10px;height:2px;border-radius:1px;background:var(--verdict-bad);transform:rotate(-45deg);
+  }
+
+  @media (max-width:767px){
+    .cs-stats.cs-stats--cards{grid-template-columns:minmax(0,1fr)}
+  }
 
   /* ---------- SLIDESHOW OVERLAYS ([data-overlay-at] on the carousel) ---------- */
   .carousel--fade .carousel-slide{position:relative}

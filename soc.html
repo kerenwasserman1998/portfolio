@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=11">
-<link rel="stylesheet" href="tailwind.css?v=11">
+<link rel="stylesheet" href="styles.css?v=14">
+<link rel="stylesheet" href="tailwind.css?v=14">
 </head>
 <body class="case-page theme-soc">
 
@@ -54,6 +54,18 @@
     <aside class="cs-rail">
       <dl class="cs-facts">
         <div><dt>Role</dt><dd>Lead UX Researcher &amp; Designer</dd></div>
+        <div class="cs-fact--wide"><dt>Team</dt><dd>
+          <ul class="team-list">
+            <li class="team-member" data-lift>
+              <span class="team-avatar team-avatar--me" aria-hidden="true">KW</span>
+              <span class="team-text"><span class="team-name">Keren (me)</span><span class="team-role">Sole researcher &amp; designer</span></span>
+            </li>
+            <li class="team-member" data-lift>
+              <span class="team-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span>
+              <span class="team-text"><span class="team-name">Faculty adviser</span><span class="team-role">Mentor</span></span>
+            </li>
+          </ul>
+        </dd></div>
         <div><dt>Tools</dt><dd>
           <ul class="tool-list">
             <li><span class="tool" tabindex="0" role="img" aria-label="Figma"><span class="tool-tile"><img src="assets/tools/figma.svg" alt="" width="20" height="20"></span><span class="tool-name" aria-hidden="true">Figma</span></span></li>
@@ -92,15 +104,18 @@
       <section class="cs-section" id="problem">
         <p class="cs-label">02</p>
         <h2 class="cs-h2">Problem &amp; goal</h2>
-        <div class="cs-split">
-          <div class="cs-pg">
-            <h3 class="cs-h3">Problem</h3>
+        <div class="shift" data-shift>
+          <article class="shift-card shift-card--problem" data-lift>
+            <span class="shift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4"/><path d="M12 17h.01"/></svg></span>
+            <h3 class="cs-label">Problem</h3>
             <p>SOC analysts face overwhelming alert volumes from dashboards that generate repetitive, low-priority notifications — making it difficult to distinguish real threats from noise.</p>
-          </div>
-          <div class="cs-pg">
-            <h3 class="cs-h3">Goal</h3>
+          </article>
+          <svg class="shift-arrow" viewBox="0 0 64 24" fill="none" aria-hidden="true"><path class="shift-arrow-line" d="M2 12h56"/><path class="shift-arrow-head" d="m50 5 8 7-8 7"/></svg>
+          <article class="shift-card shift-card--goal" data-lift>
+            <span class="shift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3 class="cs-label">Goal</h3>
             <p>Reduce alert fatigue and improve Tier 1 SOC analyst performance and well-being through evidence-based dashboard design.</p>
-          </div>
+          </article>
         </div>
       </section>
 
@@ -127,18 +142,20 @@
         <div class="cs-block">
           <h3 class="cs-h3">Interviews</h3>
           <p>5 semi-structured interviews with Tier 1 SOC analysts, conducted over Zoom. Sessions explored daily workflows, pain points, tools used, and mental models around alert triage.</p>
-          <div class="cs-cards">
-            <div class="cs-card">
-              <p class="cs-label">Finding</p>
+          <ul class="cs-cards cs-cards--findings" data-reveal>
+            <li class="cs-card cs-card--finding group" data-lift>
+              <span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="M19 3.5 21 2M5 3.5 3 2"/></svg></span>
+              <p class="cs-label">Finding 01</p>
               <h4 class="cs-h3">Alert volume is overwhelming and unlabeled</h4>
               <p>Tier 1 analysts face ~2,000 alerts per shift with no severity labels — relying entirely on experience and pattern recognition to prioritize. Without clear labeling, determining where to start was itself a cognitive task.</p>
-            </div>
-            <div class="cs-card">
-              <p class="cs-label">Finding</p>
+            </li>
+            <li class="cs-card cs-card--finding group" data-lift>
+              <span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="14" height="12" rx="2"/><path d="M6 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4"/><path d="M2 11h14"/></svg></span>
+              <p class="cs-label">Finding 02</p>
               <h4 class="cs-h3">Too many tools, too much context-switching</h4>
               <p>Participants used a minimum of 5–7 systems per investigation. One analyst identified navigating across tabs to find evidence and artifacts as the single thing she'd most want to change about her workflow.</p>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -315,15 +332,15 @@
             </div>
           </div>
         </div>
-        <div class="cs-stats cs-stats--3">
-          <div class="cs-stat"><strong>60%</strong><span>Avg success rate, no failures</span></div>
-          <div class="cs-stat"><strong>0.5</strong><span>Avg assists per task</span></div>
-          <div class="cs-stat"><strong>4.4/5</strong><span>Avg confidence</span></div>
-        </div>
-        <div class="cs-split">
-          <div>
+        <ul class="cs-stats cs-stats--3 cs-stats--cards" data-reveal>
+          <li class="cs-stat group" data-lift><span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg></span><strong data-count="60" data-suffix="%">60%</strong><span>Avg success rate, no failures</span></li>
+          <li class="cs-stat group" data-lift><span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V7a2 2 0 0 1 4 0v4"/><path d="M11 10V5a2 2 0 0 1 4 0v6"/><path d="M15 10a2 2 0 0 1 4 0v3a8 8 0 0 1-8 8h-1a7 7 0 0 1-5.6-2.8L2.6 15.6a1.8 1.8 0 0 1 2.7-2.4L7 15V11"/></svg></span><strong data-count="0.5">0.5</strong><span>Avg assists per task</span></li>
+          <li class="cs-stat group" data-lift><span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg></span><strong data-count="4.4" data-suffix="/5">4.4/5</strong><span>Avg confidence</span></li>
+        </ul>
+        <div class="cs-split cs-verdicts" data-reveal>
+          <div class="cs-verdict-card cs-verdict-card--yes" data-lift>
             <h3 class="cs-h3 cs-verdict"><span class="cs-verdict-icon cs-verdict-icon--yes" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>What worked</h3>
-            <ul class="cs-list">
+            <ul class="cs-list cs-list--check cs-list--good">
               <li>Dashboard orientation was immediate — all participants identified where to start without assistance</li>
               <li>Alert detail panel gave the right context without requiring extra navigation</li>
               <li>Guided documentation form reduced anxiety — described as quick and aligned with real workflow</li>
@@ -331,9 +348,9 @@
               <li>AI suggestions felt non-intrusive — analysts appreciated staying in control of the final decision</li>
             </ul>
           </div>
-          <div>
+          <div class="cs-verdict-card cs-verdict-card--no" data-lift>
             <h3 class="cs-h3 cs-verdict"><span class="cs-verdict-icon cs-verdict-icon--no" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg></span>What didn't work</h3>
-            <ul class="cs-list">
+            <ul class="cs-list cs-list--x">
               <li>Filtering toolbar went unnoticed by all participants — 0% full success on Task 2</li>
               <li>Alert status column not visible enough — nearly caused a wrong alert selection</li>
               <li>Ambiguous alert description language caused hesitation during investigation</li>
@@ -460,6 +477,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="site.js" defer></script>
 <script src="projects.js?v=11" defer></script>
-<script src="case.js?v=12" defer></script>
+<script src="case.js?v=14" defer></script>
 </body>
 </html>
