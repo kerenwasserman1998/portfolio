@@ -514,12 +514,17 @@
   .foot-icon--mail:hover svg,.foot-icon--mail:focus-visible svg{transform:translateY(-1px) rotate(6deg) scale(1.08)}
 
   /* ---------- KERENAI WIDGET ---------- */
+  /* KerenAI chat widget (served from the portfolio-agent app). Closed, the frame hugs the
+     button + bubble (size reported by the widget); open, it grows to fit the panel. */
   .agent-frame{
     position:fixed;right:0;bottom:0;z-index:60;
-    width:min(var(--agent-closed-w),100vw);height:var(--agent-closed-h);
+    width:min(var(--agent-fit-w,var(--agent-closed-w)),100vw);height:min(var(--agent-fit-h,var(--agent-closed-h)),100dvh);
     border:0;background:transparent;color-scheme:light;
   }
   .agent-frame.is-open{width:min(var(--agent-open-w),100vw);height:min(var(--agent-open-h),100dvh)}
+  @media (max-width:540px){
+    .agent-frame.is-open{width:100vw;height:100dvh}
+  }
 
   /* ---------- CASE STUDY PAGES ---------- */
   .theme-opsin{--case-g1:var(--g-opsin-1);--case-g2:var(--g-opsin-2);--case-g3:var(--g-opsin-2)}
