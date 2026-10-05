@@ -3,21 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keren Wasserman — Product Designer</title>
+<meta name="robots" content="noindex">
+<title>Page not found · Keren Wasserman</title>
+<script>
+  /* This page can be served at any missing URL (e.g. /work/old-link), so point every
+     relative link and file back at the site root before anything loads. */
+  (function () {
+    var p = location.pathname, root = p.indexOf("/portfolio/") === 0 ? "/portfolio/" : "/";
+    if (location.protocol !== "file:") document.write('<base href="' + root + '">');
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=33">
-<link rel="stylesheet" href="tailwind.css?v=2">
+<link rel="stylesheet" href="tailwind.css">
 </head>
 <body>
 
 <header>
   <div class="nav-inner">
-    <a href="#top" class="logo">KW</a>
+    <a href="index.html" class="logo">KW</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span class="nav-toggle-bars" aria-hidden="true"></span></button>
     <nav id="site-nav" aria-label="Primary">
-      <a href="#work">Work</a>
+      <a href="index.html#work">Work</a>
       <a href="playground.html">Playground</a>
       <a href="about.html">About</a>
       <a href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume</a>
@@ -28,47 +37,31 @@
 
 <main id="top">
 
-  <!-- HERO -->
-  <section class="hero wrap">
+  <!-- 404: same stars + shooting star as the homepage hero (site.js looks for .hero .hl) -->
+  <section class="hero error-hero wrap">
     <div class="hero-copy">
-      <p class="greet fade">Hi, I'm Keren!</p>
-      <h1 class="fade d1">A <span class="hl">product designer</span> who designs clarity into complex systems</h1>
-      <p class="lede fade d2">Research-driven product design — I helped <span class="logo-pop">
-        <button class="logo-pop-trigger" type="button" aria-expanded="false" aria-controls="opsin-pop" aria-label="About Opsin"><img class="inline-logo" src="assets/opsin-wordmark.png" width="40" height="40" alt="Opsin"></button>
-        <span class="logo-pop-card" id="opsin-pop" role="group" aria-label="Opsin">
-          <span class="logo-pop-head"><img src="assets/about/logo-opsin.png" width="28" height="28" alt=""><strong>Opsin Security</strong></span>
-          <span class="logo-pop-text">GenAI security platform · raised a $7M seed round</span>
-          <a class="logo-pop-link" href="opsin.html">Read the case study <span aria-hidden="true">→</span></a>
-          <a class="logo-pop-link" href="https://www.opsinsecurity.com/" target="_blank" rel="noopener">opsinsecurity.com <span aria-hidden="true">↗</span></a>
-        </span>
-      </span> raise $7M by designing its GenAI security platform.</p>
+      <p class="greet fade">Error 404</p>
+      <h1 class="fade d1">This page drifted off into <span class="hl">space</span></h1>
+      <p class="lede fade d2">The link may be old or mistyped. Everything else is right where you left it.</p>
       <div class="cta-row fade d3">
-        <a class="btn btn-blue" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn <span class="btn-arrow" aria-hidden="true">↗</span></a>
-        <a class="btn btn-mauve" href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume <span class="btn-arrow" aria-hidden="true">↗</span></a>
+        <a class="btn btn-blue" href="index.html">Back home <span class="btn-arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-mauve" href="index.html#work">See the work <span class="btn-arrow" aria-hidden="true">→</span></a>
       </div>
-    </div>
-  </section>
-
-  <!-- SELECTED WORK — 2-column case study cards -->
-  <section class="block" id="work">
-    <div class="wrap">
-      <div class="case-grid" id="case-grid"></div>
     </div>
   </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer id="contact">
   <div class="wrap foot-grid">
-    <div class="foot-brand" id="about">
+    <div class="foot-brand">
       <h4>Keren Wasserman</h4>
       <p>Product designer focused on turning complexity into clarity, one research-backed decision at a time.</p>
       <p class="copy">© 2026 Keren Wasserman</p>
     </div>
     <div class="foot-col">
       <h5>Links</h5>
-      <a href="#work">Work</a>
+      <a href="index.html#work">Work</a>
       <a href="playground.html">Playground</a>
       <a href="about.html">About</a>
       <a href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume</a>
@@ -87,12 +80,10 @@
   </div>
 </footer>
 
-<!-- KERENAI CHAT WIDGET -->
 <iframe class="agent-frame" src="https://portfolio-agent-eta.vercel.app/widget.html" title="KerenAI — ask anything about Keren" loading="lazy"></iframe>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="site.js?v=26" defer></script>
-<script src="projects.js?v=21" defer></script>
 </body>
 </html>
