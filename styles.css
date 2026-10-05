@@ -274,6 +274,11 @@
     padding-top:72px;padding-bottom:50px;
   }
   .hero-copy{width:100%;max-width:100%;position:relative;z-index:1}
+  .hero-avatar{display:block;width:64px;height:64px;border-radius:50%;object-fit:cover;margin-bottom:18px;
+    border:3px solid #fff;box-shadow:0 0 0 1px var(--line),0 8px 20px -10px rgba(23,24,26,.35);
+    transition:transform .45s var(--ease-out)}
+  .hero-avatar:hover{transform:rotate(-6deg) scale(1.08)}
+  @media (max-width:767px){.hero-avatar{width:56px;height:56px;margin-bottom:14px}}
   .hero .greet{
     font-size:var(--fs-lede);line-height:22px;color:var(--body);font-weight:var(--fw-medium);
     margin-bottom:16px;
