@@ -25,6 +25,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* Logo pop-cards: hover / focus open them in CSS; a tap toggles, Escape or a tap outside closes. */
+  document.querySelectorAll(".logo-pop").forEach((pop) => {
+    const trigger = pop.querySelector(".logo-pop-trigger");
+    const set = (open) => {
+      pop.classList.toggle("is-open", open);
+      trigger.setAttribute("aria-expanded", String(open));
+    };
+    trigger.addEventListener("click", () => set(!pop.classList.contains("is-open")));
+    document.addEventListener("click", (event) => { if (!pop.contains(event.target)) set(false); });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") set(false); });
+  });
+
   const header = document.querySelector("header");
   if (!header) return;
 

@@ -293,6 +293,56 @@
     vertical-align:middle;margin:-6px .15em;
     border-radius:var(--radius-sm);
   }
+  /* Opsin logo in the hero lede: hover (or tap / focus) opens a small card */
+  .hero{position:relative;z-index:5}   /* keeps the card above the work grid (the fade-in makes the lede its own layer) */
+  .hero p.lede{position:relative;z-index:2}   /* and above the buttons below it */
+  .logo-pop{position:relative;display:inline-block;vertical-align:middle}
+  .logo-pop-trigger{padding:0;border:0;background:none;cursor:pointer;border-radius:var(--radius-sm);transition:transform .25s var(--ease-out)}
+  .logo-pop-trigger .inline-logo{margin:-6px .15em;transition:box-shadow .25s var(--ease-out)}
+  .logo-pop:hover .logo-pop-trigger,.logo-pop.is-open .logo-pop-trigger{transform:translateY(-2px) scale(1.08)}
+  .logo-pop:hover .inline-logo,.logo-pop.is-open .inline-logo{box-shadow:0 8px 18px -8px rgba(23,24,26,.45)}
+  .logo-pop-trigger:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .logo-pop-card{
+    position:absolute;top:calc(100% + 10px);left:50%;z-index:20;
+    display:flex;flex-direction:column;gap:6px;width:260px;padding:16px;
+    border:1px solid var(--line);border-radius:var(--radius-md);background:var(--bg);
+    box-shadow:0 18px 40px -16px rgba(23,24,26,.35);
+    font-size:var(--fs-small);line-height:1.45;color:var(--body);text-align:left;
+    opacity:0;visibility:hidden;transform:translate(-50%,6px);
+    transition:opacity .2s ease,transform .25s var(--ease-out),visibility 0s linear .25s;
+  }
+  .logo-pop-card::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}   /* hover bridge */
+  .logo-pop:hover .logo-pop-card,.logo-pop.is-open .logo-pop-card,.logo-pop:focus-within .logo-pop-card{
+    opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s;
+  }
+  .logo-pop-head{display:flex;align-items:center;gap:10px;margin-bottom:2px;color:var(--ink);font-size:var(--fs-body)}
+  .logo-pop-head img{width:28px;height:28px;border-radius:var(--radius-sm)}
+  .logo-pop-link{display:inline-flex;gap:6px;width:fit-content;color:var(--ink);font-weight:var(--fw-semibold)}
+  .logo-pop-link span{transition:transform .2s var(--ease-out)}
+  .logo-pop-link:hover span{transform:translateX(3px)}
+  .logo-pop-link:last-child:hover span{transform:translate(2px,-2px)}
+
+  @media (max-width:767px){
+    /* phones: anchor the card to the paragraph so it never runs off screen */
+    .logo-pop{position:static}
+    .logo-pop-card{left:0;width:min(280px,100%);transform:translateY(6px)}
+    .logo-pop:hover .logo-pop-card,.logo-pop.is-open .logo-pop-card,.logo-pop:focus-within .logo-pop-card{transform:none}
+  }
+
+  /* status pill on work cards: frosted glass, colored dot */
+  .case-pill{
+    position:absolute;top:14px;left:14px;z-index:2;
+    display:inline-flex;align-items:center;gap:7px;padding:6px 11px 6px 9px;border-radius:var(--radius-pill);
+    background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);
+    backdrop-filter:blur(12px) saturate(1.4);-webkit-backdrop-filter:blur(12px) saturate(1.4);
+    font-size:var(--fs-meta);line-height:1.2;font-weight:var(--fw-medium);color:var(--ink);
+    box-shadow:0 2px 8px rgba(23,24,26,.08);
+  }
+  .case-pill-dot{width:8px;height:8px;border-radius:50%;background:var(--pill-dot,var(--ink));box-shadow:0 0 0 3px color-mix(in srgb,var(--pill-dot,var(--ink)) 22%,transparent)}
+  .case-pill--shipped{--pill-dot:#1f9d55}
+  .case-pill--research{--pill-dot:#7c5cff}
+  .case-pill--sponsored{--pill-dot:#e58a00}
+
   .cta-row{display:flex;gap:12px;margin-top:42px;flex-wrap:wrap}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
