@@ -326,6 +326,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* Stat counters ([data-count] outside a callout): count up from zero the first time they scroll in.
+     Decimals follow the target ("4.4" counts in tenths); data-prefix / data-suffix wrap the number. */
+  document.querySelectorAll("[data-count]").forEach((num) => {
+    if (num.closest("[data-callout]") || !animate || !window.ScrollTrigger) return;
+    const raw = num.dataset.count;
+    const target = parseFloat(raw);
+    const decimals = (raw.split(".")[1] || "").length;
+    const { prefix = "", suffix = "" } = num.dataset;
+    const counter = { value: 0 };
+    const paint = () => { num.textContent = `${prefix}${counter.value.toFixed(decimals)}${suffix}`; };
+    paint();
+    gsap.to(counter, {
+      value: target, duration: 1.4, ease: "power2.out", onUpdate: paint,
+      scrollTrigger: { trigger: num, start: "top 88%", once: true },
+    });
+  });
+
   /* Live callout: the headline number counts up from zero, then the copy beside it slides in. */
   document.querySelectorAll("[data-callout]").forEach((callout) => {
     if (!animate || !window.ScrollTrigger) return;
