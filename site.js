@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const linkBox = link.getBoundingClientRect();
       glide.style.setProperty("--glide-x", `${linkBox.left - navBox.left - nav.clientLeft}px`);
       glide.style.setProperty("--glide-w", `${linkBox.width}px`);
+      glide.style.setProperty("--glide-c", getComputedStyle(link).getPropertyValue("--pill"));
       if (appearing) void glide.offsetWidth;
       hovered?.classList.remove("is-hovered");
       hovered = link;
@@ -143,6 +144,11 @@ document.addEventListener("DOMContentLoaded", () => {
     [4, 18], [9, 70], [16, 40], [22, 88], [28, 14], [33, 58], [39, 30], [45, 80],
     [50, 12], [55, 50], [60, 90], [64, 26], [70, 66], [75, 10], [80, 44], [85, 84],
     [89, 22], [93, 60], [97, 36], [98, 90]
+  ]);
+
+  makeSky(document.querySelector(".about-hero"), [
+    [1, 10], [6, 48], [12, 86], [19, 4], [27, 70], [36, 14], [44, 92], [52, 6],
+    [58, 60], [64, 22], [69, 96], [94, 6], [97, 40], [99, 78], [88, 94], [74, 2]
   ]);
 
   const hero = document.querySelector(".hero");
