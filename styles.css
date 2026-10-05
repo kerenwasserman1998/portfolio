@@ -960,7 +960,7 @@
     --fs-pg-lede:clamp(18px,1.8vw,22px);
     --fs-pg-detail:clamp(28px,3vw,40px);
     --pg-col-gap:var(--case-gap-col);
-    --pg-row-gap:clamp(32px,3.6vw,48px);
+    --pg-row-gap:clamp(20px,2.4vw,32px);
     --pg-stagger:clamp(32px,5vw,72px);   /* left column starts lower than the right */
     --pg-wide:3/2;                        /* card proportions */
     --pg-tall:6/5;
@@ -1293,6 +1293,10 @@
   @media (max-width:767px){
     .cs-stats.cs-stats--cards{grid-template-columns:minmax(0,1fr)}
   }
+
+  /* tool tile without a logo file (playground): the tool's initial */
+  .tool-initial{font-size:13px;line-height:1;font-weight:var(--fw-bold);color:var(--ink)}
+  .pg-modal-body .tool-list,.pg-page-body .tool-list{margin-bottom:2px}
 
   /* ---------- AVATAR STACK (team "worked with") ----------
      Overlapping circles; hovering (or focusing) one lifts it above the others and shows its role. */

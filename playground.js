@@ -2,6 +2,17 @@
    Media: set `thumb` (image or .mp4 for the grid card) and `video` + `poster`
    (the big video in the pop-up / phone page). Leave them null to show the
    pastel placeholder. `shape` picks the card proportion: "wide" or "tall". */
+/* Tool icons, same look as the case-study fact rail; a tool without a logo file shows its initial. */
+const TOOLS = {
+  claude: { name: "Claude", icon: "assets/tools/claude.svg" },
+  figma: { name: "Figma", icon: "assets/tools/figma.svg" },
+  figmaMake: { name: "Figma Make", icon: "assets/tools/figma-make.png" },
+  v0: { name: "v0", icon: "assets/tools/v0.svg" },
+  cursor: { name: "Cursor", icon: "assets/tools/cursor.svg" },
+  vercel: { name: "Vercel", icon: "assets/tools/vercel.svg" },
+  mobbin: { name: "Mobbin", icon: null },
+};
+
 const experiments = [
   {
     id: "thrive",
@@ -10,9 +21,9 @@ const experiments = [
     color: "#4b5a3a",
     ink: "light",
     shape: "wide",
-    thumb: null,
-    video: null,
-    poster: null,
+    thumb: "assets/playground/media/thrive.mp4",
+    video: "assets/playground/media/thrive.mp4",
+    poster: "assets/playground/media/thrive-poster.jpg",
     link: { label: "Try it", href: "https://claude.ai/public/artifacts/6cf858af-d296-441d-8ac1-ee0f7f0cbb11" },
     idea:
       "How far could I get building a real iOS wellness app with Claude as my only collaborator? No Figma, no handoff — just conversation and iteration. It's built around a to-do list, because that's how I actually live: every checkbox hides a moment of input without ever feeling like a form.",
@@ -21,7 +32,8 @@ const experiments = [
       ["Knowing when to simplify.", "When things got too complex for Claude to handle cleanly, stripping back to fundamentals beat pushing through."],
       ["Context management is the job.", "In long sessions Claude lost the thread — re-anchoring with summaries mattered as much as the prompts."],
     ],
-    builtWith: "Claude · iOS prototype · 2026",
+    tools: [TOOLS.claude],
+    builtWith: "iOS prototype · 2026",
   },
   {
     id: "fraud-alert",
@@ -30,9 +42,9 @@ const experiments = [
     color: "#f5f5f6",
     ink: "dark",
     shape: "tall",
-    thumb: null,
-    video: null,
-    poster: null,
+    thumb: "assets/playground/media/fraud-alert-thumb.webp",
+    video: "assets/playground/media/fraud-alert.mp4",
+    poster: "assets/playground/media/fraud-alert-poster.jpg",
     link: { label: "Try it", href: "https://fraud-alert-prototype.vercel.app/" },
     idea:
       "Most fraud alerts sound the alarm the same way whether the system is sure or just checking. I wanted one that matches its tone to its confidence. When it's certain, it pauses the charge and says so. When it's unsure, it just asks. The whole piece protects the cardholder's calm, not only their money.",
@@ -41,18 +53,19 @@ const experiments = [
       ["A percentage needs an object.", "“94% confident” means nothing alone. I made it read “94% confident this wasn't you,” and capped it at 99, because no system is ever fully sure."],
       ["I overrode the AI more than I accepted it.", "It proposed inverting the confidence number, which would have broken the meter. I turned it down. Directing the model mattered more than prompting it."],
     ],
-    builtWith: "v0 · Cursor · Mobbin · Vercel · 2026",
+    tools: [TOOLS.v0, TOOLS.cursor, TOOLS.mobbin, TOOLS.vercel],
+    builtWith: "2026",
   },
   {
     id: "job-tracker",
     title: "Job Tracker",
     subtitle: "From job post to table",
-    color: "#f3e6c7",
+    color: "#f1e9dd",
     ink: "dark",
     shape: "tall",
-    thumb: null,
-    video: null,
-    poster: null,
+    thumb: "assets/playground/media/job-tracker-thumb.webp",
+    video: "assets/playground/media/job-tracker.mp4",
+    poster: "assets/playground/media/job-tracker-poster.jpg",
     link: { label: "Try it", href: "https://claude.ai/public/artifacts/90b52cd4-6a10-4045-9d8c-8812c041b468" },
     idea:
       "I built this because I was living the problem. Job hunting meant copying the same fields into a spreadsheet by hand, one posting at a time. So I made what I wished existed: paste a job description and it fills the row. The one rule is restraint. If a posting doesn't list a salary, the cell stays blank instead of guessing.",
@@ -61,7 +74,8 @@ const experiments = [
       ["Structure the output.", "Reliable extraction came from defining exactly which fields to return, not from a cleverer prompt."],
       ["The table is the product.", "The AI is a shortcut. I designed the table first and let it serve the table, not the other way around."],
     ],
-    builtWith: "Claude · prototype · 2026",
+    tools: [TOOLS.claude],
+    builtWith: "Prototype · 2026",
   },
   {
     id: "brightpath",
@@ -70,9 +84,10 @@ const experiments = [
     color: "#f7dc8c",
     ink: "dark",
     shape: "wide",
-    thumb: null,
-    video: null,
-    poster: null,
+    thumb: "assets/playground/media/brightpath-thumb.mp4",
+    thumbPoster: "assets/playground/media/brightpath-thumb-poster.jpg",
+    video: "assets/playground/media/brightpath.mp4",
+    poster: "assets/playground/media/brightpath-poster.jpg",
     link: { label: "View on Devpost", href: "https://devpost.com/software/brightpath-4byjaf" },
     idea:
       "Alcohol levels are invisible until it's already too late. BrightPath makes that hidden signal something you can <em>feel</em>. A biosensor bracelet reads BAC through your skin, and an AI companion named Luna turns the number into a mood. Calm when you're safe, concerned as levels rise, critical when it's time to call someone. No graphs, no manual logging. Just a face that reflects your body back to you in real time.",
@@ -81,7 +96,8 @@ const experiments = [
       ["Supportive beats surveillant.", "The hardest design problem was tone: making Luna feel like a companion, not a monitor. Every message got rewritten to guide rather than judge."],
       ["The interface should hide the complexity.", "Passive sensing plus one clear signal at a time. The depth is there if you want it, but the default is a glance."],
     ],
-    builtWith: "Figma · Figma Make · AI concept tools · Team of 4 · FigBuild 2026",
+    tools: [TOOLS.figma, TOOLS.figmaMake],
+    builtWith: "AI concept tools · Team of 4 · FigBuild 2026",
   },
 ];
 
@@ -100,7 +116,8 @@ function placeholder(exp, label) {
 function thumbHTML(exp) {
   if (!exp.thumb) return placeholder(exp, `${exp.title} · thumbnail`);
   if (isVideo(exp.thumb)) {
-    const poster = exp.poster ? ` poster="${exp.poster}"` : "";
+    const still = exp.thumbPoster || exp.poster;
+    const poster = still ? ` poster="${still}"` : "";
     return `<video class="pg-thumb-media" src="${exp.thumb}" muted loop playsinline preload="metadata"${poster}></video>`;
   }
   return `<img class="pg-thumb-media" src="${exp.thumb}" alt="" loading="lazy">`;
@@ -109,7 +126,7 @@ function thumbHTML(exp) {
 function heroHTML(exp) {
   if (!exp.video) return placeholder(exp, `${exp.title} · video`);
   const poster = exp.poster ? ` poster="${exp.poster}"` : "";
-  return `<video class="pg-hero-media" src="${exp.video}" muted loop playsinline controls${reduceMotion ? "" : " autoplay"}${poster}></video>`;
+  return `<video class="pg-hero-media" src="${exp.video}" muted loop playsinline${reduceMotion ? "" : " autoplay"}${poster}></video>`;
 }
 
 /* The detail content shared by the pop-up and the phone page.
@@ -144,8 +161,39 @@ function detailHTML(exp, titleId) {
     </section>
     <section class="cs-section">
       <p class="cs-label">Built with</p>
+      ${toolsHTML(exp.tools)}
       <p>${exp.builtWith}</p>
     </section>`;
+}
+
+function toolsHTML(list = []) {
+  if (!list.length) return "";
+  const items = list.map((t) => `
+        <li><span class="tool" tabindex="0" role="img" aria-label="${t.name}"><span class="tool-tile">${
+          t.icon ? `<img src="${t.icon}" alt="" width="20" height="20">` : `<span class="tool-initial">${t.name[0]}</span>`
+        }</span><span class="tool-name" aria-hidden="true">${t.name}</span></span></li>`).join("");
+  return `<ul class="tool-list">${items}
+      </ul>`;
+}
+
+/* Tool tooltips: mouse hover shows the name, a tap toggles it (same behavior as the case studies). */
+function setupToolTips() {
+  const untip = (except) => document.querySelectorAll(".tool.is-tipped").forEach((t) => t !== except && t.classList.remove("is-tipped"));
+  document.addEventListener("pointerover", (event) => {
+    const tool = event.target.closest(".tool");
+    if (tool && event.pointerType === "mouse") tool.classList.add("is-tipped");
+  });
+  document.addEventListener("pointerout", (event) => {
+    const tool = event.target.closest(".tool");
+    if (tool && event.pointerType === "mouse" && !tool.contains(event.relatedTarget)) tool.classList.remove("is-tipped");
+  });
+  document.addEventListener("pointerup", (event) => {
+    const tool = event.target.closest(".tool");
+    if (!tool) { untip(); return; }
+    if (event.pointerType === "mouse") return;
+    untip(tool);
+    tool.classList.toggle("is-tipped");
+  });
 }
 
 /* ---------- Grid (playground.html) ---------- */
@@ -259,6 +307,7 @@ function renderPage(root) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  setupToolTips();
   const grid = document.getElementById("pg-grid");
   if (grid) {
     renderGrid(grid);
