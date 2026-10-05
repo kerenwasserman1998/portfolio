@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="tailwind.css?v=2">
+<link rel="stylesheet" href="styles.css?v=11">
+<link rel="stylesheet" href="tailwind.css?v=11">
 </head>
 <body class="case-page theme-soc">
 
@@ -352,7 +352,7 @@
 
         <div class="ba-hold ba-annotated" data-hold data-start="before">
           <div class="ba-media">
-            <div class="ba-frame select-none touch-pan-y" data-lift>
+            <div class="ba-frame select-none" role="button" tabindex="0" aria-label="Show the before" data-lift>
               <div class="ba-after">
                 <img src="assets/soc/iteration/alerts-after.webp" alt="Alert queue after the iteration: a Filter by label leads the toolbar, the status column sits right after severity, a colored bar runs down the left of each row, and alerts are sorted critical first." width="2400" height="1310" loading="lazy" draggable="false">
                 <span class="ba-mark ba-mark--good soc-mark-cols-after" data-mark="1" aria-hidden="true"><span class="ba-mark-num">1</span></span>
@@ -366,8 +366,7 @@
               </div>
             </div>
             <div class="ba-bar">
-              <p class="ba-hint"><span class="ba-badge" aria-hidden="true">Before</span>Press and hold the screen to compare.</p>
-              <button class="ba-switch group" type="button" aria-pressed="true"><span class="ba-track bg-line transition-colors duration-200 group-aria-pressed:bg-ink" aria-hidden="true"><span class="ba-knob"></span></span>Show before</button>
+              <p class="ba-hint"><span class="ba-badge" aria-hidden="true">Before</span><span class="ba-hint-text">Click the screen to compare.</span></p>
             </div>
           </div>
 
@@ -460,7 +459,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="site.js" defer></script>
-<script src="projects.js?v=2" defer></script>
-<script src="case.js" defer></script>
+<script src="projects.js?v=11" defer></script>
+<script src="case.js?v=11" defer></script>
 </body>
 </html>
