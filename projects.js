@@ -6,7 +6,7 @@ const projects = [
     summary: "Shaped the GenAI security platform that raised $7M in seed funding.",
     company: "Opsin",
     year: "2024",
-    gradient: ["#ffb4a2", "#ffe0c7"],
+    gradient: ["#d3f5ea", "#a6e5f4"],
     video: "assets/videos/opsin.mp4",
     webm: null,
     poster: "assets/videos/posters/opsin.jpg",

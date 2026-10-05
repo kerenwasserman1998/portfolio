@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="tailwind.css?v=2">
+<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="tailwind.css?v=7">
 </head>
 <body class="case-page theme-opsin">
 
@@ -103,15 +103,18 @@
       <section class="cs-section" id="problem">
         <p class="cs-label">02</p>
         <h2 class="cs-h2">Problem &amp; goal</h2>
-        <div class="cs-split">
-          <div class="cs-pg">
-            <h3 class="cs-h3">Problem</h3>
+        <div class="shift" data-shift>
+          <article class="shift-card shift-card--problem" data-lift>
+            <span class="shift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4"/><path d="M12 17h.01"/></svg></span>
+            <h3 class="cs-label">Problem</h3>
             <p>LLM deployments face data privacy and compliance risks due to insufficient access controls and monitoring.</p>
-          </div>
-          <div class="cs-pg">
-            <h3 class="cs-h3">Goal</h3>
+          </article>
+          <svg class="shift-arrow" viewBox="0 0 64 24" fill="none" aria-hidden="true"><path class="shift-arrow-line" d="M2 12h56"/><path class="shift-arrow-head" d="m50 5 8 7-8 7"/></svg>
+          <article class="shift-card shift-card--goal" data-lift>
+            <span class="shift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3 class="cs-label">Goal</h3>
             <p>Demonstrate how Opsin Security enhances LLM data protection through real-time access control, validation, and monitoring across security services.</p>
-          </div>
+          </article>
         </div>
       </section>
 
@@ -122,10 +125,44 @@
         <p>The first use case follows a user who asks for another customer's tax information. Before anything is returned, the request has to pass two checkpoints: does the user have valid credentials, and do they have permission to access this specific data? Only when both are true is the data returned; failing either one blocks the request.</p>
         <p>Laying it out made every decision point explicit, gave the founders something concrete to react to, and surfaced the moment that matters most for the product: a denied request is exactly what a security analyst later has to investigate.</p>
         <figure class="cs-figure">
-          <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/opsin/use-case-1-flow.png" target="_blank" rel="noopener" data-lift>
-            <img src="assets/opsin/use-case-1-flow.png" alt="Flow diagram: a user signs in; if credentials are invalid, access is denied. On the home screen they query another customer's tax info; if they lack access permissions the request is blocked, otherwise the tax info is returned." width="3200" height="1640" loading="lazy">
-          </a>
-          <figcaption>Use case 1: query and authorization, visualized from the founders' walkthrough. Click to open full size.</figcaption>
+          <div class="flow" data-flow role="img" aria-label="Flow diagram. A user signs in on the login screen. If the credentials are not valid, access is denied. If they are, the user reaches the home screen and enters a query for another customer's tax info. If the user does not have access permissions for that data, the request is blocked; if they do, the customer's tax info is returned.">
+            <ul class="flow-legend" aria-hidden="true">
+              <li><span class="flow-key flow-key--decision"></span>Decision</li>
+              <li><span class="flow-key flow-key--yes"></span>Allowed</li>
+              <li><span class="flow-key flow-key--no"></span>Denied</li>
+            </ul>
+            <div class="flow-grid" aria-hidden="true">
+            <div class="flow-node flow-card flow-card--start" data-flow-step data-node="login">
+              <span class="flow-badge">Start</span>
+              <span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+              <span class="flow-text"><strong>Login screen</strong><span>User signs in</span></span>
+            </div>
+            <div class="flow-node flow-decision" data-flow-step data-node="check1">
+              <p class="flow-question">Does the user have valid credentials?</p>
+              <span class="flow-diamond"><span>Valid credentials?</span></span>
+            </div>
+            <div class="flow-node flow-card flow-card--step" data-flow-step data-node="home">
+              <span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg></span>
+              <span class="flow-text"><strong>Home screen</strong><span>User enters a query for another customer’s tax info</span></span>
+            </div>
+            <div class="flow-node flow-decision" data-flow-step data-node="check2">
+              <p class="flow-question">Does the user have access permissions for this data?</p>
+              <span class="flow-diamond"><span>Has access to this data?</span></span>
+            </div>
+            <div class="flow-node flow-card flow-card--yes" data-flow-step data-node="granted">
+              <span class="flow-badge">Granted</span>
+              <span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+              <span class="flow-text"><strong>Customer’s tax info</strong><span>Data returned</span></span>
+            </div>
+            <div class="flow-node flow-card flow-card--no" data-flow-step data-node="denied">
+              <span class="flow-badge">Blocked</span>
+              <span class="flow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="m6.5 17.5 11-11"/></svg></span>
+              <span class="flow-text"><strong>Access denied</strong><span>Request is blocked</span></span>
+            </div>
+            </div>
+            <svg class="flow-lines" aria-hidden="true"></svg>
+          </div>
+          <figcaption>Use case 1: query and authorization, visualized from the founders' walkthrough.</figcaption>
         </figure>
       </section>
 
@@ -145,18 +182,39 @@
         <p class="cs-label">05</p>
         <h2 class="cs-h2">Wireframes</h2>
         <p>To get stakeholder sign-off before moving into high-fidelity, I created low-fidelity wireframes in Axure RP, chosen for its ability to simulate complex, dynamic interactions quickly. I focused on three core flows: the Dashboard (security overview), AI Model Policies (LLM access and compliance rules), and Audit Log (tracking unauthorized access). These wireframes were intentionally directional, just enough to validate the core user journeys and align on product direction before investing in visual design.</p>
-        <figure class="cs-figure">
-          <div class="cs-ph cs-media" data-lift>
-            <video muted loop playsinline preload="none" poster="assets/opsin/posters/wireframes.jpg" aria-label="Slideshow of the Axure wireframes">
-              <source src="assets/opsin/wireframes.mp4" type="video/mp4">
-            </video>
-            <button class="cs-media-toggle opacity-80 transition-opacity duration-200 hover:opacity-100" type="button" aria-label="Pause slideshow">
-              <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
-            </button>
+        <div class="carousel carousel--fade" data-carousel data-interval="8000" data-overlay-at="6000" role="region" aria-roledescription="carousel" aria-label="Wireframes">
+          <div class="carousel-stage touch-pan-y select-none">
+            <ul class="carousel-track">
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="1 of 5" data-caption="Dashboard: risky users, most common queries, alert status and AI model data access at a glance">
+                <img src="assets/opsin/wireframes/dashboard.webp" alt="Dashboard wireframe with risky users, most queries donut chart, alerts and status, AI models data access line chart, risky AI models table and three summary counts." width="1920" height="1080" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="2 of 5" data-caption="Alerts: unauthorized data requests with progress, prompt status, platform and severity">
+                <img src="assets/opsin/wireframes/alerts.webp" alt="Alerts wireframe listing unauthorized data requests with progress, prompt status, platform, severity and risk tags." width="1920" height="1080" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="3 of 5" data-caption="AI Posture: an overall posture score and the components with low scores">
+                <img src="assets/opsin/wireframes/ai-posture.webp" alt="AI posture wireframe with a posture score gauge, counts by status and a list of components with low posture scores." width="1920" height="1080" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="4 of 5" data-caption="AI Model Policies: LLM access and compliance rules per platform">
+                <img src="assets/opsin/wireframes/policies.webp" alt="AI model policies wireframe listing policies with violations, platform, severity, risks, status and project." width="1920" height="1080" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="5 of 5" data-caption="Audit log: every prompt request with model, user, status and time">
+                <img src="assets/opsin/wireframes/audit.webp" alt="Audit log wireframe listing prompt requests with LLM name, user, status and time." width="1920" height="1080" loading="lazy" draggable="false">
+              </li>
+            </ul>
           </div>
-          <figcaption>Axure wireframes: Dashboard, AI Model Policies, Audit Log</figcaption>
-        </figure>
+          <div class="carousel-bar">
+            <p class="carousel-caption" aria-live="off"></p>
+            <div class="carousel-controls">
+              <button class="carousel-btn carousel-prev transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+              <div class="carousel-dots"></div>
+              <button class="carousel-btn carousel-next transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+              <button class="carousel-btn carousel-pause transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Pause slideshow">
+                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="cs-section" id="hifi">
@@ -164,25 +222,46 @@
         <h2 class="cs-h2">High-fidelity design</h2>
         <p>Moving into high-fidelity in Figma, the core design challenge was simplicity under pressure. Since users are performing high-stakes security tasks, every screen needed to minimize cognitive load and surface only what mattered. I designed six screens across two main flows: creating a ticket for a flagged alert, and managing AI monitor policies across platforms.</p>
         <p>A key interaction pattern throughout was the use of overlays for quick actions like ticket creation and alert analysis, keeping users in context without losing their place. Working within the provided brand guidelines, the visual direction stayed clean and minimal, letting the data and actions speak for themselves.</p>
-        <figure class="cs-figure">
-          <div class="cs-ph cs-media" data-lift>
-            <video muted loop playsinline preload="none" poster="assets/opsin/posters/hifi.jpg" aria-label="Slideshow of the high-fidelity Figma screens">
-              <source src="assets/opsin/hifi.mp4" type="video/mp4">
-            </video>
-            <button class="cs-media-toggle opacity-80 transition-opacity duration-200 hover:opacity-100" type="button" aria-label="Pause slideshow">
-              <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
-            </button>
+        <div class="carousel carousel--fade" data-carousel data-interval="8000" data-overlay-at="6000" role="region" aria-roledescription="carousel" aria-label="High-fidelity screens">
+          <div class="carousel-stage touch-pan-y select-none">
+            <ul class="carousel-track">
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="1 of 4" data-caption="Dashboard: risky users, top queries, alert status and model data access in one overview">
+                <img src="assets/opsin/hifi/dashboard.webp" alt="High-fidelity dashboard with risky users, most queries donut chart, alerts and status, AI models data access chart and risky AI models." width="2400" height="1351" loading="lazy" draggable="false">
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="2 of 4" data-caption="Alerts: an unauthorized data request opens in an overlay with the prompt, actor and violated policy">
+                <img src="assets/opsin/hifi/alerts.webp" alt="High-fidelity alerts list with two unauthorized data requests. An overlay then shows the unauthorized data request: overview, violated policy, actor, the prompt and the blocked response, with Create a ticket and Suggested actions." width="2400" height="1351" loading="lazy" draggable="false">
+                <div class="carousel-overlay" aria-hidden="true"><img src="assets/opsin/hifi/alerts-overlay.webp" alt="" width="1768" height="1600" loading="lazy" draggable="false"></div>
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="3 of 4" data-caption="Policies: each policy opens in an overlay with its description, impact and if/then logic">
+                <img src="assets/opsin/hifi/policies.webp" alt="High-fidelity policies list for Databricks and Snowflake. An overlay then shows the LLM can query Snowflake policy: description, potential impact, status, severity, risks and the if/when/then policy logic." width="2400" height="1351" loading="lazy" draggable="false">
+                <div class="carousel-overlay" aria-hidden="true"><img src="assets/opsin/hifi/policies-overlay.webp" alt="" width="1764" height="1600" loading="lazy" draggable="false"></div>
+              </li>
+              <li class="carousel-slide" aria-roledescription="slide" aria-label="4 of 4" data-caption="Audit: every prompt request is logged, and one opens to show the request and the response">
+                <img src="assets/opsin/hifi/audit.webp" alt="High-fidelity audit log of prompt requests by actor, platform, LLM and status. An overlay then shows a single prompt request: platform, LLM, status, actor, violated policy, risks, and the request and response." width="2400" height="1351" loading="lazy" draggable="false">
+                <div class="carousel-overlay" aria-hidden="true"><img src="assets/opsin/hifi/audit-overlay.webp" alt="" width="1562" height="1600" loading="lazy" draggable="false"></div>
+              </li>
+            </ul>
           </div>
-          <figcaption>High-fidelity screens: Create ticket and AI monitor policy flows</figcaption>
-        </figure>
+          <div class="carousel-bar">
+            <p class="carousel-caption" aria-live="off"></p>
+            <div class="carousel-controls">
+              <button class="carousel-btn carousel-prev transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+              <div class="carousel-dots"></div>
+              <button class="carousel-btn carousel-next transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+              <button class="carousel-btn carousel-pause transition-colors duration-200 hover:bg-ink hover:text-page" type="button" aria-label="Pause slideshow">
+                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="cs-section" id="impact">
         <p class="cs-label">07</p>
         <h2 class="cs-h2">Business impact</h2>
-        <div class="cs-callout">
-          <p class="cs-callout-num">$7M</p>
+        <div class="cs-callout cs-callout--live" data-callout data-lift>
+          <p class="cs-callout-num" data-count="7" data-prefix="$" data-suffix="M" aria-label="$7M">$7M</p>
           <div class="cs-callout-body">
             <h3 class="cs-h3">Secured $7M in seed funding</h3>
             <p>The prototype was used directly in investor pitches, helping the team communicate the product vision and secure their initial round.</p>
@@ -190,7 +269,7 @@
         </div>
         <p>As the sole UX designer during Opsin's early startup phase, I helped transform a complex GenAI security concept into an investor-ready prototype that directly contributed to the company's first seed raise.</p>
         <h3 class="cs-h3 cs-subhead">Key outcomes</h3>
-        <ul class="cs-cards cs-cards--outcomes">
+        <ul class="cs-cards cs-cards--outcomes" data-reveal>
           <li class="cs-card group" data-lift>
             <span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></svg></span>
             <h4 class="cs-h3">Established the design foundation for a 0→1 product</h4>
@@ -279,7 +358,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="site.js" defer></script>
-<script src="projects.js?v=2" defer></script>
-<script src="case.js" defer></script>
+<script src="projects.js?v=7" defer></script>
+<script src="case.js?v=7" defer></script>
 </body>
 </html>

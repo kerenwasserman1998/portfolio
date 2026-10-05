@@ -337,6 +337,221 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* Live callout: the headline number counts up from zero, then the copy beside it slides in. */
+  document.querySelectorAll("[data-callout]").forEach((callout) => {
+    if (!animate || !window.ScrollTrigger) return;
+    const num = callout.querySelector("[data-count]");
+    const body = callout.querySelector(".cs-callout-body");
+    const target = Number(num.dataset.count) || 0;
+    const { prefix = "", suffix = "" } = num.dataset;
+    const counter = { value: 0 };
+    num.textContent = `${prefix}0${suffix}`;
+    gsap.timeline({ scrollTrigger: { trigger: callout, start: "top 80%", once: true } })
+      .from(callout, { autoAlpha: 0, y: 24, duration: 0.6, ease: "power3.out", clearProps: "opacity,visibility,transform" })
+      .to(counter, {
+        value: target, duration: 1.4, ease: "power2.out",
+        onUpdate: () => { num.textContent = `${prefix}${Math.round(counter.value)}${suffix}`; },
+        onComplete: () => { num.textContent = `${prefix}${target}${suffix}`; },
+      }, "-=0.2")
+      .from(body.children, { autoAlpha: 0, x: 16, duration: 0.5, ease: "power3.out", stagger: 0.12, clearProps: "opacity,visibility,transform" }, "-=1");
+  });
+
+  /* Problem → goal: the problem card comes in, the arrow draws, then the goal card. */
+  document.querySelectorAll("[data-shift]").forEach((shift) => {
+    if (!animate || !window.ScrollTrigger) return;
+    const [problem, goal] = shift.querySelectorAll(".shift-card");
+    const line = shift.querySelector(".shift-arrow-line");
+    const head = shift.querySelector(".shift-arrow-head");
+    gsap.timeline({ scrollTrigger: { trigger: shift, start: "top 80%", once: true } })
+      .from(problem, { autoAlpha: 0, y: 20, duration: 0.6, ease: "power3.out", clearProps: "opacity,visibility,transform" })
+      .fromTo(line, { strokeDasharray: 56, strokeDashoffset: 56 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut" }, "-=0.15")
+      .from(head, { autoAlpha: 0, x: -6, duration: 0.25, ease: "power2.out" }, "-=0.1")
+      .from(goal, { autoAlpha: 0, y: 20, duration: 0.6, ease: "power3.out", clearProps: "opacity,visibility,transform" }, "-=0.1");
+  });
+
+  /* Use-case flow: nodes are laid out by CSS; the connectors are drawn here from their positions
+     (left to right, or top to bottom when the flow is stacked) and redrawn on resize.
+     On first scroll into view the journey plays in order: each step appears, then its arrow draws. */
+  document.querySelectorAll("[data-flow]").forEach((flow) => {
+    const grid = flow.querySelector(".flow-grid");
+    const svg = flow.querySelector(".flow-lines");
+    const legend = flow.querySelector(".flow-legend");
+    const NS = "http://www.w3.org/2000/svg";
+    const GAP = 8;
+    const node = (key) => flow.querySelector(`[data-node="${key}"]`);
+    const box = (key) => {
+      const el = node(key);
+      const r = (el.querySelector(".flow-diamond") || el).getBoundingClientRect();
+      const f = flow.getBoundingClientRect();
+      const l = r.left - f.left;
+      const t = r.top - f.top;
+      /* top: the whole node's top, so a stacked arrow stops above a decision's question */
+      return { l, t, r: l + r.width, b: t + r.height, cx: l + r.width / 2, cy: t + r.height / 2,
+        top: el.getBoundingClientRect().top - f.top };
+    };
+
+    /* Each edge: kind, points, and which segment carries the Yes / No chip. */
+    const edges = () => {
+      const [a, d1, h, d2, g, dn] = ["login", "check1", "home", "check2", "granted", "denied"].map(box);
+      if (getComputedStyle(grid).getPropertyValue("--flow-dir").trim() === "column") {
+        const gx = flow.clientWidth - 28;
+        return [
+          { kind: "go", from: "login", to: "check1", pts: [[a.cx, a.b + GAP], [d1.cx, d1.top - GAP]] },
+          { kind: "yes", from: "check1", to: "home", pts: [[d1.cx, d1.b + GAP], [h.cx, h.t - GAP]], chip: 0 },
+          { kind: "go", from: "home", to: "check2", pts: [[h.cx, h.b + GAP], [d2.cx, d2.top - GAP]] },
+          { kind: "yes", from: "check2", to: "granted", pts: [[d2.cx, d2.b + GAP], [g.cx, g.t - GAP]], chip: 0 },
+          { kind: "no", from: "check1", to: "denied", pts: [[d1.r + GAP, d1.cy], [gx, d1.cy], [gx, dn.cy], [dn.r + GAP, dn.cy]], chip: 0 },
+          { kind: "no", from: "check2", to: "denied", pts: [[d2.r + GAP, d2.cy], [gx, d2.cy], [gx, dn.cy], [dn.r + GAP, dn.cy]], chip: 0 },
+        ];
+      }
+      return [
+        { kind: "go", from: "login", to: "check1", pts: [[a.r + GAP, d1.cy], [d1.l - GAP, d1.cy]] },
+        { kind: "yes", from: "check1", to: "home", pts: [[d1.r + GAP, d1.cy], [h.l - GAP, d1.cy]], chip: 0 },
+        { kind: "go", from: "home", to: "check2", pts: [[h.r + GAP, d2.cy], [d2.l - GAP, d2.cy]] },
+        { kind: "yes", from: "check2", to: "granted", pts: [[d2.r + GAP, d2.cy], [g.l - GAP, d2.cy]], chip: 0 },
+        { kind: "no", from: "check1", to: "denied", pts: [[d1.cx, d1.b + GAP], [d1.cx, dn.t - GAP]], chip: 0 },
+        { kind: "no", from: "check2", to: "denied", pts: [[d2.cx, d2.b + GAP], [d2.cx, dn.cy], [dn.r + GAP, dn.cy]], chip: 1 },
+      ];
+    };
+
+    /* Polyline with rounded corners. */
+    const pathOf = (pts, radius = 12) => {
+      let d = `M${pts[0][0]},${pts[0][1]}`;
+      for (let i = 1; i < pts.length; i++) {
+        const [x, y] = pts[i];
+        const next = pts[i + 1];
+        if (!next) { d += ` L${x},${y}`; break; }
+        const [px, py] = pts[i - 1];
+        const r = Math.min(radius, Math.hypot(x - px, y - py) / 2, Math.hypot(next[0] - x, next[1] - y) / 2);
+        const inX = x - Math.sign(x - px) * r, inY = y - Math.sign(y - py) * r;
+        const outX = x + Math.sign(next[0] - x) * r, outY = y + Math.sign(next[1] - y) * r;
+        d += ` L${inX},${inY} Q${x},${y} ${outX},${outY}`;
+      }
+      return d;
+    };
+    const headOf = (pts) => {
+      const [x, y] = pts[pts.length - 1];
+      const [px, py] = pts[pts.length - 2];
+      const len = Math.hypot(x - px, y - py) || 1;
+      const ux = (x - px) / len, uy = (y - py) / len;
+      const s = 7;
+      return `M${x - ux * s - uy * s},${y - uy * s + ux * s} L${x},${y} L${x - ux * s + uy * s},${y - uy * s - ux * s}`;
+    };
+
+    let parts = [];
+    const draw = () => {
+      svg.innerHTML = "";
+      flow.querySelectorAll(".flow-chip").forEach((chip) => chip.remove());
+      const defs = document.createElementNS(NS, "defs");
+      svg.append(defs);
+      parts = edges().map((edge, i) => {
+        const id = `flow-mask-${Math.random().toString(36).slice(2, 8)}-${i}`;
+        const d = pathOf(edge.pts);
+        const mask = document.createElementNS(NS, "mask");
+        mask.id = id;
+        mask.setAttribute("maskUnits", "userSpaceOnUse");
+        const reveal = document.createElementNS(NS, "path");
+        reveal.setAttribute("d", d);
+        reveal.setAttribute("stroke", "#fff");
+        reveal.setAttribute("stroke-width", "6");
+        reveal.style.strokeLinecap = "butt";
+        mask.append(reveal);
+        defs.append(mask);
+        const line = document.createElementNS(NS, "path");
+        line.setAttribute("d", d);
+        line.setAttribute("class", `flow-line--${edge.kind}`);
+        line.setAttribute("mask", `url(#${id})`);
+        const head = document.createElementNS(NS, "path");
+        head.setAttribute("d", headOf(edge.pts));
+        head.setAttribute("class", `flow-line--${edge.kind} flow-head--${edge.kind}`);
+        [line, head].forEach((el) => { el.dataset.from = edge.from; el.dataset.to = edge.to; });
+        svg.append(line, head);
+        let chip = null;
+        if (edge.chip !== undefined) {
+          const [p, q] = [edge.pts[edge.chip], edge.pts[edge.chip + 1]];
+          chip = document.createElement("span");
+          chip.className = `flow-chip flow-chip--${edge.kind}`;
+          chip.textContent = edge.kind === "yes" ? "Yes" : "No";
+          chip.style.left = `${(p[0] + q[0]) / 2}px`;
+          chip.style.top = `${(p[1] + q[1]) / 2}px`;
+          chip.dataset.from = edge.from;
+          chip.dataset.to = edge.to;
+          flow.append(chip);
+        }
+        return { reveal, head, chip, length: reveal.getTotalLength() };
+      });
+    };
+
+    draw();
+
+    /* Hover (mouse): the node lifts and its own connections stay lit while the rest of the flow dims. */
+    const trace = (key) => {
+      flow.classList.toggle("is-tracing", Boolean(key));
+      flow.querySelectorAll("[data-node]").forEach((el) => {
+        const linked = key && (el.dataset.node === key || flow.querySelector(
+          `.flow-lines [data-from="${key}"][data-to="${el.dataset.node}"], .flow-lines [data-to="${key}"][data-from="${el.dataset.node}"]`));
+        el.classList.toggle("is-lit", Boolean(linked));
+        el.classList.toggle("is-hovered", el.dataset.node === key);
+      });
+      flow.querySelectorAll(".flow-lines path, .flow-chip").forEach((el) => {
+        el.classList.toggle("is-lit", Boolean(key) && (el.dataset.from === key || el.dataset.to === key));
+      });
+    };
+    flow.querySelectorAll("[data-node]").forEach((el) => {
+      el.addEventListener("pointerenter", (event) => {
+        if (event.pointerType === "mouse") trace(el.dataset.node);
+      });
+      el.addEventListener("pointerleave", (event) => {
+        if (event.pointerType === "mouse") trace(null);
+      });
+    });
+
+    let tl = null;
+    if (animate && window.ScrollTrigger) {
+      const step = (key) => node(key);
+      const vertical = () => getComputedStyle(grid).getPropertyValue("--flow-dir").trim() === "column";
+      const appear = () => ({ autoAlpha: 0, [vertical() ? "y" : "x"]: -14, duration: 0.45, ease: "power3.out", clearProps: "opacity,visibility,transform" });
+      const pop = { autoAlpha: 0, scale: 0.85, duration: 0.45, ease: "back.out(1.6)", clearProps: "opacity,visibility,transform" };
+      const line = (i) => {
+        const p = parts[i];
+        const t = gsap.timeline();
+        t.fromTo(p.reveal, { strokeDasharray: p.length, strokeDashoffset: p.length },
+          { strokeDashoffset: 0, duration: Math.min(0.8, Math.max(0.35, p.length / 260)), ease: "power1.inOut" });
+        t.from(p.head, { autoAlpha: 0, duration: 0.15, clearProps: "opacity,visibility" }, "-=0.08");
+        if (p.chip) t.from(p.chip, { autoAlpha: 0, scale: 0.6, duration: 0.3, ease: "back.out(2)", clearProps: "opacity,visibility,transform" }, "-=0.3");
+        return t;
+      };
+      tl = gsap.timeline({ paused: true });
+      tl.from(legend, { autoAlpha: 0, duration: 0.4 })
+        .from(step("login"), appear(), "-=0.2")
+        .add(line(0))
+        .from(step("check1"), pop)
+        .add(line(1))
+        .from(step("home"), appear())
+        .add(line(2))
+        .from(step("check2"), pop)
+        .add(line(3))
+        .from(step("granted"), appear())
+        .add(line(4), "+=0.25")
+        .add(line(5), "<")
+        .from(step("denied"), { autoAlpha: 0, y: 12, duration: 0.45, ease: "power3.out", clearProps: "opacity,visibility,transform" }, "-=0.2");
+      ScrollTrigger.create({ trigger: flow, start: "top 70%", once: true, onEnter: () => tl.play() });
+    }
+
+    /* Geometry changes with width: finish any running reveal, then redraw the lines in place. */
+    let width = flow.clientWidth;
+    new ResizeObserver(() => {
+      if (flow.clientWidth === width) return;
+      width = flow.clientWidth;
+      if (tl) {
+        tl.progress(1).kill();
+        tl = null;
+        flow.querySelectorAll("[data-node], .flow-legend").forEach((el) => gsap.set(el, { clearProps: "all" }));
+      }
+      draw();
+    }).observe(flow);
+  });
+
   /* Carousel: the current screen sits in the middle with faded neighbors either side
      (.carousel--fade shows one wide screen at a time and crossfades instead).
      Image slides advance every data-interval ms, a video slide advances when it ends.
@@ -368,6 +583,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return dot;
     });
     const fillOf = (i) => dots[i].querySelector(".carousel-dot-fill");
+    /* Optional overlay per slide (.carousel-overlay): it slides in over its dimmed screen
+       data-overlay-at ms into the slide, then holds before the slideshow moves on. */
+    const overlayAt = (Number(root.dataset.overlayAt) || 0) / 1000;
+    const overlayOf = (i) => slides[i].querySelector(".carousel-overlay");
     const videoOf = (i) => slides[i].querySelector("video");
 
     /* Signed distance from the current slide, wrapping so both sides always have a neighbor. */
@@ -435,6 +654,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         dots[current].removeAttribute("aria-current");
         if (window.gsap) gsap.set(fillOf(current), { scaleX: 0 });
+        const leaving = overlayOf(current);
+        if (leaving && window.gsap) gsap.set(leaving, { autoAlpha: 0 });
       }
       progress?.kill();
       progress = null;
@@ -445,8 +666,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const video = videoOf(current);
       if (video?.readyState >= 1) video.currentTime = 0;
       if (window.gsap && !video) {
-        progress = gsap.fromTo(fillOf(current), { scaleX: 0 },
-          { scaleX: 1, duration: interval, ease: "none", paused: true, onComplete: () => go(current + 1) });
+        const overlay = overlayAt ? overlayOf(current) : null;
+        const total = overlay ? overlayAt + interval * 0.75 : interval;
+        progress = gsap.timeline({ paused: true, onComplete: () => go(current + 1) })
+          .fromTo(fillOf(current), { scaleX: 0 }, { scaleX: 1, duration: total, ease: "none" }, 0);
+        if (overlay) {
+          progress
+            .fromTo(overlay, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, ease: "power1.out" }, overlayAt)
+            .fromTo(overlay.querySelector("img"), { xPercent: 110 }, { xPercent: 0, duration: 0.8, ease: "power3.out" }, overlayAt);
+        }
       }
       sync();
     };
@@ -462,8 +690,27 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    root.querySelector(".carousel-prev").addEventListener("click", () => go(current - 1));
-    root.querySelector(".carousel-next").addEventListener("click", () => go(current + 1));
+    /* Stepping: on a slide with an overlay, Next first brings the overlay in (no waiting for it),
+       and Previous first takes a showing overlay away. */
+    const hasOverlay = () => Boolean(overlayAt && progress && overlayOf(current));
+    const step = (dir) => {
+      if (dir > 0 && hasOverlay() && progress.time() < overlayAt) {
+        /* Play the overlay's entrance by moving the playhead, so it runs even while the
+           slideshow is paused by hover; autoplay then carries on from there. */
+        progress.seek(overlayAt);
+        gsap.to(progress, { time: overlayAt + 0.8, duration: 0.8, ease: "none", overwrite: true });
+        return;
+      }
+      if (dir < 0 && hasOverlay() && progress.time() >= overlayAt) {
+        progress.seek(0);
+        gsap.set(overlayOf(current), { autoAlpha: 0 });
+        sync();
+        return;
+      }
+      go(current + dir);
+    };
+    root.querySelector(".carousel-prev").addEventListener("click", () => step(-1));
+    root.querySelector(".carousel-next").addEventListener("click", () => step(1));
     pauseBtn.addEventListener("click", () => {
       userPaused = !userPaused;
       if (!userPaused) keyboardFocus = false;
@@ -473,7 +720,7 @@ document.addEventListener("DOMContentLoaded", () => {
     root.addEventListener("keydown", (event) => {
       if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
       event.preventDefault();
-      go(current + (event.key === "ArrowRight" ? 1 : -1));
+      step(event.key === "ArrowRight" ? 1 : -1);
     });
 
     root.addEventListener("pointerenter", (event) => {
@@ -511,7 +758,7 @@ document.addEventListener("DOMContentLoaded", () => {
       start = null;
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
         swiped = true;
-        go(current + (dx < 0 ? 1 : -1));
+        step(dx < 0 ? 1 : -1);
       }
     });
     stage.addEventListener("pointercancel", () => { start = null; });
