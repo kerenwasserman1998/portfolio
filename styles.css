@@ -436,7 +436,15 @@
   /* PLAYGROUND styles live in the PLAYGROUND PAGE section below. */
 
   /* ---------- FOOTER ---------- */
-  footer{padding:70px 0 60px;border-top:1px solid var(--line)}
+  footer{padding:70px 0 60px;border-top:1px solid var(--line);position:relative;overflow:hidden}
+  footer > .wrap{position:relative;z-index:1}
+  .foot-stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+  .foot-star{position:absolute;width:var(--size);height:var(--size);background:var(--c);opacity:0;
+    clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);
+    animation:twinkle var(--dur) ease-in-out var(--delay) infinite;animation-play-state:paused}
+  .foot-star--dot{border-radius:50%;clip-path:none}
+  .foot-stars.is-on .foot-star{animation-play-state:running}
+  @keyframes twinkle{0%,100%{opacity:0;transform:scale(.6) rotate(0deg)}50%{opacity:.75;transform:scale(1) rotate(20deg)}}
   .foot-grid{display:grid;grid-template-columns:minmax(0,480px) minmax(0,280px) minmax(0,280px);gap:40px}
   .foot-brand h4{font-size:30px;line-height:1.2;font-weight:var(--fw-medium);letter-spacing:-.01em}
   .foot-brand p{color:var(--body);margin-top:14px;max-width:34ch}
@@ -1402,6 +1410,7 @@
   @media (prefers-reduced-motion:reduce){
     .fade{animation:none;opacity:1;transform:none}
     .about-portrait,.btn,.btn-arrow{transition:none}
+    .foot-star{animation:none;opacity:.35}
     .case.is-hovered :is(.case-video,.case-image),.case:focus-visible :is(.case-video,.case-image){transform:none}
     .case-arrow,.case.is-hovered .case-arrow{transform:none}
     .carousel-dot-bar,.ba-mark,.tip-bubble{transition:none}

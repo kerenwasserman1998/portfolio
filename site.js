@@ -107,3 +107,39 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mq.matches) setOpen(false);
   });
 });
+
+/* Contact footer: a few tiny pastel stars that twinkle softly.
+   Purely decorative; paused while the footer is off screen. */
+document.addEventListener("DOMContentLoaded", () => {
+  const foot = document.querySelector("footer#contact");
+  if (!foot || foot.querySelector(".foot-stars")) return;
+
+  const colors = ["#c9b8f0", "#a8dccf", "#f6c3cf", "#b5d3f5", "#f5dfa6"];
+  // Fixed spots (% of footer) so the sky looks the same on every visit.
+  const spots = [
+    [6, 22], [14, 78], [27, 12], [36, 64], [44, 30], [52, 86],
+    [61, 18], [68, 58], [77, 10], [84, 72], [91, 34], [97, 88]
+  ];
+  const sky = document.createElement("div");
+  sky.className = "foot-stars";
+  sky.setAttribute("aria-hidden", "true");
+  spots.forEach(([x, y], i) => {
+    const s = document.createElement("span");
+    s.className = "foot-star" + (i % 3 === 2 ? " foot-star--dot" : "");
+    s.style.left = x + "%";
+    s.style.top = y + "%";
+    s.style.setProperty("--c", colors[i % colors.length]);
+    s.style.setProperty("--size", (i % 3 === 2 ? 4 : 7 + (i * 5) % 5) + "px");
+    s.style.setProperty("--dur", (3.6 + (i * 7) % 5 * 0.6).toFixed(1) + "s");
+    s.style.setProperty("--delay", (-(i * 1.3) % 6).toFixed(1) + "s");
+    sky.appendChild(s);
+  });
+  foot.prepend(sky);
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => sky.classList.toggle("is-on", e.isIntersecting))
+      .observe(foot);
+  } else {
+    sky.classList.add("is-on");
+  }
+});
