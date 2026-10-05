@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=14">
-<link rel="stylesheet" href="tailwind.css?v=14">
+<link rel="stylesheet" href="styles.css?v=17">
+<link rel="stylesheet" href="tailwind.css?v=17">
 </head>
 <body class="case-page theme-joymee">
 
@@ -64,12 +64,27 @@
             </li>
           </ul>
           <p class="team-with">Worked with</p>
-          <ul class="team-pills">
-            <li>Graphic Designer</li>
-            <li>UX Manager</li>
-            <li>Founder</li>
-            <li>Marketing</li>
-            <li>Head of Engineering</li>
+          <ul class="avatar-stack" aria-label="Worked with: graphic designer, UX manager, founder, marketing, head of engineering">
+            <li class="avatar" tabindex="0" aria-label="Graphic Designer">
+              <span class="avatar-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 1 9-9c0 2.5-2 3-3.5 3H15a2 2 0 0 0-1.5 3.3A1.7 1.7 0 0 1 12 21z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="11" cy="7" r="1"/><circle cx="15.5" cy="8.5" r="1"/></svg></span>
+              <span class="avatar-tip" aria-hidden="true">Graphic Designer</span>
+            </li>
+            <li class="avatar" tabindex="0" aria-label="UX Manager">
+              <span class="avatar-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></span>
+              <span class="avatar-tip" aria-hidden="true">UX Manager</span>
+            </li>
+            <li class="avatar" tabindex="0" aria-label="Founder">
+              <span class="avatar-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2"/><path d="M9 15 6.5 12.5C8 8 11.5 4 18 3c-.5 6.5-4.5 10-9 11.5z"/><circle cx="14.5" cy="9.5" r="1.5"/></svg></span>
+              <span class="avatar-tip" aria-hidden="true">Founder</span>
+            </li>
+            <li class="avatar" tabindex="0" aria-label="Marketing">
+              <span class="avatar-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 9a4 4 0 0 1 0 6"/><path d="M8 14v4a2 2 0 0 0 4 0"/></svg></span>
+              <span class="avatar-tip" aria-hidden="true">Marketing</span>
+            </li>
+            <li class="avatar" tabindex="0" aria-label="Head of Engineering">
+              <span class="avatar-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m13 5-2 14"/></svg></span>
+              <span class="avatar-tip" aria-hidden="true">Head of Engineering</span>
+            </li>
           </ul>
         </dd></div>
         <div><dt>Tools</dt><dd>
@@ -104,15 +119,18 @@
       <section class="cs-section" id="problem">
         <p class="cs-label">02</p>
         <h2 class="cs-h2">Problem &amp; goal</h2>
-        <div class="cs-split">
-          <div class="cs-pg">
-            <h3 class="cs-h3">Problem</h3>
+        <div class="shift" data-shift>
+          <article class="shift-card shift-card--problem" data-lift>
+            <span class="shift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4"/><path d="M12 17h.01"/></svg></span>
+            <h3 class="cs-label">Problem</h3>
             <p>Current platforms for sexual education and therapy are fragmented, lacking inclusivity and a seamless user experience.</p>
-          </div>
-          <div class="cs-pg">
-            <h3 class="cs-h3">Goal</h3>
+          </article>
+          <svg class="shift-arrow" viewBox="0 0 64 24" fill="none" aria-hidden="true"><path class="shift-arrow-line" d="M2 12h56"/><path class="shift-arrow-head" d="m50 5 8 7-8 7"/></svg>
+          <article class="shift-card shift-card--goal" data-lift>
+            <span class="shift-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3 class="cs-label">Goal</h3>
             <p>Create an integrated platform that combines sexual education and therapy services, offering an inclusive, user-friendly experience for diverse users.</p>
-          </div>
+          </article>
         </div>
       </section>
 
@@ -159,8 +177,8 @@
               </div>
               <div class="tabs-panel" role="tabpanel" id="persona-panel-ashley" aria-labelledby="persona-tab-ashley" tabindex="0" hidden>
                 <figure class="cs-figure">
-                  <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/joymee/personas/persona-2.jpg" target="_blank" rel="noopener" data-lift>
-                    <img src="assets/joymee/personas/persona-2.jpg" alt="Persona: Ashley, 39, divorced nurse anesthetist in San Jose. Wants better communication and intimacy and a therapist who shares her values; past couples therapy felt ineffective and she grew up with negative views of sexuality." width="2000" height="1114" loading="lazy">
+                  <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/joymee/personas/persona-2.webp" target="_blank" rel="noopener" data-lift>
+                    <img src="assets/joymee/personas/persona-2.webp" alt="Persona: Ashley, 39, divorced nurse anesthetist in San Jose. Wants better communication and intimacy and a therapist who shares her values; past couples therapy felt ineffective and she grew up with negative views of sexuality." width="1294" height="712" loading="lazy">
                   </a>
                   <figcaption>Persona 2: Ashley, a divorced nurse anesthetist looking for a therapist who aligns with her values.</figcaption>
                 </figure>
@@ -246,8 +264,8 @@
         <div class="carousel" data-carousel data-interval="8000" role="region" aria-roledescription="carousel" aria-label="High-fidelity screens">
           <div class="carousel-stage touch-pan-y select-none">
             <ul class="carousel-track">
-              <li class="carousel-slide carousel-slide--video" aria-roledescription="slide" aria-label="1 of 6" data-caption="Walkthrough: browsing courses, therapists and articles">
-                <video muted playsinline preload="none" poster="assets/joymee/hifi/walkthrough-poster.jpg" aria-label="Walkthrough of the high-fidelity JoyMee app">
+              <li class="carousel-slide carousel-slide--video" aria-roledescription="slide" aria-label="1 of 6" data-caption="Walkthrough: finding a course, exploring its content and enrolling">
+                <video muted playsinline preload="none" poster="assets/joymee/hifi/walkthrough-poster.jpg" aria-label="Walkthrough of the high-fidelity JoyMee app: finding a course, opening its content and enrolling">
                   <source src="assets/joymee/hifi/walkthrough.mp4" type="video/mp4">
                 </video>
               </li>
@@ -353,7 +371,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="site.js" defer></script>
-<script src="projects.js?v=2" defer></script>
-<script src="case.js?v=14" defer></script>
+<script src="projects.js?v=17" defer></script>
+<script src="case.js?v=17" defer></script>
 </body>
 </html>

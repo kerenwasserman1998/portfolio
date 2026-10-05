@@ -45,7 +45,7 @@ const projects = [
     summary: "Widening access to mental health education and support.",
     company: "JoyMee",
     year: "2024",
-    gradient: ["#f3e6c7", "#efe4ec", "#dce7fb"],
+    gradient: ["#fdf1f8", "#f3e5f6", "#e8d8f4"],
     video: "assets/joymee/cover.mp4",
     webm: null,
     poster: "assets/joymee/cover-poster.jpg",
