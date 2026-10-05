@@ -8,7 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const agentOrigin = new URL(agent.src).origin;
     window.addEventListener("message", (event) => {
       if (event.origin !== agentOrigin || event.data?.source !== "kerenai") return;
-      agent.classList.toggle("is-open", event.data.state === "open");
+      const open = event.data.state === "open";
+      agent.classList.toggle("is-open", open);
+      // Closed: shrink the frame to just the button + bubble so the page stays clickable around it.
+      if (!open && event.data.width && event.data.height) {
+        agent.style.setProperty("--agent-fit-w", `${event.data.width}px`);
+        agent.style.setProperty("--agent-fit-h", `${event.data.height}px`);
+      }
     });
   }
 
