@@ -467,18 +467,35 @@
   .foot-brand .copy{color:var(--muted);font-size:var(--fs-small);line-height:18px;margin-top:18px}
   .foot-col h5{font-size:var(--fs-body);line-height:20px;font-weight:var(--fw-bold);margin-bottom:16px}
   .foot-col a{display:block;color:var(--body);font-size:var(--fs-nav);line-height:18px;padding:5px 0;transition:color .16s ease}
-  @media (hover:hover) and (pointer:fine){
-    .foot-col a:hover{color:var(--ink)}
-  }
+  /* Text links: slide over a touch and a tiny pastel star twinkles in beside them */
+  .foot-col > a{position:relative;width:fit-content;transition:color .2s ease,transform .3s var(--ease-out)}
+  .foot-col > a::before{content:"";position:absolute;left:-16px;top:50%;width:9px;height:9px;margin-top:-4.5px;
+    background:var(--link-star,#c9b8f0);opacity:0;transform:scale(.3) rotate(-45deg);
+    clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);
+    transition:opacity .25s ease,transform .35s var(--ease-out)}
+  .foot-col > a:nth-of-type(2){--link-star:#a8dccf}
+  .foot-col > a:nth-of-type(3){--link-star:#f6c3cf}
+  .foot-col > a:nth-of-type(4){--link-star:#f5dfa6}
+  .foot-col > a:hover,.foot-col > a:focus-visible{color:var(--ink);transform:translateX(16px)}
+  .foot-col > a:hover::before,.foot-col > a:focus-visible::before{opacity:1;transform:scale(1) rotate(0)}
   .foot-icons{display:flex;gap:14px}
   .foot-icons a{
-    width:38px;height:38px;border-radius:10px;border:1px solid var(--line);
+    position:relative;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;color:var(--body);
-    transition:background .16s ease,color .16s ease;
+    transition:background .25s ease,color .25s ease,border-color .25s ease,transform .35s var(--ease-out),box-shadow .35s var(--ease-out);
   }
-  @media (hover:hover) and (pointer:fine){
-    .foot-icons a:hover{background:var(--chip);color:var(--ink)}
-  }
+  .foot-icons a svg{transition:transform .4s var(--ease-out)}
+  /* Pastel tile per icon, a small lift, and a star that pops at the corner */
+  .foot-icon--in{--tile:var(--blue-tag);--tile-ink:#2b4a7a;--tile-star:#9fbdf0}
+  .foot-icon--mail{--tile:var(--mauve-tag);--tile-ink:#6a4560;--tile-star:#f0a3b6}
+  .foot-icons a::after{content:"";position:absolute;top:-5px;right:-5px;width:10px;height:10px;background:var(--tile-star);
+    clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);
+    opacity:0;transform:scale(.2) rotate(-60deg);transition:opacity .2s ease,transform .4s var(--ease-out)}
+  .foot-icons a:hover,.foot-icons a:focus-visible{background:var(--tile);color:var(--tile-ink);border-color:transparent;
+    transform:translateY(-3px);box-shadow:0 8px 18px -10px color-mix(in srgb,var(--tile-ink) 45%,transparent)}
+  .foot-icons a:hover::after,.foot-icons a:focus-visible::after{opacity:1;transform:scale(1) rotate(0)}
+  .foot-icon--in:hover svg,.foot-icon--in:focus-visible svg{transform:rotate(-8deg) scale(1.08)}
+  .foot-icon--mail:hover svg,.foot-icon--mail:focus-visible svg{transform:translateY(-1px) rotate(6deg) scale(1.08)}
 
   /* ---------- KERENAI WIDGET ---------- */
   .agent-frame{
@@ -1427,6 +1444,8 @@
     .fade{animation:none;opacity:1;transform:none}
     .about-portrait,.btn,.btn-arrow{transition:none}
     .star{animation:none;opacity:.45}
+    .foot-col > a,.foot-icons a,.foot-icons a svg{transition:color .2s ease,background .2s ease}
+    .foot-col > a:hover,.foot-icons a:hover,.foot-icons a:hover svg{transform:none}
     .case.is-hovered :is(.case-video,.case-image),.case:focus-visible :is(.case-video,.case-image){transform:none}
     .case-arrow,.case.is-hovered .case-arrow{transform:none}
     .carousel-dot-bar,.ba-mark,.tip-bubble{transition:none}
