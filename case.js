@@ -314,10 +314,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* Section reveal ([data-reveal-sections]): each section's blocks rise in one after another
-     as it scrolls into view. Blocks with their own entrance (problem → goal, callouts) are left out. */
+     as it scrolls into view. Blocks with their own entrance (problem → goal, callouts, flows, SUS meter, reveal groups) are left out. */
   document.querySelectorAll("[data-reveal-sections] > .cs-section").forEach((section) => {
     if (!animate || !window.ScrollTrigger) return;
-    const blocks = Array.from(section.children).filter((el) => !el.matches("[data-shift], [data-callout], [data-reveal]"));
+    const own = "[data-shift], [data-callout], [data-reveal], [data-sus], [data-flow]";
+    const blocks = Array.from(section.children).filter((el) => !el.matches(own) && !el.querySelector(own));
     gsap.from(blocks, {
       autoAlpha: 0, y: 28, duration: 0.7, ease: "power3.out", stagger: 0.1,
       clearProps: "opacity,visibility,transform",
