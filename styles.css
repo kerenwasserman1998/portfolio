@@ -1829,3 +1829,15 @@
   .tm-more span{transition:transform .2s var(--ease-out)}
   .tm-more:hover span{transform:translate(2px,-2px)}
   .tm-extra{display:block;margin-top:2px;font-size:12px;color:var(--muted)}
+  /* testimonial cards: hover lifts the card, tints it with its star colour and spins the star */
+  .tm-card{--tm-c:#c9b8f0;transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out),border-color .35s ease,background-color .35s ease,opacity .35s ease}
+  .tm-card:nth-child(2){--tm-c:#a8dccf}
+  .tm-card:nth-child(3){--tm-c:#f6c3cf}
+  .tm-card:nth-child(4){--tm-c:#b5d3f5}
+  .tm-star{transition:transform .5s var(--ease-out)}
+  .tm-avatar{transition:transform .35s var(--ease-out),box-shadow .35s ease}
+  .tm-grid:hover .tm-card:not(:hover){opacity:.6}
+  .tm-card:hover{transform:translateY(-6px);border-color:var(--tm-c);background:color-mix(in srgb,var(--tm-c) 12%,#fff);box-shadow:0 18px 36px -20px color-mix(in srgb,var(--tm-c) 90%,#000)}
+  .tm-card:hover .tm-star{transform:rotate(90deg) scale(1.6)}
+  .tm-card:hover .tm-avatar{transform:scale(1.08);box-shadow:0 0 0 3px var(--tm-c)}
+  @media (prefers-reduced-motion:reduce){.tm-card,.tm-star,.tm-avatar{transition:none}}
