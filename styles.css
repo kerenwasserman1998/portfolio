@@ -1815,3 +1815,5 @@
     .ia-branch li:hover{background:var(--g-cmi-ink);color:#fff;transform:translateX(3px)}
     .ia-branch li.ia-l4:hover{background:var(--bg);color:var(--g-cmi-ink)}
   }
+  .cs-label--logo{display:flex;align-items:center;gap:10px}
+  .cs-label--logo img{width:22px;height:22px;flex:none}
