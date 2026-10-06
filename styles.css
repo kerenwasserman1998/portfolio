@@ -527,7 +527,7 @@
   .about-hero{position:relative}
   .about-hero > :not(.stars){position:relative;z-index:1}
   /* Twinkling pastel stars (hero + contact footer), built in site.js */
-  .stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+  .stars{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
   .star{position:absolute;width:var(--size);height:var(--size);background:var(--c);opacity:0;
     clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);
     animation:twinkle var(--dur) ease-in-out var(--delay) infinite;animation-play-state:paused}
@@ -1818,3 +1818,4 @@
 
   .cs-label--logo{display:flex;align-items:center;gap:10px}
   .cs-label--logo img{width:22px;height:22px;flex:none}
+  .home-tm[hidden]{display:none}
