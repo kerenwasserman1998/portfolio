@@ -1848,3 +1848,4 @@
   .open-pill i{width:8px;height:8px;border-radius:50%;background:#2fa36b;animation:open-pulse 2.2s ease-in-out infinite}
   @keyframes open-pulse{0%,100%{box-shadow:0 0 0 0 rgba(47,163,107,.5)}60%{box-shadow:0 0 0 6px rgba(47,163,107,0)}}
   @media (prefers-reduced-motion:reduce){.open-pill i{animation:none}}
+  .inline-logo--cmi{object-fit:contain;padding:6px;background:#fff;box-shadow:0 0 0 1px var(--line)}
