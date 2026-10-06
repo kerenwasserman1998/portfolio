@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=34">
+<link rel="stylesheet" href="styles.css?v=36">
 <link rel="stylesheet" href="tailwind.css?v=2">
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
@@ -63,7 +63,7 @@
         </span>
       </span> raise $7M by designing its GenAI security platform.</p>
       <div class="cta-row fade d3">
-        <a class="btn btn-blue" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn <span class="btn-arrow" aria-hidden="true">↗</span></a>
+        <a class="btn btn-blue" href="https://www.linkedin.com/in/keren-wasserman/" target="_blank" rel="noopener">LinkedIn <span class="btn-arrow" aria-hidden="true">↗</span></a>
         <a class="btn btn-mauve" href="https://drive.google.com/file/d/1xFKhT9YhIFa-behb6wijhUUO63FMCSd9/view" target="_blank" rel="noopener">Resume <span class="btn-arrow" aria-hidden="true">↗</span></a>
       </div>
     </div>
@@ -72,7 +72,65 @@
   <!-- SELECTED WORK — 2-column case study cards -->
   <section class="block" id="work">
     <div class="wrap">
+      <h2 class="sec-title">Work</h2>
       <div class="case-grid" id="case-grid"></div>
+    </div>
+  </section>
+
+  <!-- PLAYGROUND — one row of small thumbnails that scrolls sideways -->
+  <section class="block home-pg" aria-labelledby="home-pg-title" data-strip>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec-title" id="home-pg-title">Playground</h2>
+        <div class="sec-actions">
+          <a class="sec-link" href="playground.html">See all <span aria-hidden="true">→</span></a>
+          <button class="strip-btn" type="button" data-dir="-1" aria-label="Previous experiments"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
+          <button class="strip-btn" type="button" data-dir="1" aria-label="Next experiments"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
+        </div>
+      </div>
+      <ul class="pg-strip" tabindex="0" aria-label="Playground experiments">
+          <li class="pg-strip-item"><a class="pg-strip-card" href="playground.html#thrive">
+            <span class="pg-strip-thumb"><img src="assets/playground/media/thrive-poster.jpg" alt="" loading="lazy"></span>
+            <span class="pg-strip-text"><strong>Thrive</strong> AI-powered personal wellness app</span>
+          </a></li>
+          <li class="pg-strip-item"><a class="pg-strip-card" href="playground.html#fraud-alert">
+            <span class="pg-strip-thumb"><img src="assets/playground/media/fraud-alert-thumb.webp" alt="" loading="lazy"></span>
+            <span class="pg-strip-text"><strong>Fraud Alert</strong> A credit card alert that scales with certainty</span>
+          </a></li>
+          <li class="pg-strip-item"><a class="pg-strip-card" href="playground.html#job-tracker">
+            <span class="pg-strip-thumb"><img src="assets/playground/media/job-tracker-thumb.webp" alt="" loading="lazy"></span>
+            <span class="pg-strip-text"><strong>Job Tracker</strong> From job post to table</span>
+          </a></li>
+          <li class="pg-strip-item"><a class="pg-strip-card" href="playground.html#brightpath">
+            <span class="pg-strip-thumb"><img src="assets/playground/media/brightpath-thumb-poster.jpg" alt="" loading="lazy"></span>
+            <span class="pg-strip-text"><strong>BrightPath</strong> Hackathon project</span>
+          </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <!-- Testimonials: hidden until the three real quotes are in (remove "hidden" to show) -->
+  <section class="block home-tm" aria-labelledby="home-tm-title" hidden>
+    <div class="wrap">
+      <h2 class="sec-title" id="home-tm-title">What people said about me</h2>
+      <div class="tm-grid">
+        <figure class="tm-card">
+          <span class="tm-star" aria-hidden="true"></span>
+          <blockquote>“Quote 1 goes here: one or two sentences that say something specific about working with Keren.”</blockquote>
+          <figcaption><span class="tm-avatar" aria-hidden="true"></span><span><strong>Name Surname</strong><span>Role, Company</span></span></figcaption>
+        </figure>
+        <figure class="tm-card">
+          <span class="tm-star" aria-hidden="true"></span>
+          <blockquote>“Quote 2 goes here: one or two sentences that say something specific about working with Keren.”</blockquote>
+          <figcaption><span class="tm-avatar" aria-hidden="true"></span><span><strong>Name Surname</strong><span>Role, Company</span></span></figcaption>
+        </figure>
+        <figure class="tm-card">
+          <span class="tm-star" aria-hidden="true"></span>
+          <blockquote>“Quote 3 goes here: one or two sentences that say something specific about working with Keren.”</blockquote>
+          <figcaption><span class="tm-avatar" aria-hidden="true"></span><span><strong>Name Surname</strong><span>Role, Company</span></span></figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -112,7 +170,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
-<script src="site.js?v=26" defer></script>
-<script src="projects.js?v=21" defer></script>
+<script src="site.js?v=27" defer></script>
+<script src="projects.js?v=23" defer></script>
 </body>
 </html>

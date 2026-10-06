@@ -313,6 +313,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* Bar chart ([data-bars]): bars grow from the left in sequence the first time the chart scrolls in. */
+  if (animate && window.ScrollTrigger) {
+    document.querySelectorAll("[data-bars]").forEach((chart) => {
+      gsap.from(chart.querySelectorAll(".bar-fill"), {
+        scaleX: 0, duration: 0.9, ease: "power3.out", stagger: 0.05,
+        clearProps: "transform",
+        scrollTrigger: { trigger: chart, start: "top 85%", once: true },
+      });
+    });
+  }
+
   /* Section reveal ([data-reveal-sections]): each section's blocks rise in one after another
      as it scrolls into view. Blocks with their own entrance (problem → goal, callouts, flows, SUS meter, reveal groups) are left out. */
   document.querySelectorAll("[data-reveal-sections] > .cs-section").forEach((section) => {

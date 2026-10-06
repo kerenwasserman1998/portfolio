@@ -1,6 +1,20 @@
 /* Case study data — add a project by appending an entry. */
 const projects = [
   {
+    id: "cmi",
+    href: "cmi.html",
+    summary: "Designing a trusted resource hub for military mothers on the move.",
+    company: "Connecting Mothers Initiative",
+    status: { label: "In progress", tone: "progress" },
+    year: "2025",
+    gradient: ["#eaf3ec", "#c9ddd0"],
+    video: "assets/cmi/cover.mp4",
+    webm: null,
+    poster: "assets/cmi/cover-poster.jpg",
+    posterTime: 0,
+    image: null,
+  },
+  {
     id: "opsin",
     href: "opsin.html",
     summary: "Shaped the GenAI security platform that raised $7M in seed funding.",
@@ -29,20 +43,6 @@ const projects = [
     image: null,
   },
   {
-    id: "soc",
-    href: "soc.html",
-    summary: "Cutting alert fatigue so security analysts focus on the threats that matter.",
-    company: "SOC Signal",
-    status: { label: "Research project", tone: "research" },
-    year: "2026",
-    gradient: ["#fe9a9e", "#f9d0c4"],
-    video: "assets/videos/soc.mp4",
-    webm: null,
-    poster: "assets/videos/posters/soc.jpg",
-    posterTime: 0,
-    image: null,
-  },
-  {
     id: "joymee",
     href: "joymee.html",
     summary: "Widening access to mental health education and support.",
@@ -54,6 +54,20 @@ const projects = [
     webm: null,
     poster: "assets/joymee/cover-poster.jpg",
     posterTime: 1.2,
+    image: null,
+  },
+  {
+    id: "soc",
+    href: "soc.html",
+    summary: "Cutting alert fatigue so security analysts focus on the threats that matter.",
+    company: "SOC Signal",
+    status: { label: "Research project", tone: "research" },
+    year: "2026",
+    gradient: ["#fe9a9e", "#f9d0c4"],
+    video: "assets/videos/soc.mp4",
+    webm: null,
+    poster: "assets/videos/posters/soc.jpg",
+    posterTime: 0,
     image: null,
   },
 ];
@@ -92,6 +106,9 @@ function mediaHTML(project) {
     return `<img class="case-image" src="${src}" alt="">`;
   }
 
+  if (project.placeholder) {
+    return `<div class="case-ph case-ph--soon"><img src="${project.placeholder.logo}" alt="" width="64" height="64"><span>${project.placeholder.text}</span></div>`;
+  }
   return `<div class="case-ph" aria-hidden="true"></div>`;
 }
 
