@@ -1609,7 +1609,7 @@
   .pm-cmi{fill:var(--g-cmi-2);stroke:var(--g-cmi-ink);stroke-width:1.5;stroke-dasharray:5 5}
   .pm-cmi-t{fill:var(--g-cmi-ink);font-size:17px;font-weight:600}
   .pm-cmi-s{fill:var(--g-cmi-ink);font-size:13px;opacity:.8}
-  .pm-dot circle{fill:var(--muted)}
+  .pm-dot circle,.pm-ring{fill:var(--bg);filter:drop-shadow(0 2px 4px rgba(23,24,26,.18))}
   .pm-dot text{fill:var(--ink);font-size:14px}
   .comp-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;list-style:none}
   .comp-list li{display:flex;flex-direction:column;gap:2px;padding-top:12px;border-top:1px solid var(--line);font-size:var(--fs-nav);line-height:1.55}
