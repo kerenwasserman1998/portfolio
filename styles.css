@@ -1851,3 +1851,10 @@
   .inline-chip{display:inline-flex;align-items:center;gap:6px;margin:-4px .15em;padding:4px 11px 4px 7px;border-radius:var(--radius-pill);background:#f1f4f2;color:#3e5c4f;font-weight:var(--fw-semibold);font-size:.95em;line-height:1.2;vertical-align:middle;transition:box-shadow .25s var(--ease-out),background-color .25s ease}
   .inline-chip img{width:20px;height:20px}
   .logo-pop:hover .inline-chip,.logo-pop.is-open .inline-chip{background:#e6eee9;box-shadow:0 8px 18px -8px rgba(23,24,26,.35)}
+  .inline-chip--white{padding:6px 12px;background:#fff;box-shadow:0 0 0 1px var(--line)}
+  .inline-chip .chip-wordmark{width:auto;height:15px}
+  .logo-pop:hover .inline-chip--white,.logo-pop.is-open .inline-chip--white{background:#fff;box-shadow:0 0 0 1px var(--line),0 8px 18px -8px rgba(23,24,26,.35)}
+  .inline-chip{height:1.75em;box-sizing:border-box;padding-top:0;padding-bottom:0}
+  .inline-chip img{width:1.2em;height:1.2em}
+  .inline-chip .chip-wordmark{width:auto;height:.9em}
+  .inline-chip:not(.inline-chip--white){margin-right:0}
