@@ -222,3 +222,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   schedule(5000);
 });
+
+/* Homepage Playground strip: arrows scroll one card at a time; they disable at either end,
+   and the soft fade on the right edge drops once the last card is reached. */
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-strip]").forEach((sec) => {
+    const strip = sec.querySelector(".pg-strip");
+    const [prev, next] = sec.querySelectorAll(".strip-btn");
+    if (!strip) return;
+    const step = () => {
+      const item = strip.querySelector(".pg-strip-item");
+      return item ? item.getBoundingClientRect().width + parseFloat(getComputedStyle(strip).columnGap || 20) : strip.clientWidth;
+    };
+    const sync = () => {
+      const max = strip.scrollWidth - strip.clientWidth - 2;
+      if (prev) prev.disabled = strip.scrollLeft <= 2;
+      if (next) next.disabled = strip.scrollLeft >= max;
+      strip.classList.toggle("is-end", strip.scrollLeft >= max);
+    };
+    sec.querySelectorAll(".strip-btn").forEach((btn) =>
+      btn.addEventListener("click", () => strip.scrollBy({ left: Number(btn.dataset.dir) * step() }))
+    );
+    strip.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    sync();
+  });
+});
