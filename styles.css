@@ -1848,4 +1848,6 @@
   .open-pill i{width:8px;height:8px;border-radius:50%;background:#2fa36b;animation:open-pulse 2.2s ease-in-out infinite}
   @keyframes open-pulse{0%,100%{box-shadow:0 0 0 0 rgba(47,163,107,.5)}60%{box-shadow:0 0 0 6px rgba(47,163,107,0)}}
   @media (prefers-reduced-motion:reduce){.open-pill i{animation:none}}
-  .inline-logo--cmi{object-fit:contain;padding:6px;background:#fff;box-shadow:0 0 0 1px var(--line)}
+  .inline-chip{display:inline-flex;align-items:center;gap:6px;margin:-4px .15em;padding:4px 11px 4px 7px;border-radius:var(--radius-pill);background:#f1f4f2;color:#3e5c4f;font-weight:var(--fw-semibold);font-size:.95em;line-height:1.2;vertical-align:middle;transition:box-shadow .25s var(--ease-out),background-color .25s ease}
+  .inline-chip img{width:20px;height:20px}
+  .logo-pop:hover .inline-chip,.logo-pop.is-open .inline-chip{background:#e6eee9;box-shadow:0 8px 18px -8px rgba(23,24,26,.35)}
