@@ -1819,3 +1819,7 @@
   .cs-label--logo{display:flex;align-items:center;gap:10px}
   .cs-label--logo img{width:22px;height:22px;flex:none}
   .home-tm[hidden]{display:none}
+  .cs-label--logo img.is-tile{border-radius:6px;box-shadow:0 0 0 1px var(--line)}
+  /* cover videos: never taller than the screen (short laptop screens like a Surface); stays 4:3 and centres */
+  .cs-cover--video{width:min(100%,calc((100vh - 140px) * 4 / 3));margin-inline:auto}
+  @supports (height:100svh){.cs-cover--video{width:min(100%,calc((100svh - 140px) * 4 / 3))}}
