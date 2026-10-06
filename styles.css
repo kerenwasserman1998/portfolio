@@ -1497,8 +1497,9 @@
     opacity:0;transition:opacity .18s ease,transform .18s ease;
   }
   .avatar:hover .avatar-tip,.avatar:focus-visible .avatar-tip{opacity:1;transform:translate(-50%,0)}
-  .avatar:last-child .avatar-tip{left:auto;right:-6px;transform:translateY(4px)}
-  .avatar:last-child:hover .avatar-tip,.avatar:last-child:focus-visible .avatar-tip{transform:none}
+  /* tooltips open to the right of the avatar so they never run off the left edge (phones) */
+  .avatar .avatar-tip{left:-6px;transform:translateY(4px)}
+  .avatar:hover .avatar-tip,.avatar:focus-visible .avatar-tip{transform:none}
 
   /* ---------- SLIDESHOW OVERLAYS ([data-overlay-at] on the carousel) ---------- */
   .carousel--fade .carousel-slide{position:relative}
