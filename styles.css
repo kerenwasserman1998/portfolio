@@ -1824,3 +1824,8 @@
   /* cover videos: never taller than the screen (short laptop screens like a Surface); stays 4:3 and centres */
   .cs-cover--video{width:min(100%,calc((100vh - 140px) * 4 / 3));margin-inline:auto}
   @supports (height:100svh){.cs-cover--video{width:min(100%,calc((100svh - 140px) * 4 / 3))}}
+  .tm-more{display:inline-flex;gap:6px;margin-top:20px;font-size:var(--fs-small);font-weight:var(--fw-semibold);color:var(--body);transition:color .2s ease}
+  .tm-more:hover{color:var(--ink)}
+  .tm-more span{transition:transform .2s var(--ease-out)}
+  .tm-more:hover span{transform:translate(2px,-2px)}
+  .tm-extra{display:block;margin-top:2px;font-size:12px;color:var(--muted)}
