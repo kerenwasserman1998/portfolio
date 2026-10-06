@@ -6,7 +6,7 @@ const projects = [
     summary: "Designing a trusted resource hub for military mothers on the move.",
     company: "Connecting Mothers Initiative",
     status: { label: "In progress", tone: "progress" },
-    year: "2025",
+    year: "2026",
     gradient: ["#eaf3ec", "#c9ddd0"],
     video: "assets/cmi/cover.mp4",
     webm: null,
