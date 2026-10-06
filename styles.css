@@ -1756,15 +1756,15 @@
   .flow--cmi .flow-icon{background:var(--g-cmi-2);color:var(--g-cmi-ink)}
 
   /* outcome milestones + learnings */
-  .milestones{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;padding-top:8px}
-  .milestones::before{content:"";position:absolute;top:22px;left:17px;right:calc(33.3% - 17px);height:2px;background:linear-gradient(90deg,var(--g-cmi-ink) 0 33%,var(--g-cmi-3) 33% 100%)}
+  .milestones{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;padding-top:8px}
+  .milestones::before{content:"";position:absolute;top:22px;left:17px;right:calc(25% - 17px);height:2px;background:linear-gradient(90deg,var(--g-cmi-ink) 0 34%,var(--g-cmi-3) 34% 100%)}
   .milestones li{position:relative;display:flex;flex-direction:column;gap:6px}
   .ms-dot{display:grid;place-items:center;width:30px;height:30px;margin-bottom:10px;border-radius:50%;background:var(--bg);border:2px solid var(--g-cmi-3)}
   .ms-dot svg{width:16px;height:16px}
   .is-done .ms-dot{background:var(--g-cmi-ink);border-color:var(--g-cmi-ink);color:#fff}
   .is-next .ms-dot::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--g-cmi-3)}
-  .milestones li:nth-child(2) .ms-dot{border-color:var(--g-cmi-ink);animation:chip-pulse 2.4s ease-in-out infinite}
-  .milestones li:nth-child(2) .ms-dot::after{background:var(--g-cmi-ink)}
+  .is-now .ms-dot{border-color:var(--g-cmi-ink);animation:chip-pulse 2.4s ease-in-out infinite}
+  .is-now .ms-dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--g-cmi-ink)}
   .ms-k{font-size:var(--fs-cs-label);font-weight:var(--fw-semibold);letter-spacing:.08em;text-transform:uppercase;color:var(--g-cmi-ink)}
   .is-next .ms-k{color:var(--muted)}
   .milestones p:last-child{font-size:var(--fs-nav);line-height:1.55}
@@ -1785,11 +1785,11 @@
     .persona-side{padding:24px 18px}
     .persona-main{padding:0}
     .milestones{grid-template-columns:minmax(0,1fr);gap:22px;padding-left:44px}
-    .milestones::before{top:8px;bottom:8px;left:14px;right:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--g-cmi-ink) 0 40%,var(--g-cmi-3) 40% 100%)}
+    .milestones::before{top:8px;bottom:8px;left:14px;right:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--g-cmi-ink) 0 30%,var(--g-cmi-3) 30% 100%)}
     .ms-dot{position:absolute;left:-44px;top:0;margin:0}
     .learn-grid{grid-template-columns:minmax(0,1fr)}
   }
-  @media (prefers-reduced-motion:reduce){.milestones li:nth-child(2) .ms-dot{animation:none}}
+  @media (prefers-reduced-motion:reduce){.is-now .ms-dot{animation:none}}
 
   /* ATLAS.ti wordmark inline in body copy and above the code chart */
   .has-pop{position:relative}
@@ -1801,3 +1801,17 @@
   .code-chart-src:hover{border-color:var(--ink);transform:translateY(-1px);color:var(--ink)}
   .learn-label{margin-top:20px}
   .flow--cmi .flow-diamond::before{box-shadow:0 6px 16px -8px rgba(63,107,85,.4)}
+
+  /* IA: hover a section to lift it and dim the rest; items light up too */
+  .ia-root{transition:transform .3s var(--ease-out)}
+  .ia-branch{transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),background-color .3s ease,opacity .3s ease}
+  .ia-branch::before{transition:background-color .3s ease}
+  .ia-branch li{transition:background-color .2s ease,color .2s ease,transform .2s var(--ease-out)}
+  @media (hover:hover){
+    .ia-branches:hover .ia-branch:not(:hover){opacity:.45}
+    .ia-branch:hover{transform:translateY(-4px);background:var(--g-cmi-2);box-shadow:0 14px 28px -16px rgba(63,107,85,.5)}
+    .ia-branch:hover::before{background:var(--g-cmi-ink)}
+    .ia-tree:has(.ia-branch:hover) .ia-root{transform:scale(1.05)}
+    .ia-branch li:hover{background:var(--g-cmi-ink);color:#fff;transform:translateX(3px)}
+    .ia-branch li.ia-l4:hover{background:var(--bg);color:var(--g-cmi-ink)}
+  }
