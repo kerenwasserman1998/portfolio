@@ -1806,17 +1806,15 @@
   .ia-branch{transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),background-color .3s ease,opacity .3s ease}
   .ia-branch::before{transition:background-color .3s ease}
   .ia-branch li{transition:background-color .2s ease,color .2s ease,transform .2s var(--ease-out)}
-  .ia-branches:has(.ia-branch:focus) .ia-branch:not(:focus){opacity:.45}
-  .ia-branch:focus{outline:none;transform:translateY(-4px);background:var(--g-cmi-2);box-shadow:0 14px 28px -16px rgba(63,107,85,.5)}
-  .ia-branch:focus::before{background:var(--g-cmi-ink)}
-  .ia-branch{cursor:pointer}
-  @media (hover:hover){
-    .ia-branches:hover .ia-branch:not(:hover){opacity:.45}
-    .ia-branch:hover{transform:translateY(-4px);background:var(--g-cmi-2);box-shadow:0 14px 28px -16px rgba(63,107,85,.5)}
-    .ia-branch:hover::before{background:var(--g-cmi-ink)}
-    .ia-tree:has(.ia-branch:hover) .ia-root{transform:scale(1.05)}
-    .ia-branch li:hover{background:var(--g-cmi-ink);color:#fff;transform:translateX(3px)}
-    .ia-branch li.ia-l4:hover{background:var(--bg);color:var(--g-cmi-ink)}
-  }
+  .ia-branch:focus{outline:none}
+  .ia-branch:focus-visible{outline:2px solid var(--g-cmi-ink);outline-offset:2px}
+  /* applied on hover for every pointer (no hover media query, so touch-screen laptops get it too) */
+  .ia-branches:hover .ia-branch:not(:hover){opacity:.45}
+  .ia-branch:hover{transform:translateY(-4px);background:var(--g-cmi-2);box-shadow:0 14px 28px -16px rgba(63,107,85,.5)}
+  .ia-branch:hover::before{background:var(--g-cmi-ink)}
+  .ia-tree:has(.ia-branch:hover) .ia-root{transform:scale(1.05)}
+  .ia-branch li:hover{background:var(--g-cmi-ink);color:#fff;transform:translateX(3px)}
+  .ia-branch li.ia-l4:hover{background:var(--bg);color:var(--g-cmi-ink)}
+
   .cs-label--logo{display:flex;align-items:center;gap:10px}
   .cs-label--logo img{width:22px;height:22px;flex:none}
