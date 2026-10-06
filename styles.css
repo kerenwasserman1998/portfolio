@@ -1828,3 +1828,4 @@
   .tm-more:hover{color:var(--ink)}
   .tm-more span{transition:transform .2s var(--ease-out)}
   .tm-more:hover span{transform:translate(2px,-2px)}
+  .tm-extra{display:block;margin-top:2px;font-size:12px;color:var(--muted)}
