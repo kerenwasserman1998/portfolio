@@ -23,7 +23,7 @@ const experiments = [
     shape: "wide",
     thumb: "assets/playground/media/thrive.mp4",
     video: "assets/playground/media/thrive.mp4",
-    poster: "assets/playground/media/thrive-poster.jpg",
+    poster: "assets/playground/media/thrive-poster.webp",
     link: { label: "Try it", href: "https://claude.ai/public/artifacts/6cf858af-d296-441d-8ac1-ee0f7f0cbb11" },
     idea:
       "How far could I get building a real iOS wellness app with Claude as my only collaborator? No Figma, no handoff — just conversation and iteration. It's built around a to-do list, because that's how I actually live: every checkbox hides a moment of input without ever feeling like a form.",
@@ -85,7 +85,7 @@ const experiments = [
     ink: "dark",
     shape: "wide",
     thumb: "assets/playground/media/brightpath-thumb.mp4",
-    thumbPoster: "assets/playground/media/brightpath-thumb-poster.jpg",
+    thumbPoster: "assets/playground/media/brightpath-thumb-poster.webp",
     video: "assets/playground/media/brightpath.mp4",
     poster: "assets/playground/media/brightpath-poster.jpg",
     link: { label: "View on Devpost", href: "https://devpost.com/software/brightpath-4byjaf" },
@@ -102,12 +102,12 @@ const experiments = [
 ];
 
 const isVideo = (src) => /\.(mp4|webm|mov)$/i.test(src || "");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduceMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const arrowSvg =
   '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12.5l7-7M7 5.5h5.5V11"/></svg>';
 
 /* Desktop gets the pop-up; phones follow the link to experiment.html. Matches max-md. */
-const popupQuery = window.matchMedia("(min-width: 768px)");
+const popupQuery = typeof window !== "undefined" ? window.matchMedia("(min-width: 768px)") : null;
 
 function placeholder(exp, label) {
   return `<div class="pg-ph transition-transform duration-500 ease-out group-hover/card:scale-[1.03] motion-reduce:transition-none" data-ink="${exp.ink}"><span>${label}</span></div>`;
@@ -118,7 +118,7 @@ function thumbHTML(exp) {
   if (isVideo(exp.thumb)) {
     const still = exp.thumbPoster || exp.poster;
     const poster = still ? ` poster="${still}"` : "";
-    return `<video class="pg-thumb-media" src="${exp.thumb}" muted loop playsinline preload="metadata"${poster}></video>`;
+    return `<video class="pg-thumb-media" src="${exp.thumb}" muted loop playsinline preload="none"${poster}></video>`;
   }
   return `<img class="pg-thumb-media" src="${exp.thumb}" alt="" loading="lazy">`;
 }
@@ -197,9 +197,11 @@ function setupToolTips() {
 }
 
 /* ---------- Grid (playground.html) ---------- */
-function renderGrid(root) {
+/* The grid is also written straight into playground.html by `npm run build:html`
+   (scripts/prerender.mjs), so the footer doesn't jump when this script runs. */
+function gridHTML() {
   const card = (exp) => `
-    <a class="pg-card group/card" href="experiment.html?id=${exp.id}" data-id="${exp.id}">
+    <a class="pg-card group/card" href="experiment.html?id=${exp.id}" data-id="${exp.id}" style="--pg-order:${experiments.indexOf(exp)}">
       <div class="pg-thumb pg-thumb--${exp.shape}" style="--pg-color:${exp.color}">
         ${thumbHTML(exp)}
         <span class="pg-badge absolute top-4 right-4 flex size-11 items-center justify-center rounded-full bg-page text-ink shadow-md opacity-0 translate-y-1.5 scale-90 transition duration-300 ease-out group-hover/card:opacity-100 group-hover/card:translate-y-0 group-hover/card:scale-100 group-focus-visible/card:opacity-100 group-focus-visible/card:translate-y-0 group-focus-visible/card:scale-100 motion-reduce:transition-none" aria-hidden="true">${arrowSvg}</span>
@@ -210,20 +212,25 @@ function renderGrid(root) {
      On phones the columns collapse and cards fall back to list order. */
   const left = experiments.filter((_, i) => i % 2 === 0).map(card).join("");
   const right = experiments.filter((_, i) => i % 2 === 1).map(card).join("");
-  root.innerHTML = `<div class="pg-col">${left}</div><div class="pg-col">${right}</div>`;
+  /* Phone order follows the data, not the columns (--pg-order on each card). */
+  return `<div class="pg-col">${left}</div><div class="pg-col">${right}</div>`;
+}
 
-  /* Phone order follows the data, not the columns. */
-  root.querySelectorAll(".pg-card").forEach((el) => {
-    el.style.setProperty("--pg-order", experiments.findIndex((e) => e.id === el.dataset.id));
-  });
+function renderGrid(root) {
+  if (!root.hasAttribute("data-prerendered")) root.innerHTML = gridHTML();
 
   /* Thumbnail videos play only while on screen. */
   const vids = root.querySelectorAll("video.pg-thumb-media");
+  /* They start after the page has loaded, so the posters paint first. */
   if (vids.length && !reduceMotion && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => (e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause()));
-    }, { threshold: 0.25 });
-    vids.forEach((v) => io.observe(v));
+    const start = () => {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => (e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause()));
+      }, { threshold: 0.25 });
+      vids.forEach((v) => io.observe(v));
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
   }
 }
 
@@ -306,7 +313,7 @@ function renderPage(root) {
   root.querySelector(".pg-page-body").innerHTML = detailHTML(exp, "pg-page-title");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded", () => {
   setupToolTips();
   const grid = document.getElementById("pg-grid");
   if (grid) {

@@ -5,7 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const agent = document.querySelector(".agent-frame");
   if (agent) {
-    const agentOrigin = new URL(agent.src).origin;
+    const agentSrc = agent.dataset.src || agent.src;
+    const agentOrigin = new URL(agentSrc).origin;
+    /* The widget is a whole second page, so it loads only after this page has finished
+       loading and the browser is idle; it no longer competes with the first paint or clicks. */
+    if (agent.dataset.src) {
+      const loadAgent = () => { agent.src = agentSrc; };
+      const whenIdle = () => (window.requestIdleCallback ? requestIdleCallback(loadAgent, { timeout: 4000 }) : setTimeout(loadAgent, 1500));
+      if (document.readyState === "complete") whenIdle();
+      else window.addEventListener("load", whenIdle, { once: true });
+    }
     window.addEventListener("message", (event) => {
       if (event.origin !== agentOrigin || event.data?.source !== "kerenai") return;
       const open = event.data.state === "open";

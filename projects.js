@@ -10,7 +10,7 @@ const projects = [
     gradient: ["#eaf3ec", "#c9ddd0"],
     video: "assets/cmi/cover.mp4",
     webm: null,
-    poster: "assets/cmi/cover-poster.jpg",
+    poster: "assets/cmi/cover-poster.webp",
     posterTime: 0,
     image: null,
   },
@@ -24,7 +24,7 @@ const projects = [
     gradient: ["#d3f5ea", "#a6e5f4"],
     video: "assets/videos/opsin.mp4",
     webm: null,
-    poster: "assets/videos/posters/opsin.jpg",
+    poster: "assets/videos/posters/opsin.webp",
     posterTime: 0,
     image: null,
   },
@@ -38,7 +38,7 @@ const projects = [
     gradient: ["#ebe9fd", "#cbc4ed"],
     video: "assets/videos/acme.mp4",
     webm: null,
-    poster: "assets/videos/posters/acme.jpg",
+    poster: "assets/videos/posters/acme.webp",
     posterTime: 0,
     image: null,
   },
@@ -52,7 +52,7 @@ const projects = [
     gradient: ["#fdf1f8", "#f3e5f6", "#e8d8f4"],
     video: "assets/joymee/cover.mp4",
     webm: null,
-    poster: "assets/joymee/cover-poster.jpg",
+    poster: "assets/joymee/cover-poster.webp",
     posterTime: 1.2,
     image: null,
   },
@@ -66,7 +66,7 @@ const projects = [
     gradient: ["#fe9a9e", "#f9d0c4"],
     video: "assets/videos/soc.mp4",
     webm: null,
-    poster: "assets/videos/posters/soc.jpg",
+    poster: "assets/videos/posters/soc.webp",
     posterTime: 0,
     image: null,
   },
@@ -87,9 +87,11 @@ function gradientStyle(colors) {
   return `--case-g1:${colors[0]};--case-g2:${colors[1]};--case-g3:${colors[2]}`;
 }
 
-function mediaHTML(project) {
+/* Only the first card's still loads with the page; the rest load as they near the screen
+   (data-poster, see setupCaseMedia), so they don't slow down the first one on phones. */
+function mediaHTML(project, index = 0) {
   if (project.video || project.webm) {
-    const poster = project.poster ? ` poster="${project.poster}"` : "";
+    const poster = project.poster ? ` ${index === 0 ? "poster" : "data-poster"}="${project.poster}"` : "";
     const start = project.posterTime ? ` data-start="${project.posterTime}"` : "";
     const sources = [];
     if (project.webm) {
@@ -98,12 +100,12 @@ function mediaHTML(project) {
     if (project.video) {
       sources.push(`<source src="${project.video}" type="video/mp4">`);
     }
-    return `<video class="case-video" muted loop playsinline preload="metadata"${poster}${start}>${sources.join("")}</video>`;
+    return `<video class="case-video" muted loop playsinline preload="none"${poster}${start}>${sources.join("")}</video>`;
   }
 
   if (project.image || project.poster) {
     const src = project.image || project.poster;
-    return `<img class="case-image" src="${src}" alt="">`;
+    return `<img class="case-image" src="${src}" alt=""${index === 0 ? "" : ' loading="lazy"'}>`;
   }
 
   if (project.placeholder) {
@@ -112,14 +114,16 @@ function mediaHTML(project) {
   return `<div class="case-ph" aria-hidden="true"></div>`;
 }
 
-/* Optional data attributes on the grid: data-exclude="<id>" and data-limit="<n>". */
-function renderProjects(root) {
-  const { exclude, limit } = root.dataset;
+/* Optional data attributes on the grid: data-exclude="<id>" and data-limit="<n>".
+   The cards are also written straight into the HTML by `npm run build:html`
+   (scripts/prerender.mjs), so the page doesn't jump when this script runs.
+   A grid marked data-prerendered is left as is. */
+function projectsHTML({ exclude, limit } = {}) {
   let list = exclude ? projects.filter((p) => p.id !== exclude) : projects;
   if (limit) list = list.slice(0, Number(limit));
 
-  root.innerHTML = list
-    .map((p) => {
+  return list
+    .map((p, i) => {
       const multi =
         p.gradient && p.gradient.length > 2 ? " case-frame--multi" : "";
       const full = p.video || p.webm ? " case-frame--full" : "";
@@ -127,7 +131,7 @@ function renderProjects(root) {
       <a class="case group/case" href="${p.href}" data-case-id="${p.id}">
         <div class="relative case-frame${multi}${full}" style="${gradientStyle(p.gradient)}">
           <div class="case-media">
-            ${mediaHTML(p)}
+            ${mediaHTML(p, i)}
           </div>
           ${badgeHTML}
           ${p.status ? `<span class="case-pill case-pill--${p.status.tone}"><span class="case-pill-dot" aria-hidden="true"></span>${p.status.label}</span>` : ""}
@@ -141,12 +145,35 @@ function renderProjects(root) {
     .join("");
 }
 
+function renderProjects(root) {
+  if (root.hasAttribute("data-prerendered")) return;
+  root.innerHTML = projectsHTML(root.dataset);
+}
+
 /* Mouse devices: a card's video plays only while the card is hovered or keyboard-focused.
    Touch devices: only the card nearest the middle of the screen plays.
    A device counts as mouse-driven if it reports so, or as soon as a real mouse pointer
    appears, since some embedded browsers misreport (hover:hover). */
 function setupCaseMedia(root) {
   const cards = Array.from(root.querySelectorAll(".case"));
+
+  const lazyStills = root.querySelectorAll("video[data-poster]");
+  const showStill = (video) => {
+    video.poster = video.dataset.poster;
+    video.removeAttribute("data-poster");
+  };
+  if ("IntersectionObserver" in window) {
+    const near = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        showStill(e.target);
+        near.unobserve(e.target);
+      }),
+      { rootMargin: "600px 0px" }
+    );
+    lazyStills.forEach((v) => near.observe(v));
+  } else lazyStills.forEach(showStill);
+
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let mouseMode = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const videoOf = (card) => card.querySelector(".case-video");
@@ -224,8 +251,15 @@ function setupCaseMedia(root) {
     });
   });
 
-  /* Buffer videos shortly before they scroll into view so hover starts without a wait. */
-  if ("IntersectionObserver" in window) {
+  /* Buffer videos shortly before they scroll into view so hover starts without a wait.
+     Starts only once the page has finished loading, so video downloads never compete
+     with the first paint. */
+  const afterLoad = (fn) => {
+    const idle = () => (window.requestIdleCallback ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 200));
+    if (document.readyState === "complete") idle();
+    else window.addEventListener("load", idle, { once: true });
+  };
+  if ("IntersectionObserver" in window) afterLoad(() => {
     const warm = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -237,7 +271,7 @@ function setupCaseMedia(root) {
       { rootMargin: "200px 0px" }
     );
     cards.forEach((card) => videoOf(card) && warm.observe(videoOf(card)));
-  }
+  });
 
   if (!mouseMode && !reduceMotion) {
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -248,11 +282,11 @@ function setupCaseMedia(root) {
       if (!mouseMode) enterMouseMode();
     };
     document.addEventListener("pointermove", detectMouse, { passive: true });
-    playCentred();
+    afterLoad(playCentred);
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("case-grid");
   if (!root) return;
   renderProjects(root);

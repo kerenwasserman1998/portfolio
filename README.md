@@ -24,6 +24,25 @@ npm run build:css    # one-off minified build (run before committing)
   `bg-chip`, `bg-page`, `border-line`, `bg-blue-tag`, `font-sans`, …
 - `rounded-sm` / `rounded-md` / `rounded-lg` use the site's own radius tokens
 
+## Work cards and Playground grid (prerendered)
+The cards live as data in `projects.js` and `playground.js`, but they are also written
+straight into the HTML so they're on screen at first paint (no layout shift). After
+changing either file, run:
+
+```
+npm run build:html   # scripts/prerender.mjs → updates index.html, playground.html and the case pages
+```
+
+It also updates the `<link rel="preload" ... data-lcp>` in `index.html` / `playground.html`
+to the first card's still. Only the first work card's poster loads with the page; the
+others load as they scroll near (`data-poster`). Card stills are `.webp`.
+
+## Performance notes
+- Albert Sans is self-hosted in `assets/fonts/` (no Google Fonts request), with a
+  size-matched fallback so text doesn't jump when it loads.
+- The KerenAI iframe uses `data-src`; `site.js` loads it after the page has loaded.
+- Card videos use `preload="none"` and start buffering only after the page has loaded.
+
 ## Hover
 Tailwind's `hover:` variant is set to plain `:hover` in `src/tailwind.css` (the default media-query check
 misfires in some embedded browsers). Hovers that change a color set in `styles.css` live in `styles.css`,
