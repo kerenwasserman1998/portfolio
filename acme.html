@@ -17,7 +17,8 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/albert-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=46">
+<link rel="preload" as="image" href="assets/videos/posters/acme.webp" fetchpriority="high">
+<link rel="stylesheet" href="styles.css?v=47">
 <link rel="stylesheet" href="tailwind.css?v=17">
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
@@ -61,7 +62,7 @@
   <div class="wrap">
     <div class="cs-cover cs-cover--video">
       <div class="cs-cover-media">
-        <video muted loop playsinline autoplay preload="metadata">
+        <video muted loop playsinline autoplay preload="metadata" poster="assets/videos/posters/acme.webp">
           <source src="assets/videos/acme.mp4" type="video/mp4">
         </video>
       </div>
@@ -205,7 +206,7 @@
           <div class="tabs-panels">
             <div class="tabs-panel" role="tabpanel" id="transfer-panel-before" aria-labelledby="transfer-tab-before" tabindex="0">
               <div class="cs-ph cs-media cs-media--framed cs-media--before" data-lift>
-                <video muted loop playsinline preload="none" poster="assets/acme/posters/transfer-before.jpg" aria-label="Initial transfer-agent prototype, starting from the overview dashboard">
+                <video muted loop playsinline preload="none" poster="assets/acme/posters/transfer-before.webp" aria-label="Initial transfer-agent prototype, starting from the overview dashboard">
                   <source src="assets/acme/transfer-before.mp4" type="video/mp4">
                 </video>
                 <button class="cs-media-toggle opacity-80 transition-opacity duration-200 hover:opacity-100" type="button" aria-label="Pause video">
@@ -224,7 +225,7 @@
             </div>
             <div class="tabs-panel" role="tabpanel" id="transfer-panel-after" aria-labelledby="transfer-tab-after" tabindex="0" hidden>
               <div class="cs-ph cs-media cs-media--framed cs-media--after" data-lift>
-                <video muted loop playsinline preload="none" poster="assets/acme/posters/transfer-after.jpg" aria-label="Refined transfer-agent prototype, starting from the queue detail page">
+                <video muted loop playsinline preload="none" poster="assets/acme/posters/transfer-after.webp" aria-label="Refined transfer-agent prototype, starting from the queue detail page">
                   <source src="assets/acme/transfer-after.mp4" type="video/mp4">
                 </video>
                 <button class="cs-media-toggle opacity-80 transition-opacity duration-200 hover:opacity-100" type="button" aria-label="Pause video">

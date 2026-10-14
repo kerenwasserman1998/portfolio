@@ -1253,7 +1253,7 @@
   :is(.pg-modal-body,.pg-page-body) .cs-rows li:hover .cs-row-key{color:var(--ink)}
 
   /* phone page (experiment.html) */
-  .pg-page{max-width:calc(860px + 2 * var(--page-pad));padding-top:16px;padding-bottom:80px}
+  .pg-page{min-height:100vh;max-width:calc(860px + 2 * var(--page-pad));padding-top:16px;padding-bottom:80px}
   .pg-page-media{margin-top:8px;aspect-ratio:4/3;border-radius:var(--radius-card)}
   .pg-page-body{margin-top:24px}
 
@@ -1293,7 +1293,7 @@
      Below ~760px of width the flow stacks top to bottom (container query). */
   :root{
     --flow-decision:#2f6fe8;
-    --flow-yes:#1f9d55;
+    --flow-yes:#157a3c;   /* was #1f9d55; darkened to pass WCAG AA on white and on its tint */
     --flow-no:var(--verdict-bad);
     --flow-yes-tint:#e3f5ea;
     --flow-no-tint:#fdeaea;

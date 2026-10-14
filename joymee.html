@@ -17,7 +17,8 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/albert-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=46">
+<link rel="preload" as="image" href="assets/joymee/cover-start.webp" fetchpriority="high">
+<link rel="stylesheet" href="styles.css?v=47">
 <link rel="stylesheet" href="tailwind.css?v=17">
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
@@ -63,7 +64,7 @@
   <div class="wrap">
     <div class="cs-cover cs-cover--video">
       <div class="cs-cover-media">
-        <video muted loop playsinline autoplay preload="metadata">
+        <video muted loop playsinline autoplay preload="metadata" poster="assets/joymee/cover-start.webp">
           <source src="assets/joymee/cover.mp4" type="video/mp4">
         </video>
       </div>
@@ -283,7 +284,7 @@
           <div class="carousel-stage touch-pan-y select-none">
             <ul class="carousel-track">
               <li class="carousel-slide carousel-slide--video" aria-roledescription="slide" aria-label="1 of 6" data-caption="Walkthrough: finding a course, exploring its content and enrolling">
-                <video muted playsinline preload="none" poster="assets/joymee/hifi/walkthrough-poster.jpg" aria-label="Walkthrough of the high-fidelity JoyMee app: finding a course, opening its content and enrolling">
+                <video muted playsinline preload="none" poster="assets/joymee/hifi/walkthrough-poster.webp" aria-label="Walkthrough of the high-fidelity JoyMee app: finding a course, opening its content and enrolling">
                   <source src="assets/joymee/hifi/walkthrough.mp4" type="video/mp4">
                 </video>
               </li>

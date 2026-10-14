@@ -137,7 +137,7 @@ function detailHTML(exp, titleId) {
           <li>
             <span class="cs-row-key">${String(i + 1).padStart(2, "0")}</span>
             <div class="cs-row-body">
-              <h3 class="cs-h3">${lead.replace(/\.$/, "")}</h3>
+              <h2 class="cs-h3">${lead.replace(/\.$/, "")}</h2>
               <p>${rest}</p>
             </div>
           </li>`)
