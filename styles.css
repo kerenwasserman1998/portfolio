@@ -305,7 +305,8 @@
   }
   /* Marker-style highlight that sweeps in once the headline has faded up. */
   .hl{
-    padding:0 .16em;margin:0 -.04em;border-radius:var(--radius-sm);
+    padding:0 .26em;margin:0 .02em;border-radius:0;
+    clip-path:polygon(.2em 0,100% 0,calc(100% - .2em) 100%,0 100%);  /* slanted marker edges */
     background:linear-gradient(var(--hl-c),var(--hl-c)) no-repeat left center / 0% 100%;
     transition:--hl-c .7s ease;
     box-decoration-break:clone;-webkit-box-decoration-break:clone;
