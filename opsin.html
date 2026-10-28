@@ -123,9 +123,9 @@
           <li class="cs-stat group" data-lift><span class="cs-card-icon transition-colors duration-300 group-hover:bg-ink group-hover:text-page" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></span><strong>Lead</strong><span>UX designer, working directly with both founders</span></li>
         </ul>
         <p>When Opsin Security began its journey to help enterprises adopt GenAI securely, the team needed more than a concept. They needed a clear, functional vision that could show investors what was possible.</p>
-        <p>I joined Opsin in its early startup phase to design the foundation of its Security Management Interface. Working closely with the founders and engineers, I helped translate complex ideas about AI data protection into a tangible, user-centered product experience.</p>
-        <p>Together, we created Opsin’s first end-to-end prototype, a system that visualized GenAI activity, prioritized real risks, and made remediation intuitive. This early design became a cornerstone for investor presentations and product demos, helping Opsin communicate its value and raise $7M seed funding.</p>
-        <p>Through this process, I learned how design can bring clarity and momentum to an emerging product vision, turning technical innovation into something investors and users can immediately understand.</p>
+        <p>I joined Opsin in its early startup phase to design the foundation of its Security Management Interface. Working directly with the two founders, I designed for two audiences at once: the security analysts who would use the product every day, and the CISOs and companies who would decide to buy it.</p>
+        <p>Together, we created Opsin’s first end-to-end prototype, a system that visualized GenAI activity, prioritized real risks, and walked an analyst from an alert to an escalated ticket. That alert flow became the story the founders told in investor presentations and product demos, helping Opsin communicate its value and raise $7M seed funding.</p>
+        <p>Because the prototype had to sell the product as much as show it, business needs shaped decisions at every stage: which flow to go deep on, how polished to make it, and how it would play in a live demo.</p>
       </section>
 
       <section class="cs-section" id="problem">
@@ -151,7 +151,7 @@
         <h2 class="cs-h2">Use case: query &amp; authorization</h2>
         <p>Opsin's founders first walked me through their use cases verbally, in conversation rather than documentation. Before designing anything, I turned that explanation into a visual flow so all three of us could point at the same picture.</p>
         <p>The first use case follows a user who asks for another customer's tax information. Before anything is returned, the request has to pass two checkpoints: does the user have valid credentials, and do they have permission to access this specific data? Only when both are true is the data returned; failing either one blocks the request.</p>
-        <p>Laying it out made every decision point explicit, gave the founders something concrete to react to, and surfaced the moment that matters most for the product: a denied request is exactly what a security analyst later has to investigate.</p>
+        <p>Laying it out made every decision point explicit, gave the founders something concrete to react to, and surfaced the moment that matters most for the product: a denied request is exactly what a security analyst later has to investigate. It is also the moment Opsin sells. For a CISO, a blocked request is proof the product is protecting company data, so the rest of the design was built around what happens after that block.</p>
         <figure class="cs-figure">
           <div class="flow" data-flow role="img" aria-label="Flow diagram. A user signs in on the login screen. If the credentials are not valid, access is denied. If they are, the user reaches the home screen and enters a query for another customer's tax info. If the user does not have access permissions for that data, the request is blocked; if they do, the customer's tax info is returned.">
             <ul class="flow-legend" aria-hidden="true">
@@ -197,7 +197,7 @@
       <section class="cs-section" id="jtbd">
         <p class="cs-label">04</p>
         <h2 class="cs-h2">Jobs-to-be-done</h2>
-        <p>With the use cases mapped, I chose to frame the problem space using a Jobs-to-be-Done framework before jumping into design. Rather than documenting what the system does, JTBD helped me focus on what the security analyst is actually trying to accomplish — and the circumstances, pressures, and emotional stakes that shape how they work. This grounded decisions like alert prioritization and audit traceability in real analyst needs, not just technical requirements.</p>
+        <p>With the use cases mapped, I chose to frame the problem space using a Jobs-to-be-Done framework before jumping into design. Rather than documenting what the system does, JTBD helped me focus on what the security analyst is actually trying to accomplish — and the circumstances, pressures, and emotional stakes that shape how they work. This grounded decisions like alert prioritization and audit traceability in real analyst needs, not just technical requirements. I chose responding to an unauthorized access alert as the target job on purpose: it is the analyst's highest-stakes task, and it is the same flow the founders needed to show buyers, so designing it well served the user and the pitch at once.</p>
         <figure class="cs-figure">
           <a class="cs-ph cs-ph--fit cursor-zoom-in" href="assets/opsin/Jobs-to-be-done.png" target="_blank" rel="noopener" data-lift>
             <img src="assets/opsin/Jobs-to-be-done.png" alt="Jobs-to-be-done map for a security analyst whose target job is responding to an unauthorized access alert: aspirations, related jobs, seven job steps, emotional and social jobs, needs and circumstances." width="5168" height="4054" loading="lazy">
@@ -209,7 +209,8 @@
       <section class="cs-section" id="wireframes">
         <p class="cs-label">05</p>
         <h2 class="cs-h2">Wireframes</h2>
-        <p>To get stakeholder sign-off before moving into high-fidelity, I created low-fidelity wireframes in Axure RP, chosen for its ability to simulate complex, dynamic interactions quickly. I focused on three core flows: the Dashboard (security overview), AI Model Policies (LLM access and compliance rules), and Audit Log (tracking unauthorized access). These wireframes were intentionally directional, just enough to validate the core user journeys and align on product direction before investing in visual design.</p>
+        <p>To get stakeholder sign-off before moving into high-fidelity, I created low-fidelity wireframes in Axure RP, chosen for its ability to simulate complex, dynamic interactions quickly. I focused on three core flows: the Dashboard (security overview), AI Model Policies (LLM access and compliance rules), and Audit Log (tracking unauthorized access). Across them, the alert flow got the most depth, because it was the one the founders would demo: an alert comes in, the analyst investigates it, creates a ticket and escalates it. The other screens only needed to make the product feel complete around it. These wireframes were intentionally directional, just enough to validate the core user journeys and align on product direction before investing in visual design.</p>
+        <p>The wireframes were interactive, and the founders' feedback after testing them was mostly small tweaks to pages. The biggest change was about fidelity rather than flow: to raise money, the prototype needed to look like a real product from a serious company, with Opsin's color and brand, not grey boxes. That made moving to high-fidelity a business decision as much as a design one.</p>
         <div class="carousel carousel--fade" data-carousel data-interval="8000" data-overlay-at="6000" role="region" aria-roledescription="carousel" aria-label="Wireframes">
           <div class="carousel-stage touch-pan-y select-none">
             <ul class="carousel-track">
@@ -249,7 +250,7 @@
         <p class="cs-label">06</p>
         <h2 class="cs-h2">High-fidelity design</h2>
         <p>Moving into high-fidelity in Figma, the core design challenge was simplicity under pressure. Since users are performing high-stakes security tasks, every screen needed to minimize cognitive load and surface only what mattered. I designed six screens across two main flows: creating a ticket for a flagged alert, and managing AI monitor policies across platforms.</p>
-        <p>A key interaction pattern throughout was the use of overlays for quick actions like ticket creation and alert analysis, keeping users in context without losing their place. Working within the provided brand guidelines, the visual direction stayed clean and minimal, letting the data and actions speak for themselves.</p>
+        <p>A key interaction pattern throughout was the use of overlays for quick actions like ticket creation and alert analysis, keeping users in context without losing their place. The same choice made the product easier to sell: the founders could walk investors from an alert to an escalated ticket in one continuous demo, without jumping between pages. Working within the provided brand guidelines, the visual direction stayed clean and minimal, polished enough to read as a fundable company while letting the data and actions speak for themselves.</p>
         <div class="carousel carousel--fade" data-carousel data-interval="8000" data-overlay-at="6000" role="region" aria-roledescription="carousel" aria-label="High-fidelity screens">
           <div class="carousel-stage touch-pan-y select-none">
             <ul class="carousel-track">
@@ -295,7 +296,7 @@
             <p>The prototype was used directly in investor pitches, helping the team communicate the product vision and secure their initial round.</p>
           </div>
         </div>
-        <p>As the sole UX designer during Opsin's early startup phase, I helped transform a complex GenAI security concept into an investor-ready prototype that directly contributed to the company's first seed raise.</p>
+        <p>As the sole UX designer during Opsin's early startup phase, I helped transform a complex GenAI security concept into an investor-ready prototype that directly contributed to the company's first seed raise. The choices that got it there were business choices as much as design ones: going deep on the one flow that proved the product, building it to demo in one take, and investing in polish once the flow was validated.</p>
         <h3 class="cs-h3 cs-subhead">Key outcomes</h3>
         <ul class="cs-cards cs-cards--outcomes" data-reveal>
           <li class="cs-card group" data-lift>
