@@ -303,8 +303,6 @@
     font-weight:var(--fw-semibold);letter-spacing:var(--ls-tight);
     overflow:visible;width:100%;
   }
-  /* Quieter second half of the headline. */
-  .hero-soft{color:var(--muted)}
   /* Marker-style highlight that sweeps in once the headline has faded up. */
   .hl{
     padding:0 .16em;margin:0 -.04em;border-radius:var(--radius-sm);
